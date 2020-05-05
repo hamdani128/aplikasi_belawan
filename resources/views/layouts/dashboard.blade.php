@@ -61,7 +61,7 @@
                             <div class="card shadow-none m-0">
                                 <div class="card-body text-center">
                                     <i class="dripicons-wallet text-muted" style="font-size: 24px;"></i>
-                                    <h3 id="pendapatan"><span>29</span></h3>
+                                    <h3 id="pendapatan"><span>Rp.{{ number_format($total_pendapatan) }}</span></h3>
                                     <p class="text-muted font-15 mb-0">Total Pendapatan</p>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                             <div class="card shadow-none m-0 border-left">
                                 <div class="card-body text-center">
                                     <i class="dripicons-cart text-muted" style="font-size: 24px;"></i>
-                                    <h3 id="pengeluaran"><span>715</span></h3>
+                                    <h3 id="pengeluaran"><span>Rp.{{ number_format($out) }}</span></h3>
                                     <p class="text-muted font-15 mb-0">Total Pengeluaran</p>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="card shadow-none m-0">
                                 <div class="card-body text-center">
                                     <i class="dripicons-briefcase text-muted" style="font-size: 24px;"></i>
-                                    <h3 id="jenis_surat"><span>29</span></h3>
+                                    <h3 id="jenis_surat"><span>{{ $mail }}</span></h3>
                                     <p class="text-muted font-15 mb-0">Total Jenis Surat</p>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                             <div class="card shadow-none m-0 border-left">
                                 <div class="card-body text-center">
                                     <i class="dripicons-meter text-muted" style="font-size: 24px;"></i>
-                                    <h3 id="kendaran"><span>715</span></h3>
+                                    <h3 id="kendaran"><span>{{ $truk }}</span></h3>
                                     <p class="text-muted font-15 mb-0">Total Kendaraan</p>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="card shadow-none m-0 border-left">
                                 <div class="card-body text-center">
                                     <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
-                                    <h3 id="user"><span>31</span></h3>
+                                    <h3 id="user"><span>{{ $user }}</span></h3>
                                     <p class="text-muted font-15 mb-0">Jumlah User</p>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                             <div class="card shadow-none m-0 border-left">
                                 <div class="card-body text-center">
                                     <i class="dripicons-tags text-muted" style="font-size: 24px;"></i>
-                                    <h3 id="bermalam"><span>93%</span></h3>
+                                    <h3 id="bermalam"><span>Rp.{{ number_format($malam) }}</span></h3>
                                     <p class="text-muted font-15 mb-0">Total Pendapatan Bermalam</p>
                                 </div>
                             </div>

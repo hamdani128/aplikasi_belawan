@@ -112,6 +112,15 @@ class RevenueController extends Controller
         Auth::user()->forum_phg()->create($request->all());
         return back();
     }
+
+    public function edit_forum($id)
+    {
+        $forum = ForumPhg::find($id);
+        return view('pages.revenue.edit_forum', compact('forum', 'total_kendaraan'));
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *

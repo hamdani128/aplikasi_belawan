@@ -85,6 +85,87 @@ class ReportController extends Controller
         }
     }
 
+    public function add_labarugi()
+    {
+        return view('pages.report.labarugi');
+    }
+
+    public function trsmart_labarugi(Request $request)
+    {
+        if(request()->ajax())
+        {
+            if(!empty($request->from_date))
+            {
+                $data = TransactionSmart::whereDate('tanggal', array($request->from_date))->whereDate('tanggal', array($request->to_date))->sum('pendapatan');
+                // $data = TransactionOut::whereBetween('created_at', array($start->toDateTimeString(), $end->toDateTimeString()))->get();
+            }
+            else    
+            {
+                $data = TransactionSmart::get();
+            }
+            return datatables()->of($data)->make(true);
+        }
+    }
+
+    public function info_trsmart(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $trsmart = TransactionSmart::whereBetween('tanggal', array($request->from_date, $request->to_date))->sum('pendapatan');           
+            //  $data = TransactionOut::whereBetween('created_at', array($start->toDateTimeString(), $end->toDateTimeString()))->get();
+        }
+        else    
+        {
+            $trsmart = 0;
+        }
+        return $trsmart;
+    }
+
+    public function info_trphg(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $trphg = TransactionPhgt::whereBetween('tanggal', array($request->from_date, $request->to_date))->sum('pendapatan');           
+            //  $data = TransactionOut::whereBetween('created_at', array($start->toDateTimeString(), $end->toDateTimeString()))->get();
+        }
+        else    
+        {
+            $trphg = 0;
+        }
+        return $trphg;
+    }
+
+    public function info_trkeluar(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $trout = TransactionOut::whereDate('created_at', '>=' ,array($request->from_date))->whereDate('created_at', '<=' ,array($request->to_date))->sum('jumlah');           
+            //  $data = TransactionOut::whereBetween('created_at', array($start->toDateTimeString(), $end->toDateTimeString()))->get();
+        }
+        else    
+        {
+            $trout = TransactionOut::whereDate('created_at', '>=' ,array(date('Y-m-d')))->whereDate('created_at', '<=' ,array(date('Y-m-d')))->sum('jumlah');           
+            // $trout = TransactionOut::whereBetween('tanggal', array(date('Y-m-d'), date('Y-m-d')))->sum('pendapatan');;
+        }
+        return  $trout;
+    }
+
+    public function info_hasil(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $trsmart = TransactionSmart::whereBetween('tanggal', array($request->from_date, $request->to_date))->sum('pendapatan');           
+            $trphg = TransactionPhgt::whereBetween('tanggal', array($request->from_date, $request->to_date))->sum('pendapatan');           
+            $trout = TransactionOut::whereDate('created_at', '>=' ,array($request->from_date))->whereDate('created_at', '<=' ,array($request->to_date))->sum('jumlah');           
+            $hasil = ($trsmart + $trphg) - $trout;
+        }
+        else    
+        {
+            $hasil = 0;
+            // $trout = TransactionOut::whereBetween('tanggal', array(date('Y-m-d'), date('Y-m-d')))->sum('pendapatan');;
+        }
+        return  $hasil;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -92,7 +173,7 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

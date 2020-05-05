@@ -61,6 +61,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/report/table/smart', 'ReportController@table_smart')->name('table-report-smart');
     Route::get('/report/table/phg', 'ReportController@table_phg')->name('table-report-phg');
     Route::get('/report/table/outgoing', 'ReportController@table_outgoing')->name('table-report-outgoing');
+    Route::get('/report/trsmart', 'ReportController@trsmart_labarugi');
+    Route::get('/report/sum-pendapatan/trsmart', 'ReportController@info_trsmart');
+    Route::get('/report/sum-pendapatan/trphg', 'ReportController@info_trphg');
+    Route::get('/report/sum-pengeluaran/trkeluar', 'ReportController@info_trkeluar');
+    Route::get('/report/hasil', 'ReportController@info_hasil');
 
     Route::get('/print_out/transaction_smart/{id}', 'TransactionController@printout_peritem_smart');
     Route::get('/print_out/transaction_phg/{id}', 'TransactionController@printout_peritem_phg');
@@ -71,8 +76,10 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/forum', 'RevenueController@index_forum')->name('forum_phg');
     Route::get('/forum/table', 'RevenueController@table_forum');
-    Route::post('/forum/create', 'RevenueController@add_forum')->name('create-forum');    
+    Route::post('/forum/create', 'RevenueController@add_forum')->name('create-forum');
+    Route::get('/edit/forumphg/{id}', 'RevenueController@edit_forum');    
 
     Route::get('/activity', 'TransactionController@index_activity')->name('activity');
 
+    Route::get('/report-labarugi', 'ReportController@add_labarugi')->name('report-labarugi');
 });

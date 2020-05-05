@@ -3,12 +3,12 @@
     <div class="h-100" id="left-side-menu-container" data-simplebar>
 
         <!-- LOGO -->
-        <a href="index.html" class="logo text-center">
+        <a href="#" class="logo text-center">
             <span class="logo-lg">
-            <img src="{{ asset('/assets/images/logo.png') }}" alt="" height="16" id="side-main-logo">
+            <img src="img/polado.png" alt="" height="16" id="side-main-logo">
             </span>
             <span class="logo-sm">
-                <img src="{{ asset('/assets/images/logo_sm.png') }}" alt="" height="16" id="side-sm-main-logo">
+                <img src="img/polado.png" alt="" height="16" id="side-sm-main-logo">
             </span>
         </a>
 
@@ -111,7 +111,7 @@
                         <a href="{{ route('report-outgoing') }}">Laporan Transaksi Keluar</a>
                     </li>
                     <li>
-                        <a href="#">Laporan Line Total</a>
+                        <a href="{{ route('report-labarugi') }}">Laporan Line Total</a>
                     </li>
                 </ul>
             </li>
