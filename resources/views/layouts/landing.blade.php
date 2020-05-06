@@ -5,7 +5,7 @@
 <!-- Mirrored from coderthemes.com/hyper/saas/landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Feb 2020 05:16:54 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>Landing Page | PT.FOLADO KARYA ABADI</title>
+        <title>Landing Page | PT FOLADO KARYA ABADI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -63,7 +63,7 @@
                     <div class="col-md-5">
                         <div class="mt-md-4">
                             <h2 class="text-white font-weight-normal mb-4 mt-3 hero-title">
-                                PT.FOLADO KARYA ABADI 
+                                PT FOLADO KARYA ABADI 
                             </h2>
 
                             <p class="mb-4 font-16 text-white-50">Rest Area Parkir Industri
@@ -111,8 +111,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="mb-1">
-                            <p class="text-white-50 mt-4 text-center mb-0">© 2020 Millennial Technology. Design and coded by
-                                Coderthemes</p>
+                            <p class="text-white-50 mt-4 text-center mb-0">© 2020 PT Folado Karya Abadi | 
+                                Develop by Millennial Technology</p>
                         </div>
                     </div>
                 </div>
