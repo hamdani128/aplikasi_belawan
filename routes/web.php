@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::get('/home', 'HomeController@landing');
 Auth::routes();
+Route::get('/', 'HomeController@landing');
 Route::middleware('auth')->group(function(){
-    Route::get('/', 'HomeController@index');
-
+    Route::get('/dashboard', 'HomeController@index');
     Route::get('/type_mails', "TypeMailController@index")->name('TypeMail');
     Route::post('/type_mails/create', 'TypeMailController@store')->name('create-surat');
     Route::get('/edit/type_mails/{id}', 'TypeMailController@edit');
