@@ -157,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body printableArea">
+            <div class="card-body printableArea ">
                 <div class="row">
                     <div class="col-5">
                         <table class="table-responsive pb-3 pt-1 border" style="height: 11cm">
