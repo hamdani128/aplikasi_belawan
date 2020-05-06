@@ -17,5 +17,5 @@ class OvernightSmart extends Model
     public function transaction_smart()
     {
         return $this->belongsTo(TransactionSmart::class,'transaksi_id');
-    }
+    }    
 }

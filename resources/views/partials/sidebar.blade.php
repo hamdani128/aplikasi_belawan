@@ -17,7 +17,7 @@
 
             <li class="side-nav-title side-nav-item">Navigation</li>
             <li class="side-nav-item">
-                <a href=" {{ url('/') }}" class="side-nav-link">
+                <a href=" {{ url('/dashboard') }}" class="side-nav-link">
                     <i class="uil-home-alt"></i>
                     <span> Dashboards </span>
                 </a>
