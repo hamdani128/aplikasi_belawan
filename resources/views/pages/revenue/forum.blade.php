@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item active">Pembagian</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Forum Pt.Fulado Karya Abado</h4>
+                <h4 class="page-title">Forum PT Folado Karya Abadi</h4>
             </div>
         </div>
     </div>

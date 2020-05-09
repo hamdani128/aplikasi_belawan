@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item active">Revenue</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Setoran PT.Fulado Karya Abadi</h4>
+                <h4 class="page-title">Setoran PT Folado Karya Abadi</h4>
             </div>
         </div>
     </div>

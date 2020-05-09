@@ -8,21 +8,6 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <div class="input-group input-daterange">
-                                <input type="text" class="form-control form-control-default" id="dash-daterange">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-primary border-primary text-white">
-                                        <i class="mdi mdi-calendar-range font-13"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary ml-2" ><i class="mdi mdi-autorenew"></i></button>
-                    </form>
-                </div>
                 <h4 class="page-title">Transaksi Pendapatan</h4>
             </div>
         </div>

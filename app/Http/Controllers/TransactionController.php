@@ -314,6 +314,14 @@ class TransactionController extends Controller
         return redirect('/outgoing_transaction');
     }
 
+    public function delete_troutgoing($id)
+    {
+        $trout = TransactionOut::find($id);
+        $trout->delete();
+        return back();
+    }
+
+
     // prinout
     public function printout_peritem_smart($id)
     {

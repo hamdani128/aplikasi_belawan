@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/outgoing_transaction/create', 'TransactionController@create_troutgoing')->name('create-transaction-outgoing');
     Route::get('/edit/transaction_outgoing/{id}', 'TransactionController@edit_troutgoing');
     Route::post('/outgoing_transaction/{id}/update', 'TransactionController@update_troutgoing');
+    Route::get('/delete/transaction_outgoing/{transactionout}', 'TransactionController@delete_troutgoing');
 
     Route::get('/overnight-smart', 'OvernightController@index_smart')->name('malam-smart');
     Route::get('/overnight-phg', 'OvernightController@index_phg')->name('malam-phg');
