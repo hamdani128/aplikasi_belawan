@@ -35,6 +35,6 @@ Route::get('dayphg', function(){
 });
 
 Route::get('allphg', function(){
-    return response()->json(TransactionSmart::all());
+    return response()->json(TransactionPhgt::all());
 });
 
