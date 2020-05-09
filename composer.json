@@ -17,6 +17,7 @@
         "laravel/ui": "^2.0",
         "milon/barcode": "^7.0",
         "spatie/laravel-permission": "^3.11",
+        "tymon/jwt-auth": "^1.0",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
