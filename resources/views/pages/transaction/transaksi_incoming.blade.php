@@ -1,6 +1,6 @@
 @extends('partials.app')
 @section('content')
-@section('title', 'Modul Transaksi | Transaksi Pendapatan')
+@section('title', 'Modul Transaksi | Transaksi Masuk')
 
 <div class="container-fluid">
                         

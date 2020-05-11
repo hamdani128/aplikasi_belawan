@@ -44,7 +44,7 @@
                     <!-- right menu -->
                     <ul class="navbar-nav ml-auto align-items-center">
                         <li class="nav-item mx-lg-1">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="https://goo.gl/maps/Tjs7ZQqPnxTujUBt6" target="_blank">Contact</a>
                         </li>
                         <li class="nav-item mx-lg-1">
                             <a class="nav-link" href="{{ route('login') }}">Login Administrator</a>

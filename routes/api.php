@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('daysmart', function(){
-        $data = TransactionSmart::get()->where('tanggal', date('2020-05-09'));
+        $data = TransactionSmart::get()->where('tanggal', date('Y-m-d'));
         return response()->json($data);
 });
 

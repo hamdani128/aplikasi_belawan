@@ -27,38 +27,6 @@
         <div class="col-xl-10 col-lg-9">
             <div class="card card-ouline-light">
                 <div class="card-header bg-default">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-inline">
-                                <div class="form-group">
-                                    <label for="" class="mr-1">Start Date</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control form-control-light" id="dash-daterange">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text bg-primary border-primary text-white">
-                                                <i class="mdi mdi-calendar-range font-13"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                <label for="" class="mr-1 ml-1 pt-1">To Date</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control form-control-light" id="dash-daterange">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text bg-primary border-primary text-white">
-                                            <i class="mdi mdi-calendar-range font-13"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="input-group ml-1">
-                                    <a href="javascript: void(0);" class="btn btn-primary">
-                                        <i class="mdi mdi-autorenew"></i>
-                                    </a>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
