@@ -17,4 +17,9 @@ class Truck extends Model
     {
         return $this->belongsTo(TransactionSmart::class);
     }
+
+    public function transactionphgt()
+    {
+        return $this->belongsTo(TransactionPhgt::class);
+    }
 }

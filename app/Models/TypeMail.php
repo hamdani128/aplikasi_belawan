@@ -19,4 +19,10 @@ class TypeMail extends Model
     {
         return $this->belongsTo(TransactionSmart::class,'surat_id');
     }
+
+    
+    public function trphg()
+    {
+        return $this->belongsTo(TransactionPhgt::class,'surat_id');
+    }
 }
