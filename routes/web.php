@@ -79,11 +79,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/forum/table', 'RevenueController@table_forum');
     Route::post('/forum/create', 'RevenueController@add_forum')->name('create-forum');
     Route::get('/edit/forumphg/{id}', 'RevenueController@edit_forum');    
-
     Route::get('/activity', 'TransactionController@index_activity')->name('activity');
-
     Route::get('/report-labarugi', 'ReportController@add_labarugi')->name('report-labarugi');
 
-   
+    
 
 });

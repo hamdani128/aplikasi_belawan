@@ -48,8 +48,8 @@ Route::get('all', function(){
 Route::get('days', function () {
     $result = [
         'data' => [
-            'transaction_smart' => TransactionSmart::all()->where('tanggal', date('Y-m-d')),
-            'transaction_phg' =>  TransactionPhgt::all()->where('tanggal', date('Y-m-d')),    
+            'transaction_smart' => TransactionSmart::where('tanggal', date('Y-m-d'))->get(),
+            'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),    
         ]
     ];
     return response()->json($result);
@@ -58,10 +58,11 @@ Route::get('days', function () {
 Route::get('all', function () {
     $result = [
         'data' => [
-            'transaction_smart'=>TransactionSmart::all(),
-            'transaction_phg' => TransactionPhgt::all(),
+            'transaction_smart'=>TransactionSmart::get(),
+            'transaction_phg' => TransactionPhgt::get(),
         ]
     ];
     return response()->json($result);
 });
+
 
