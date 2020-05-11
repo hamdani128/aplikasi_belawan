@@ -83,4 +83,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/activity', 'TransactionController@index_activity')->name('activity');
 
     Route::get('/report-labarugi', 'ReportController@add_labarugi')->name('report-labarugi');
+
+   
+
 });

@@ -9,6 +9,19 @@ class TransactionPhgt extends Model
 {
     protected $guarded = [];
 
+    protected $appends = [
+        'bk',
+        'namaSurat'
+    ];
+
+    public function getBkAttribute() {
+        return $this->trucks->no_kendaraan;
+    }
+
+    public function getNamaSuratAttribute() {
+        return $this->typemail->nama;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

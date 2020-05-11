@@ -126,6 +126,9 @@
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
                     <li>
+                        <a href="#">Management Permision</a>
+                    </li>
+                    <li>
                         <a href="{{ route('activity') }}">History Activity</a>
                     </li>
                 </ul>
