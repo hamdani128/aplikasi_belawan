@@ -13,4 +13,8 @@ class Truck extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function transactionsmart()
+    {
+        return $this->belongsTo(TransactionSmart::class);
+    }
 }

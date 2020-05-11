@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Resources\TransactionSmartCollection;
 use App\Models\TransactionPhgt;
 use App\Models\TransactionSmart;
+use App\Models\Truck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +38,30 @@ Route::get('dayphg', function(){
 
 Route::get('allphg', function(){
     return response()->json(TransactionPhgt::all());
+});
+
+Route::get('all', function(){
+    $data = Truck::all();
+    return response()->json($data);
+});
+
+Route::get('days', function () {
+    $result = [
+        'data' => [
+            'transaction_smart'=>TransactionSmart::all()->where('tanggal', date('Y-m-d')),
+            'transaction_phg' => TransactionPhgt::all()->where('tanggal', date('Y-m-d')),
+        ]
+    ];
+    return response()->json($result);
+});
+
+Route::get('all', function () {
+    $result = [
+        'data' => [
+            'transaction_smart'=>TransactionSmart::all(),
+            'transaction_phg' => TransactionPhgt::all(),
+        ]
+    ];
+    return response()->json($result);
 });
 
