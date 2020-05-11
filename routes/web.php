@@ -81,8 +81,5 @@ Route::middleware('auth')->group(function(){
     Route::get('/edit/forumphg/{id}', 'RevenueController@edit_forum');    
     Route::get('/activity', 'TransactionController@index_activity')->name('activity');
     Route::get('/report-labarugi', 'ReportController@add_labarugi')->name('report-labarugi');
-
-    
-
-
+    Route::get('/permission', 'PermissionController@index')->name('permission');
 });

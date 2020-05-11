@@ -46,20 +46,26 @@ Route::get('all', function(){
 });
 
 Route::get('days', function () {
+    sleep(1);
     $result = [
         'data' => [
             'transaction_smart' => TransactionSmart::where('tanggal', date('Y-m-d'))->get(),
             'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),    
+            'subtotal_smart' =>  [ TransactionSmart::where('tanggal', date('Y-m-d'))->sum('pendapatan') ],    
+            'subtotal_phg' =>  [ TransactionPhgt::where('tanggal', date('Y-m-d'))->sum('pendapatan') ],    
         ]
     ];
     return response()->json($result);
 });
 
 Route::get('all', function () {
+    sleep(1);
     $result = [
         'data' => [
-            'transaction_smart'=>TransactionSmart::get(),
+            'transaction_smart'=> TransactionSmart::get(),
             'transaction_phg' => TransactionPhgt::get(),
+            'subtotal_smart' => [ TransactionSmart::sum('pendapatan') ],    
+            'subtotal_phg' =>  [ TransactionPhgt::sum('pendapatan') ],    
         ]
     ];
     return response()->json($result);
