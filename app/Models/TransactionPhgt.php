@@ -29,7 +29,7 @@ class TransactionPhgt extends Model
 
     public function overnight_phg()
     {
-        return $this->hasMany(OvernightSmart::class,'transaksi_id');
+        return $this->hasMany(OvernightPhg::class,'transaksi_id');
     }
 
     public function typemail()
