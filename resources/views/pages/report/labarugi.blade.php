@@ -261,8 +261,6 @@
 </div>
 
 @section('labarugi')
-<script src="assets/js/vendor.min.js"></script>
-<script src="assets/js/app.min.js"></script>
 <!-- third party js -->
 <script src="assets/js/vendor/apexcharts.min.js"></script>
 <script src="assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
@@ -301,6 +299,7 @@
                     load_data(from_date, to_date);
                     load_phg(from_date, to_date);
                     load_pengeluaran(from_date, to_date);
+
                     $.get('/report/sum-pendapatan/trsmart', {from_date:from_date, to_date:to_date}, function(data){
                         $(".pensmart").html(data );
                     });
@@ -320,9 +319,7 @@
                     alert('Both Date is required');
                 }
         });
-
-       
-
+        
     load_data();
     load_phg();
    

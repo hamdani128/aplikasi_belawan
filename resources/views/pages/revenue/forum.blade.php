@@ -58,7 +58,7 @@
 </div>
 
 <div class="modal fade" id="add_forum" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Tambah Data Forum</h5>
@@ -73,16 +73,37 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                <label for="">Tanggal</label>
-                                <div class="input-group input-daterange">                                    
-                                    <input type="text" class="form-control" name="tanggal">
-                                  </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="">Mulai Tanggal</label>
+                                        <div class="input-group input-daterange">                                    
+                                            <input type="text" class="form-control" name="from_date" id="from_date">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="">Sampai Tanggal</label>
+                                        <div class="input-group input-daterange">                                    
+                                            <input type="text" class="form-control" name="to_date" id="to_date">
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="">Jadwal Shift</label>
+                                        <div class="input-group input-daterange">                                    
+                                            <select name="shift" id="shift" class="form-control">
+                                                <option value="" disabled selected>Pilih :</option>
+                                                <option value="" >Shift 1</option>
+                                                <option value="" >Shift 2</option>
+                                            </select>
+                                            <button class="btn btn-md btn-primary ml-2"><i class="mdi mdi-filter" id="filter"></i> Filter Data</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Total Kendaraan Masuk</label>
                                 <div class="input-group">                                    
-                                    <input type="text" class="form-control" name="total_kendaraan" value="{{ $total_kendaraan }}">
+                                    <input type="text" class="form-control" name="total_kendaraan">
                                   </div>
                             </div>
 
@@ -97,7 +118,7 @@
                                     <div class="col-2">
                                         <label for="">Jumlah</label>
                                         <div class="input-group">                                    
-                                        <input type="text" class="form-control jlh_kwitansi" value="{{ $total_kendaraan }}">
+                                        <input type="text" class="form-control jlh_kwitansi" name="jlh_kwitansi">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -120,7 +141,7 @@
                                     <div class="col-2">
                                         <label for="">Jumlah</label>
                                         <div class="input-group">                                    
-                                        <input type="text" class="form-control jlh_mandor" value="{{ $total_kendaraan }}">
+                                        <input type="text" class="form-control jlh_mandor" name="jlh_mandor">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -143,7 +164,7 @@
                                     <div class="col-2">
                                         <label for="">Jumlah</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control jlh_acit" value="{{ $total_acit }}" disabled>
+                                            <input type="text" class="form-control jlh_acit" name="jlh_acit">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -166,7 +187,7 @@
                                     <div class="col-2">
                                         <label for="">jumlah</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control jlh_acit"  value="{{ $total_bulking }}" disabled>
+                                            <input type="text" class="form-control jlh_acit" name="jlh_bulking">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -189,7 +210,7 @@
                                     <div class="col-2">
                                         <label for="">Jumlah</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control jlh_acit"value="{{ $total_pko }}" disabled>
+                                            <input type="text" class="form-control jlh_acit" name="jlh_pko">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -212,7 +233,7 @@
                                     <div class="col-2">
                                         <label for="">Jumlah</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control jlh_acit" value="{{ $total_olin }}" disabled>
+                                            <input type="text" class="form-control jlh_acit" name="jlh_olin">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -235,7 +256,7 @@
                                     <div class="col-2">
                                         <label for="">Jumlah</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control jlh_acit" name="" value="{{ $total_cpo }}" disabled>
+                                            <input type="text" class="form-control jlh_acit" name="jlh_cpo">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -283,8 +304,6 @@
 </div>
 
 @section('forum')
-<script src="assets/js/vendor.min.js"></script>
-<script src="assets/js/app.min.js"></script>
 <!-- third party js -->
 <script src="assets/js/vendor/jquery.dataTables.min.js"></script>
 <script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
@@ -366,6 +385,22 @@
             acit = harga * jumlah
             row.find('.bpjs').val(acit);
         })
+
+        $("#filter").click(function(){
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val();
+        var shift = $('#shift').val();
+                if(from_date != '' &&  to_date != '' && shift= 'Shift 1') {         
+                    $.get('/forum/shift1', {from_date:from_date, to_date:to_date}, function(data){
+                        $(".total_kendaraan").html(data );
+                    });
+
+                } else {
+                    alert('Data Tidak Terdata');
+                }
+        });
+
+
     </script>
 @endsection
 

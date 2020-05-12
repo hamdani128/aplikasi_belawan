@@ -230,8 +230,6 @@
     </div>
 </div>
 @section('deposit')
-<script src="assets/js/vendor.min.js"></script>
-<script src="assets/js/app.min.js"></script>
 <!-- third party js -->
 <script src="assets/js/vendor/jquery.dataTables.min.js"></script>
 <script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
@@ -285,6 +283,30 @@
                     { data: 'aksi', name: 'aksi', orderable: false, searchable: false  }
                 ]
             });
+        });
+
+        $("#filter").click(function(){
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val();
+                if(from_date != '' &&  to_date != '') {         
+                    $.get('/report/sum-pendapatan/trsmart', {from_date:from_date, to_date:to_date}, function(data){
+                        $(".pensmart").html(data );
+                    });
+                    $.get('/report/sum-pendapatan/trphg', {from_date:from_date, to_date:to_date}, function(data){
+                        $(".penphg").html(data);
+                    });
+
+                    $.get('/report/sum-pengeluaran/trkeluar', {from_date:from_date, to_date:to_date}, function(data){
+                        $(".penkeluar").html(data);
+                    });
+
+                    $.get('/report/hasil', {from_date:from_date, to_date:to_date}, function(data){
+                        $(".hasil").html(data);
+                    });
+
+                } else {
+                    alert('Data Tidak Terdata');
+                }
         });
 
     </script>

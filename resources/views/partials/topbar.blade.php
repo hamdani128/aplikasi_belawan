@@ -42,6 +42,13 @@
             </div>
         </li>
 
+
+        {{-- <li class="notification-list ml-2">
+            <a class="" href="#">
+                <span><i class="dripicons-exit noti-icon"></i> Logout</span>
+            </a>
+        </li> --}}
+
     </ul>
     <button class="button-menu-mobile open-left disable-btn">
         <i class="mdi mdi-menu"></i>

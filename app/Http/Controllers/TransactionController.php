@@ -387,14 +387,19 @@ class TransactionController extends Controller
     public function days()
     {
             sleep(1);
+            $pen1 = TransactionSmart::where('tanggal', date('Y-m-d'))->sum('pendapatan');
+            $pen2 = TransactionPhgt::where('tanggal', date('Y-m-d'))->sum('pendapatan');
             $result = [
                 'data' => [
                     'transaction_smart' => TransactionSmart::where('tanggal', date('Y-m-d'))->get(),
-                    'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),    
-                    'subtotal' =>   [ DB::table('transaction_smarts')->select(DB::raw('SUM(pendapatan) AS subsmart'))->where('tanggal', date('Y-m-d'))->get(),
-                                    DB::table('transaction_phgts')->select(DB::raw('SUM(pendapatan) AS subphg'))->where('tanggal', date('Y-m-d'))->get()
-                                ],    
-                ]
+                    'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),
+                    'subtotal' => [
+                        collect([
+                            'smart' => $pen1, 
+                            'phg' => $pen2
+                        ]), 
+                    ],
+                ],
             ];
             return response()->json($result);
     }
@@ -402,13 +407,18 @@ class TransactionController extends Controller
     public function all_transaction()
     {
             sleep(1);
+            $pen1 = TransactionSmart::sum('pendapatan');
+            $pen2 = TransactionPhgt::sum('pendapatan');
             $result = [
                 'data' => [
                     'transaction_smart' => TransactionSmart::get(),
                     'transaction_phg' =>  TransactionPhgt::get(),    
-                    'subtotal' =>  [ DB::table('transaction_smarts')->select(DB::raw('SUM(pendapatan) AS subsmart'))->get(),
-                                    DB::table('transaction_phgts')->select(DB::raw('SUM(pendapatan) AS subphg'))->get()
-                                ],    
+                    'subtotal' => [
+                        collect([
+                            'smart' => $pen1, 
+                            'phg' => $pen2
+                        ]),    
+                    ],
                 ]
             ];
             return response()->json($result);
