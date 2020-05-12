@@ -11,6 +11,7 @@ use App\Models\Truck;
 use App\Models\TypeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
@@ -382,4 +383,36 @@ class TransactionController extends Controller
     {
         //
     }
+
+    public function days()
+    {
+            sleep(1);
+            $result = [
+                'data' => [
+                    'transaction_smart' => TransactionSmart::where('tanggal', date('Y-m-d'))->get(),
+                    'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),    
+                    'subtotal' =>   [ DB::table('transaction_smarts')->select(DB::raw('SUM(pendapatan) AS subsmart'))->where('tanggal', date('Y-m-d'))->get(),
+                                    DB::table('transaction_phgts')->select(DB::raw('SUM(pendapatan) AS subphg'))->where('tanggal', date('Y-m-d'))->get()
+                                ],    
+                ]
+            ];
+            return response()->json($result);
+    }
+
+    public function all_transaction()
+    {
+            sleep(1);
+            $result = [
+                'data' => [
+                    'transaction_smart' => TransactionSmart::get(),
+                    'transaction_phg' =>  TransactionPhgt::get(),    
+                    'subtotal' =>  [ DB::table('transaction_smarts')->select(DB::raw('SUM(pendapatan) AS subsmart'))->get(),
+                                    DB::table('transaction_phgts')->select(DB::raw('SUM(pendapatan) AS subphg'))->get()
+                                ],    
+                ]
+            ];
+            return response()->json($result);
+    }
+
+
 }
