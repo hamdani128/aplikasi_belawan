@@ -95,7 +95,7 @@ class ReportController extends Controller
         if(request()->ajax())
         {
             if(!empty($request->from_date))
-            {
+                {
                 $data = TransactionSmart::whereDate('tanggal', array($request->from_date))->whereDate('tanggal', array($request->to_date))->sum('pendapatan');
                 // $data = TransactionOut::whereBetween('created_at', array($start->toDateTimeString(), $end->toDateTimeString()))->get();
             }

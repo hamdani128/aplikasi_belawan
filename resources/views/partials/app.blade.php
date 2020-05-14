@@ -72,6 +72,8 @@
         @yield('forum')
         @yield('activity')
         @yield('labarugi')
+        @yield('setoran')
+        @yield('setoran-shift2')
     </body>
 
 <!-- Mirrored from coderthemes.com/hyper/saas/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Feb 2020 05:17:48 GMT -->

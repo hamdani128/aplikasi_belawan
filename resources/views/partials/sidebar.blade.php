@@ -5,10 +5,10 @@
         <!-- LOGO -->
         <a href="#" class="logo text-center">
             <span class="logo-lg">
-            <img src="img/polado.png" alt="" height="16" id="side-main-logo">
+            <img src="/img/polado.png" alt="" height="16" id="side-main-logo">
             </span>
             <span class="logo-sm">
-                <img src="img/polado.png" alt="" height="16" id="side-sm-main-logo">
+                <img src="/img/polado.png" alt="" height="16" id="side-sm-main-logo">
             </span>
         </a>
 

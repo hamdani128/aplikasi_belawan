@@ -399,6 +399,12 @@ class TransactionController extends Controller
                             'phg' => $pen2
                         ]), 
                     ],
+                    'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(),
+                    'total_pengeluaran' => [
+                        collect([
+                            'days' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->sum('jumlah'),
+                        ]),
+                    ], 
                 ],
             ];
             return response()->json($result);
@@ -419,7 +425,13 @@ class TransactionController extends Controller
                             'phg' => $pen2
                         ]),    
                     ],
-                ]
+                    'list_pengeluaran' => TransactionOut::get(),
+                    'total_pengeluaran' => [
+                        collect([
+                            'all' => TransactionOut::sum('jumlah'),
+                        ]),
+                    ],   
+                ],
             ];
             return response()->json($result);
     }

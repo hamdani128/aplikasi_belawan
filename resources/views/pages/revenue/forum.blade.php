@@ -94,7 +94,7 @@
                                                 <option value="" >Shift 1</option>
                                                 <option value="" >Shift 2</option>
                                             </select>
-                                            <button class="btn btn-md btn-primary ml-2"><i class="mdi mdi-filter" id="filter"></i> Filter Data</button>
+                                            <a href="#" class="btn btn-md btn-primary ml-1" id="filter"><i class="mdi mdi-filter"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -321,6 +321,15 @@
 <!-- demo app -->
 <script src="assets/js/pages/demo.datatable-init.js"></script>
     <script>
+        
+        $(document).ready(function(){
+            $('.input-daterange').datepicker({
+            todayBtn:'linked',
+            format:'yyyy-mm-dd',
+            autoclose:true
+            });
+        });
+
         $(function() {
             $('#forum').DataTable({
                 processing: true,
@@ -342,13 +351,6 @@
             });
         });
         
-         $(document).ready(function(){
-            $('.input-daterange').datepicker({
-            todayBtn:'linked',
-            format:'yyyy-mm-dd',
-            autoclose:true
-            });
-        });
         
         $('.harga_acit').on('keyup',(e)=>{
             let row = $(e.target).parents('.row-acit')
@@ -386,13 +388,13 @@
             row.find('.bpjs').val(acit);
         })
 
-        $("#filter").click(function(){
+        $('#filter').click(function(){
         var from_date = $('#from_date').val();
         var to_date = $('#to_date').val();
         var shift = $('#shift').val();
-                if(from_date != '' &&  to_date != '' && shift= 'Shift 1') {         
-                    $.get('/forum/shift1', {from_date:from_date, to_date:to_date}, function(data){
-                        $(".total_kendaraan").html(data );
+                if(from_date != '' &&  to_date != '') {         
+                    $.get('/forum/shift/1', {from_date:from_date, to_date:to_date}, function(data){
+                        $('.total_kendaraan').val(data );
                     });
 
                 } else {

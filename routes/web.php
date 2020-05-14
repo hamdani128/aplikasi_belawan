@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/api/get-company/{truck:no_kendaraan}', 'TruckController@company')->name('trucks.company');
     Route::post('/transaction_incoming/smart/add', 'TransactionController@store')->name('create-transaction-smart');
     Route::get('/trsmart/table', 'TransactionController@table_trsmart')->name('table-trsmart');
+
     Route::middleware('permission:add night income')->get('/add_overnight/transaction_smart/{id}', 'TransactionController@add_overnight_smart');
     Route::post('/create/overnight/trsmart/{transactionsmart}', 'TransactionController@store_overnight_trsmart')->name('create-overnightsmart');
     Route::get('/edit/transaction_smart/{id}', 'TransactionController@edit_trsmart');
@@ -82,5 +83,20 @@ Route::middleware('auth')->group(function(){
     Route::get('/activity', 'TransactionController@index_activity')->name('activity');
     Route::get('/report-labarugi', 'ReportController@add_labarugi')->name('report-labarugi');
     Route::get('/permission', 'PermissionController@index')->name('permission');
+
+    Route::get('/forum/shift/1', 'RevenueController@shift1');
+    Route::get('/setoran/add', 'RevenueController@add_setoran')->name('add-setoran');
+    
+    Route::get('/print/setoran/shift1', 'RevenueController@print_setoran_shift1')->name('print-setoran-shift1');
+    Route::get('/print/setoran/shift2', 'RevenueController@print_setoran_shift2')->name('print-setoran-shift2');
+    Route::get('/setoran/shift2', 'RevenueController@setoran_api_shift2');
+    Route::get('/setoran/shift2/acit', 'RevenueController@setoran_api_shift2_acit');
+    Route::get('/setoran/shift2/bulking', 'RevenueController@setoran_api_shift2_bulking');
+    Route::get('/setoran/shift2/pko', 'RevenueController@setoran_api_shift2_pko');
+    Route::get('/setoran/shift2/olin', 'RevenueController@setoran_api_shift2_olin');
+    Route::get('/setoran/shift2/cpo', 'RevenueController@setoran_api_shift2_cpo');
+    Route::get('/setoran/shift2/inti', 'RevenueController@setoran_api_shift2_inti');
+    Route::get('/setoran/shift2/pendapatan', 'RevenueController@setoran_api_shift2_pendapatan');
+    Route::get('/setoran/shift2/pengeluaran', 'RevenueController@setoran_api_shift2_pengeluaran');
 
 });

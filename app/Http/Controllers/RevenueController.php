@@ -6,6 +6,7 @@ use App\Models\DepositPhg;
 use App\Models\ForumPhg;
 use App\Models\TransactionOut;
 use App\Models\TransactionPhgt;
+use App\Models\TransactionSmart;
 use App\Models\TypeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,7 @@ class RevenueController extends Controller
         $bulking = TypeMail::where('nama', 'BULKING')->first()->id; 
         $pko = TypeMail::where('nama', 'PKO')->first()->id;
         $olin = TypeMail::where('nama', 'OLIN')->first()->id; 
-        $cpo = TypeMail::where('nama', 'CPO')->first()->id; 
+        $cpo = TypeMail::where('nama', 'CPO')->first()->id;
         $total_acit = TransactionPhgt::where('tanggal', date('Y-m-d'))->where('surat_id', $acit)->count();
         $total_bulking = TransactionPhgt::where('tanggal', date('Y-m-d'))->where('surat_id', $bulking)->count();
         $total_pko = TransactionPhgt::where('tanggal', date('Y-m-d'))->where('surat_id', $pko)->count();
@@ -117,6 +118,234 @@ class RevenueController extends Controller
     {
         $forum = ForumPhg::find($id);
         return view('pages.revenue.edit_forum', compact('forum', 'total_kendaraan'));
+    }
+
+    public function shift1(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $trsmart = TransactionSmart::whereBetween('tanggal', array($request->from_date, $request->to_date))->count('id');           
+            $trphg = TransactionPhgt::whereBetween('tanggal', array($request->from_date, $request->to_date))->count('id');                      
+            $hasil = $trsmart + $trphg;
+        }
+        else    
+        {
+            $hasil = 0;
+            // $trout = TransactionOut::whereBetween('tanggal', array(date('Y-m-d'), date('Y-m-d')))->sum('pendapatan');;
+        }
+        return  $hasil;
+    }
+
+    public function add_setoran(){
+        $acit = TypeMail::where('nama', 'ACIT')->first()->id; 
+        $bulking = TypeMail::where('nama', 'BULKING')->first()->id; 
+        $pko = TypeMail::where('nama', 'PKO')->first()->id;
+        $olin = TypeMail::where('nama', 'OLIN')->first()->id; 
+        $inti = TypeMail::where('nama', 'INTI')->first()->id; 
+        $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+        $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.Smart')->first()->id;
+
+        $ken1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->count();
+        $ken2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->count();
+       
+        $pen1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('pendapatan');
+        $pen2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('pendapatan');
+        $keluar = TransactionOut::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('jumlah');
+
+        $CPO_total1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo1)->count();      
+        $CPO_total2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo2)->count();      
+        
+        $bulking_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking)->count();      
+        $acit_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $acit)->count();      
+        $olin_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $olin)->count();      
+        $pko_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $pko)->count();      
+        $INTI_total1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $inti)->count();
+        
+        $sub_cpo = $CPO_total1 + $CPO_total2;
+        $total_kendaraan = $ken1 + $ken2;
+        $total_pendapatan = $pen1 + $pen2;
+        return view('pages.revenue.add_setoran', compact('total_kendaraan', 'sub_cpo', 'INTI_total1','bulking_total', 'acit_total', 'olin_total', 'pko_total', 'total_pendapatan', 'keluar'));
+    }
+
+
+
+
+    public function print_setoran_shift1()
+    {
+
+        $acit = TypeMail::where('nama', 'ACIT')->first()->id; 
+        $bulking = TypeMail::where('nama', 'BULKING')->first()->id; 
+        $pko = TypeMail::where('nama', 'PKO')->first()->id;
+        $olin = TypeMail::where('nama', 'OLIN')->first()->id; 
+        $inti = TypeMail::where('nama', 'INTI')->first()->id; 
+        $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+        $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.Smart')->first()->id;
+
+        $ken1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->count();
+        $ken2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->count();
+       
+        $pen1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('pendapatan');
+        $pen2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('pendapatan');
+        $keluar = TransactionOut::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('jumlah');
+
+        $CPO_total1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo1)->count();      
+        $CPO_total2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo2)->count();      
+        
+        $bulking_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking)->count() * 15000;      
+        $acit_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $acit)->count() * 15000;      
+        $olin_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $olin)->count() * 15000;      
+        $pko_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $pko)->count() * 15000;      
+        $INTI_total1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $inti)->count() * 15000;
+        
+        $sub_cpo = ($CPO_total1 + $CPO_total2) * 15000;
+        $total_kendaraan = $ken1 + $ken2;
+        $total_pendapatan = $pen1 + $pen2;
+        
+        return view('pages.revenue.print_setoran_shift1', compact('total_kendaraan', 'sub_cpo', 'INTI_total1','bulking_total', 'acit_total', 'olin_total', 'pko_total', 'total_pendapatan', 'keluar'));
+    }
+
+    public function print_setoran_shift2()
+    {
+
+        return view('pages.revenue.print_setoran_shift2');
+    }
+
+    //  this is Api ---------------------------------------------------------------
+
+    public function setoran_api_shift2(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $trsmart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();           
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();
+            $hasil = $trphg+$trsmart;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_acit(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $acit = TypeMail::where('nama', 'ACIT')->first()->id;
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
+            $hasil = $trphg * 15000;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_bulking(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $acit = TypeMail::where('nama', 'BULKING')->first()->id;
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
+            $hasil = $trphg * 15000;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_pko(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $acit = TypeMail::where('nama', 'PKO')->first()->id;
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
+            $hasil = $trphg * 15000;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_olin(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $acit = TypeMail::where('nama', 'OLIN')->first()->id;
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
+            $hasil = $trphg * 15000;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_cpo(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+            $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.smart')->first()->id;
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo1)->count();
+            $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
+            $hasil = ($smart+$trphg) * 15000;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_inti(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $cpo2 = TypeMail::where('nama', 'INTI')->first()->id;
+            $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
+            $hasil = $smart * 15000;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_pendapatan(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->sum('pendapatan');
+            $phg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->sum('pendapatan');
+            $hasil = $smart + $phg;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_pengeluaran(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $keluar = TransactionOut::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->sum('jumlah');
+            $hasil = $keluar;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
     }
 
 

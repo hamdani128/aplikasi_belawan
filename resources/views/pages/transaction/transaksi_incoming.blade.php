@@ -5,14 +5,40 @@
 <div class="container-fluid">
                         
     <!-- start page title -->
-    <div class="row">
+    <div class="row mb-2">
         <div class="col-12">
             <div class="page-title-box">
                 <h4 class="page-title">Transaksi Pendapatan</h4>
             </div>
+
         </div>
     </div>
     <!-- end page title -->
+    {{-- <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="{{ route('add-setoran') }}" class="btn btn-info btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran</a>
+                    <a href="" class="btn btn-success btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Forum</a>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="{{ route('print-setoran-shift1') }}" class="btn btn-primary btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran (Shift 1)</a>
+                    <a href="{{ route('print-setoran-shift2') }}" class="btn btn-primary btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran (Shift 2)</a>
+                    <a href="" class="btn btn-info btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Forum (Shift 1)</a>
+                    <a href="" class="btn btn-info btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir forum (Shift 2)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="row">
         <div class="col-xl-4 col-lg-4">
