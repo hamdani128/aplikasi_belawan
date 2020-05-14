@@ -396,15 +396,11 @@ class TransactionController extends Controller
                     'subtotal' => [
                         collect([
                             'smart' => $pen1, 
-                            'phg' => $pen2
+                            'phg' => $pen2,
+                            'pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->sum('jumlah'),
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(),
-                    'total_pengeluaran' => [
-                        collect([
-                            'days' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->sum('jumlah'),
-                        ]),
-                    ], 
+                    'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(), 
                 ],
             ];
             return response()->json($result);
@@ -422,15 +418,11 @@ class TransactionController extends Controller
                     'subtotal' => [
                         collect([
                             'smart' => $pen1, 
-                            'phg' => $pen2
+                            'phg' => $pen2,
+                            'pengeluran' => TransactionOut::sum('jumlah')
                         ]),    
                     ],
-                    'list_pengeluaran' => TransactionOut::get(),
-                    'total_pengeluaran' => [
-                        collect([
-                            'all' => TransactionOut::sum('jumlah'),
-                        ]),
-                    ],   
+                    'list_pengeluaran' => TransactionOut::get(),   
                 ],
             ];
             return response()->json($result);
