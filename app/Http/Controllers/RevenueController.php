@@ -349,6 +349,15 @@ class RevenueController extends Controller
     }
 
 
+    public function print_forum_shift1()
+    {
+        return view('pages.revenue.print_forum_shift1');
+    }
+
+    public function print_forum_shift2()
+    {
+        return view('pages.revenue.print_forum_shift2');
+    }
 
     /**
      * Show the form for creating a new resource.

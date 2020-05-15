@@ -96,7 +96,7 @@
                             <div class="form-group">
                                 <label for="">No.</label>
                                 <div class="input-group">                                    
-                                    <input type="number" class="form-control" name="no" value="{{ $no_terakhir ? $no_terakhir->no + 1 : '1'  }}">
+                                    <input type="number" class="form-control" name="no" value="{{ $troutgoing->first() ? $troutgoing->first()->no + 1 : '1'  }}">
                                   </div>
                             </div>
                             <div class="form-group">

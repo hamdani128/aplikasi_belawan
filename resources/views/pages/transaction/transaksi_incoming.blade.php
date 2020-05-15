@@ -29,10 +29,12 @@
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12">
-                    <a href="{{ route('print-setoran-shift1') }}" class="btn btn-primary btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran (Shift 1)</a>
+                    {{-- <a href="{{ route('print-setoran-shift1') }}" class="btn btn-primary btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran (Shift 1)</a>
                     <a href="{{ route('print-setoran-shift2') }}" class="btn btn-primary btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran (Shift 2)</a>
-                    <a href="" class="btn btn-info btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Forum (Shift 1)</a>
-                    <a href="" class="btn btn-info btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir forum (Shift 2)</a>
+                    <a href="{{ route('print-forum-shift1') }}" class="btn btn-info btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Forum (Shift 1)</a>
+                    <a href="{{ route('print-forum-shift2') }}" class="btn btn-info btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir forum (Shift 2)</a> --}}
+                    <a href="{{ route('tutup-kasir1') }}" class="btn btn-success btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift1</a>
+                    <a href="" class="btn btn-warning btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift2</a>
                 </div>
             </div>
         </div>
@@ -103,8 +105,10 @@
                         <div class="tab-pane show active" id="multi-item-preview">
                             <div class="row pb-3">
                                 @can('add transaction')
-                                <div class="col-md-12">
+                                <div class="col-lg-12">
                                     <a href="{{ route('create-smart') }}" class="btn btn-md btn-primary"><i class="uil-plus-square"></i> Tambah</a>
+                                    <a href="{{ route('smart-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    <a href="" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
                                 </div>
                                 @endcan
                             </div>
@@ -176,6 +180,8 @@
                                 @can('add transaction')
                                 <div class="col-md-12">
                                     <a href="{{ route('create-phg') }}" class="btn btn-md btn-primary"><i class="uil-plus-square"></i> Tambah</a>
+                                    <a href="" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    <a href="" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
                                 </div>
                                 @endcan
                             </div>

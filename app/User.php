@@ -6,6 +6,7 @@ use App\Models\ActivityLog;
 use App\Models\Barcode;
 use App\Models\DepositPhg;
 use App\Models\ForumPhg;
+use App\models\Netincome;
 use App\Models\OvernightPhg;
 use App\Models\OvernightSmart;
 use App\Models\TransactionOut;
@@ -80,7 +81,7 @@ class User extends Authenticatable
     
     public function transaction_out()
     {
-        return $this->hasMany(TransactionOut::class,'user_id');
+        return $this->hasMany(TransactionOut::class);
     }
 
     public function deposit_phg()
@@ -101,6 +102,11 @@ class User extends Authenticatable
     public function barcode()
     {
         return $this->hasMany(Barcode::class,'user_id');
+    }
+
+    public function netincome()
+    {
+        return $this->hasMany(Netincome::class);
     }
 
 }

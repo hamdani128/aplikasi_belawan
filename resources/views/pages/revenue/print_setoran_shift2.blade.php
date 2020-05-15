@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <button  class="btn btn-md btn-primary ml-1" id="filter"><i class=" dripicons-print"></i><b> refresh</b></button>
+                            <button  class="btn btn-md btn-primary ml-1" id="filter"><i class="mdi mdi-update"></i><b> refresh</b></button>
                             <button  class="btn btn-md btn-info ml-1" id="print"><i class=" dripicons-print"></i><b> Print</b></button>
                         </div>
                     </div>

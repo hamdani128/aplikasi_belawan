@@ -99,4 +99,17 @@ Route::middleware('auth')->group(function(){
     Route::get('/setoran/shift2/pendapatan', 'RevenueController@setoran_api_shift2_pendapatan');
     Route::get('/setoran/shift2/pengeluaran', 'RevenueController@setoran_api_shift2_pengeluaran');
 
+    Route::get('/print/forum/shift1', 'RevenueController@print_forum_shift1')->name('print-forum-shift1');
+    Route::get('/print/forum/shift2', 'RevenueController@print_forum_shift2')->name('print-forum-shift2');
+
+    Route::get('/smart/rekapan/shift1', 'TransactionController@smart_rekapan_shift1')->name('smart-rekapan-shift1');
+
+    Route::get('/tutup-transaksi/shift1', 'TransactionController@tutup_kasir1')->name('tutup-kasir1');
+    Route::post('/tutup-transaksi/create', 'NetincomeController@store')->name('create-kasir1');
+
+});
+
+Route::middleware('role:super admin')->group(function () {
+    Route::livewire('permissions/kufra/{name}', 'permissions.index')->name('permissions.index')->layout('layouts.back', ['title' => 'Setup Peran & Perizinan']);
+    Route::livewire('permissions/assign', 'permissions.assign')->name('permissions.assign')->layout('layouts.back', ['title' => 'Tetapkan Peran & Perizinan']);
 });

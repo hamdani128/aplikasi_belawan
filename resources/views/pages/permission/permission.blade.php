@@ -25,6 +25,9 @@
 </div>
 
 @section('dashboard')
+
+    {{ $roles }}
+    {{ $permissions }}
     <script>
         $(document).ready(function(){
             $('#perhari').click(function(){
