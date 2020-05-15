@@ -429,7 +429,8 @@ class TransactionController extends Controller
                         collect([
                             'smart' => $pen1, 
                             'phg' => $pen2,
-                            'pengeluran' => TransactionOut::sum('jumlah')
+                            'pengeluran' => TransactionOut::sum('jumlah'),
+                            'pendapatan_bersih' => Netincome::sum('pendapatan_bersih'),
                         ]),    
                     ],
                     'list_pengeluaran' => TransactionOut::get(),   
