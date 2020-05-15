@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\models\Netincome;
 use App\Models\OvernightSmart;
 use App\Models\TransactionOut;
 use App\Models\TransactionPhgt;
@@ -406,6 +407,7 @@ class TransactionController extends Controller
                             'smart' => $pen1, 
                             'phg' => $pen2,
                             'pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->sum('jumlah'),
+                            'pendapatan_bersih' => Netincome::where('created_at', 'LIKE' ,'%'.date('Y-m-d').'%')->sum('pendapatan_bersih'),
                         ]), 
                     ],
                     'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(), 
