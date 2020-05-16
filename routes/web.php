@@ -89,7 +89,9 @@ Route::middleware('auth')->group(function(){
     
     Route::get('/print/setoran/shift1', 'RevenueController@print_setoran_shift1')->name('print-setoran-shift1');
     Route::get('/print/setoran/shift2', 'RevenueController@print_setoran_shift2')->name('print-setoran-shift2');
+
     Route::get('/setoran/shift2', 'RevenueController@setoran_api_shift2');
+    Route::get('/setoran/shift2/phg', 'RevenueController@setoran_api_shift2_phg');
     Route::get('/setoran/shift2/acit', 'RevenueController@setoran_api_shift2_acit');
     Route::get('/setoran/shift2/bulking', 'RevenueController@setoran_api_shift2_bulking');
     Route::get('/setoran/shift2/pko', 'RevenueController@setoran_api_shift2_pko');
@@ -105,6 +107,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/smart/rekapan/shift1', 'TransactionController@smart_rekapan_shift1')->name('smart-rekapan-shift1');
 
     Route::get('/tutup-transaksi/shift1', 'TransactionController@tutup_kasir1')->name('tutup-kasir1');
+    Route::get('/tutup-transaksi/shift2', 'TransactionController@tutup_kasir2')->name('tutup-kasir2');
     Route::post('/tutup-transaksi/create', 'NetincomeController@store')->name('create-kasir1');
 
 });

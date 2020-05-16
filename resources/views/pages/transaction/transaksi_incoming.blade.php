@@ -34,7 +34,7 @@
                     <a href="{{ route('print-forum-shift1') }}" class="btn btn-info btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Forum (Shift 1)</a>
                     <a href="{{ route('print-forum-shift2') }}" class="btn btn-info btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir forum (Shift 2)</a> --}}
                     <a href="{{ route('tutup-kasir1') }}" class="btn btn-success btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift1</a>
-                    <a href="" class="btn btn-warning btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift2</a>
+                    <a href="{{ route('tutup-kasir2') }}" class="btn btn-warning btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift2</a>
                 </div>
             </div>
         </div>

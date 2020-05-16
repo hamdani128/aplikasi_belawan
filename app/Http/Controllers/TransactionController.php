@@ -29,8 +29,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $trsmart = TransactionSmart::orderBy('no','DESC')->get();
-        $trphg = TransactionPhgt::orderBy('no','DESC')->get();
+        $trsmart = TransactionSmart::orderBy('no', 'DESC')->get();
+        $trphg = TransactionPhgt::orderBy('no', 'DESC')->get();
         $truksmart = TransactionSmart::where('created_at','LIKE','%'.date('Y-m-d').'%')->count();
         $trukphg = TransactionPhgt::where('created_at','LIKE','%'.date('Y-m-d').'%')->count();
         return view('pages.transaction.transaksi_incoming', compact('trsmart', 'trphg', 'truksmart', 'trukphg'));
@@ -421,19 +421,20 @@ class TransactionController extends Controller
             sleep(1);
             $pen1 = TransactionSmart::sum('pendapatan');
             $pen2 = TransactionPhgt::sum('pendapatan');
+            $month = Carbon::now()->format('m');
             $result = [
                 'data' => [
-                    'transaction_smart' => TransactionSmart::get(),
-                    'transaction_phg' =>  TransactionPhgt::get(),    
+                    'transaction_smart' => TransactionSmart::whereMonth('created_at', $month)->get(),
+                    'transaction_phg' =>  TransactionPhgt::whereMonth('created_at', $month)->get(),    
                     'subtotal' => [
                         collect([
                             'smart' => $pen1, 
                             'phg' => $pen2,
-                            'pengeluran' => TransactionOut::sum('jumlah'),
-                            'pendapatan_bersih' => Netincome::sum('pendapatan_bersih'),
+                            'pengeluran' => TransactionOut::whereMonth('created_at', $month)->sum('jumlah'),
+                            'pendapatan_bersih' => Netincome::whereMonth('created_at', $month)->sum('pendapatan_bersih'),
                         ]),    
                     ],
-                    'list_pengeluaran' => TransactionOut::get(),   
+                    'list_pengeluaran' => TransactionOut::whereMonth('created_at', $month)->get(),   
                 ],
             ];
             return response()->json($result);
@@ -477,6 +478,11 @@ class TransactionController extends Controller
         $total_kendaraan = $ken1 + $ken2;
         $total_pendapatan = $pen1 + $pen2;
         return view('pages.transaction.tutup_kasir1', compact('total_kendaraan', 'total_pendapatan','keluar', 'sub_cpo', 'jlh_phg', 'acit_total', 'olin_total', 'pko_total', 'INTI_total', 'CPO_total2', 'CPO_total1', 'bulking_total'));
+    }
+
+    public function tutup_kasir2()
+    {
+        return view('pages.transaction.tutup_kasir2');
     }
 
 

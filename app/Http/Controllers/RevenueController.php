@@ -227,6 +227,21 @@ class RevenueController extends Controller
         return  $hasil;
     }
 
+    public function setoran_api_shift2_phg(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            // $trsmart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();           
+            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();
+            $hasil = $trphg;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
     public function setoran_api_shift2_acit(Request $request)
     {
         if(!empty($request->from_date))
@@ -295,7 +310,7 @@ class RevenueController extends Controller
             $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.smart')->first()->id;
             $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo1)->count();
             $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
-            $hasil = ($smart+$trphg) * 15000;
+            $hasil = $smart+$trphg;
         }
         else    
         {
