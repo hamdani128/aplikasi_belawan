@@ -201,66 +201,68 @@
                     </div>
                 </div>
                 <div class="card-body printableArea">
-                    <div class="row">
-                        <h5>Setoran</h5>
-                        <div class="table-responsive">
-                            <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>PHG (15000)</th>
-                                        <th>CPO (15000)</th>
-                                        <th>INTI (15000)</th>
-                                        <th>OLIN (15000)</th>
-                                        <th>PKO (15000)</th>
-                                        <th>BULKING (15000)</th>
-                                        <th>Bulking Keluar (Jlh Motor)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <h5>Setoran</h5>
+                            <div class="table-responsive">
+                                <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
+                                    <thead class="thead-light">
                                         <tr>
-                                            <td>{{ date('Y-m-d') }}</td>
-                                            <td><h5 class="setoran_phg" id="setoran_phg"></h5></td>
-                                            <td><h5 class="cpo_setoran" id="setoran_cpo"></h5></td>
-                                            <td><h5 class="inti_setoran" id="setoran_inti"></h5></td>
-                                            <td><h5 class="olin_setoran" id="setoran_olin"></h5></td>
-                                            <td><h5 class="pko_setoran" id="setoran_pko"></h5></td>
-                                            <td><h5 class="bulking_setoran" id="setoran_bulking"></h5></td>
-                                            <td><h5 class="bulking_keluar" id="keluar_bulking"></h5></td>
+                                            <th>Tanggal</th>
+                                            <th>PHG (15000)</th>
+                                            <th>CPO (15000)</th>
+                                            <th>INTI (15000)</th>
+                                            <th>OLIN (15000)</th>
+                                            <th>PKO (15000)</th>
+                                            <th>BULKING (15000)</th>
+                                            <th>Bulking Keluar (Jlh Motor)</th>
                                         </tr>
-                                </tbody>
-                            </table>  
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>{{ date('Y-m-d') }}</td>
+                                                <td><h5 class="setoran_phg" id="setoran_phg"></h5></td>
+                                                <td><h5 class="cpo_setoran" id="setoran_cpo"></h5></td>
+                                                <td><h5 class="inti_setoran" id="setoran_inti"></h5></td>
+                                                <td><h5 class="olin_setoran" id="setoran_olin"></h5></td>
+                                                <td><h5 class="pko_setoran" id="setoran_pko"></h5></td>
+                                                <td><h5 class="bulking_setoran" id="setoran_bulking"></h5></td>
+                                                <td><h5 class="bulking_keluar" id="keluar_bulking"></h5></td>
+                                            </tr>
+                                    </tbody>
+                                </table>  
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <h5>Forum</h5>
-                        <div class="table-responsive printableArea">
-                            <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>Kwitansi (5000)</th>
-                                        <th>Mandor (8000)</th>
-                                        <th>CPO (5000)</th>
-                                        <th>OLIN (10000)</th>
-                                        <th>PKO (10000)</th>
-                                        <th>Bulking (15000)</th>
-                                        <th>BPJS (10000) /14 Orang</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <div class="row">
+                            <h5>Forum</h5>
+                            <div class="table-responsive">
+                                <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
+                                    <thead class="thead-light">
                                         <tr>
-                                            <td>{{ date('Y-m-d') }}</td>
-                                            <td><h5 id="forum_kwitansi"></h5></td>
-                                            <td><h5 id="forum_mandor"></h5></td>
-                                            <td><h5 id="forum_cpo"></h5></td>
-                                            <td><h5 id="forum_olin"></h5></td>
-                                            <td><h5 id="forum_pko"></h5></td>
-                                            <td><h5 id="forum_bulking"></h5></td>
-                                            <td><h5 id="forum_bpjs"></h5></td>
+                                            <th>Tanggal</th>
+                                            <th>Kwitansi (5000)</th>
+                                            <th>Mandor (8000)</th>
+                                            <th>CPO (5000)</th>
+                                            <th>OLIN (10000)</th>
+                                            <th>PKO (10000)</th>
+                                            <th>Bulking (15000)</th>
+                                            <th>BPJS (10000) /14 Orang</th>
                                         </tr>
-                                </tbody>
-                            </table>  
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>{{ date('Y-m-d') }}</td>
+                                                <td><h5 id="forum_kwitansi"></h5></td>
+                                                <td><h5 id="forum_mandor"></h5></td>
+                                                <td><h5 id="forum_cpo"></h5></td>
+                                                <td><h5 id="forum_olin"></h5></td>
+                                                <td><h5 id="forum_pko"></h5></td>
+                                                <td><h5 id="forum_bulking"></h5></td>
+                                                <td><h5 id="forum_bpjs"></h5></td>
+                                            </tr>
+                                    </tbody>
+                                </table>  
+                            </div>
                         </div>
                     </div>
                 </div>
