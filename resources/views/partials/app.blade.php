@@ -77,6 +77,9 @@
         @yield('forum-shift1')
         @yield('forum-shift2')
         @yield('smart_rakapan1')
+        @yield('smart_rakapan2')
+        @yield('phg_rakapan1')
+        @yield('phg_rakapan2')
         @yield('kasir1')
         @yield('kasir2')
     </body>

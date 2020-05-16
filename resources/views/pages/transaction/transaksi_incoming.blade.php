@@ -108,7 +108,7 @@
                                 <div class="col-lg-12">
                                     <a href="{{ route('create-smart') }}" class="btn btn-md btn-primary"><i class="uil-plus-square"></i> Tambah</a>
                                     <a href="{{ route('smart-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
-                                    <a href="" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
+                                    <a href="{{ route('smart-rekapan-shift2') }}" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
                                 </div>
                                 @endcan
                             </div>
@@ -180,8 +180,8 @@
                                 @can('add transaction')
                                 <div class="col-md-12">
                                     <a href="{{ route('create-phg') }}" class="btn btn-md btn-primary"><i class="uil-plus-square"></i> Tambah</a>
-                                    <a href="" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
-                                    <a href="" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
+                                    <a href="{{ route('phg-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    <a href="{{ route('phg-rekapan-shift2') }}" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
                                 </div>
                                 @endcan
                             </div>

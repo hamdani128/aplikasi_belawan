@@ -105,6 +105,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/print/forum/shift2', 'RevenueController@print_forum_shift2')->name('print-forum-shift2');
 
     Route::get('/smart/rekapan/shift1', 'TransactionController@smart_rekapan_shift1')->name('smart-rekapan-shift1');
+    Route::get('/smart/rekapan/shift2', 'TransactionController@smart_rekapan_shift2')->name('smart-rekapan-shift2');
+    Route::get('/phg/rekapan/shift1', 'TransactionController@phg_rekapan_shift1')->name('phg-rekapan-shift1');
+    Route::get('/phg/rekapan/shift2', 'TransactionController@phg_rekapan_shift2')->name('phg-rekapan-shift2');
 
     Route::get('/tutup-transaksi/shift1', 'TransactionController@tutup_kasir1')->name('tutup-kasir1');
     Route::get('/tutup-transaksi/shift2', 'TransactionController@tutup_kasir2')->name('tutup-kasir2');

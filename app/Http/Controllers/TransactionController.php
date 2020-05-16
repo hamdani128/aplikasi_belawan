@@ -293,8 +293,9 @@ class TransactionController extends Controller
             $troutgoing = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orderBy('no','DESC')->get();
         }
 
-        $number = TransactionOut::where('created_at','LIKE','%'.date('Y-m-d').'%')->sum('jumlah');
-        return view('pages.transaction.transaction_outgoing', compact('troutgoing', 'number'));
+        $shift1 = TransactionOut::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('jumlah');
+        $shift2 = TransactionOut::where('created_at', '>=' ,date('Y-m-d').' 19:00:00')->where('created_at', '<=' ,date('Y-m-d').' 07:00:00')->sum('jumlah');
+        return view('pages.transaction.transaction_outgoing', compact('troutgoing', 'shift1', 'shift2'));
     }
 
     public function create_troutgoing()
@@ -445,6 +446,25 @@ class TransactionController extends Controller
         $trsmart = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->get();
         return view('pages.transaction.print_smart_rekapan1', compact('trsmart'));
     }
+
+    public function smart_rekapan_shift2()
+    {
+        $trsmart = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 19:00:00')->where('created_at', '<=' ,date('Y-m-d').' 07:00:00')->get();
+        return view('pages.transaction.print_smart_rekapan2', compact('trsmart'));
+    }
+
+    public function phg_rekapan_shift1()
+    {
+        $trphg = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->get();
+        return view('pages.transaction.print_phg_rekapan1', compact('trphg'));
+    }
+
+    public function phg_rekapan_shift2()
+    {
+        $trphg = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 19:00:00')->where('created_at', '<=' ,date('Y-m-d').' 07:00:00')->get();
+        return view('pages.transaction.print_phg_rekapan2', compact('trphg'));
+    }
+    
 
     public function tutup_kasir1()
     {

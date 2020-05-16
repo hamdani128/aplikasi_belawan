@@ -17,8 +17,17 @@
         <div class="col-xl-2 col-lg-3">
             <div class="card title-box">
                 <div class="card-body">
-                        <h6 class="text-uppercase mt-0">Jumlah Pengeluaran</h6>
-                        <h4 class="my-2" id="active-users-count">Rp.{{ number_format($number) }}</h4>
+                        <h6 class="text-nowrap mt-0">Jumlah Pengeluaran Shift 1</h6>
+                        <h4 class="my-2" id="active-users-count">Rp.{{ number_format($shift1) }}</h4>
+                        <p class="mb-0 text-muted">
+                            <span class="text-nowrap">/ Pengeluaran</span>  
+                        </p>
+                </div>
+            </div>
+            <div class="card title-box">
+                <div class="card-body">
+                        <h6 class=" mt-0">Jumlah Pengeluaran Shift 2</h6>
+                        <h4 class="my-2" id="active-users-count">Rp.{{ number_format($shift2) }}</h4>
                         <p class="mb-0 text-muted">
                             <span class="text-nowrap">/ Pengeluaran</span>  
                         </p>
