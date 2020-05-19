@@ -58,7 +58,7 @@
                     </ul>
                 </li>
 
-                <li class="side-nav-title side-nav-item">Pembagian Pendapatan</li>
+                {{-- <li class="side-nav-title side-nav-item">Pembagian Pendapatan</li>
 
                 <li class="side-nav-item">
                     <a href="javascript: void(0);" class="side-nav-link">
@@ -74,7 +74,7 @@
                             <a href="{{ route('deposite_phg') }}">Setoran </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
             @role('super admin')
                 <li class="side-nav-title side-nav-item mt-1">Data Pendapatan Malam</li>

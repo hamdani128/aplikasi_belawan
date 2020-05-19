@@ -86,41 +86,25 @@
                                         <input type="text" class="form-control" name="tiket">
                                       </div>
                                 </div>
-                                
-
-                                <div class="form-group">
-                                    <label for="">Jenis Surat</label>
-                                    <div class="input-group">
-                                        <select name="surat_id" class="form-control" id="">
-                                            <option value="">Pilih Data:</option>
-                                            @foreach ($typemail as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-    
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">langsung</label>
-                                <div class="input-group">                                    
-                                    <input type="number" class="form-control" name="p_langsung" id="langsung">
-                                  </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">bulking</label>
-                                <div class="input-group">                                    
-                                    <input type="number" class="form-control" name="p_bulking" id="bulking"  onkeyup="sum();">
-                                  </div>
+                                <label for="">Jenis Surat</label>
+                                <div class="input-group">
+                                    <select name="surat_id" id="select" class="form-control" id="">
+                                        <option value="" selected disabled>Pilih Data:</option>
+                                        @foreach ($typemail as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Total Didapatkan</label>
                                 <div class="input-group">                                    
-                                    <input type="number" class="form-control" name="pendapatan" id="pendapatan" onkeyup="sum();">
+                                    <input type="number" class="form-control" name="pendapatan" id="pendapatan">
                                   </div>
                             </div>
                         </div>
@@ -168,6 +152,21 @@
                     }
                 })
             })
+
+            $("#select").change(function(){
+            var bil;
+            if($("#select option:selected").text() == "CPO"){
+                bil = 17000
+            }else if ($("#select option:selected").text() == "INTI"){
+                bil = 20000
+            }else if ($("#select option:selected").text() == "BULKING CPO"){
+                bil = 27000
+            }else if ($("#select option:selected").text() == "BULKING INTI"){
+                bil = 30000
+            }
+            $("#pendapatan").val(bil);
+             });
+
     </script>
 @endsection
 

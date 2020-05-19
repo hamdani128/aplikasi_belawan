@@ -48,7 +48,7 @@
                 <div class="card-body bg-info">
                     <i class=' dripicons-cart float-right text-white'></i>
                     <h6 class="text-uppercase mt-0">Pendapatan ( PT.SMART )</h6>
-                    <h2 class="my-2" id="active-users-count">Rp.{{ number_format($trsmart->where('tanggal',date('Y-m-d'))->sum('pendapatan')) }}</h2>
+                    <h2 class="my-2" id="active-users-count">Rp.{{ number_format($trsmart->sum('pendapatan')) }}</h2>
                     <p class="mb-0 text-muted">
                         <span class="text-white mr-2"><span class="mdi mdi-arrow-up-bold"></span> 5.27%</span>
                         <span class="text-nowrap text-white">Transaction</span>
@@ -62,7 +62,7 @@
                 <div class="card-body bg-success">
                     <i class=' dripicons-cart float-right'></i>
                     <h6 class="text-uppercase mt-0">Pendapatan ( Pt.Phg )</h6>
-                    <h2 class="my-2" id="active-users-count">Rp. {{ number_format($trphg->where('tanggal',date('Y-m-d'))->sum('pendapatan'),0) }}</h2>
+                    <h2 class="my-2" id="active-users-count">Rp. {{ number_format($trphg->sum('pendapatan'),0) }}</h2>
                     <p class="mb-0 text-muted">
                         <span class="text-white mr-2"><span class="mdi mdi-arrow-up-bold"></span> 5.27%</span>
                         <span class="text-nowrap text-white">Transaction</span>
@@ -124,8 +124,6 @@
                                                 <th>Tanggal</th>
                                                 <th>Jam</th>
                                                 <th>Jenis Surat</th>
-                                                <th>Langsung</th>
-                                                <th>Bulking</th>
                                                 <th>Line Pendapatan</th>
                                                 <th>Pendapatan Bermalam</th>
                                                 @can('add transaction')
@@ -142,8 +140,6 @@
                                                     <td>{{ $item->tanggal }}</td>
                                                     <td>{{ $item->jam }}</td>
                                                     <td>{{ $item->typemail->nama }}</td>
-                                                    <td>{{ $item->p_langsung }}</td>
-                                                    <td>{{ $item->p_bulking }}</td>
                                                     <td>{{ $item->pendapatan }}</td>
                                                     <td>{{ $item->bermalam }}</td>
                                                     @can('add transaction')
@@ -252,28 +248,28 @@
 
 @section('datatable-tr')
 <!-- third party js -->
-<script src="assets/js/vendor/jquery.dataTables.min.js"></script>
-<script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
-<script src="assets/js/vendor/dataTables.responsive.min.js"></script>
-<script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
-<script src="assets/js/vendor/dataTables.buttons.min.js"></script>
-<script src="assets/js/vendor/buttons.bootstrap4.min.js"></script>
-<script src="assets/js/vendor/buttons.html5.min.js"></script>
-<script src="assets/js/vendor/buttons.flash.min.js"></script>
-<script src="assets/js/vendor/buttons.print.min.js"></script>
-<script src="assets/js/vendor/dataTables.keyTable.min.js"></script>
-<script src="assets/js/vendor/dataTables.select.min.js"></script>
+<script src="{{ asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.keyTable.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.select.min.js') }}"></script>
 <!-- third party js ends -->
-<script src="assets/js/vendor/apexcharts.min.js"></script>
+<script src="{{ asset('assets/js/vendor/apexcharts.min.js') }}"></script>
 <!-- Todo js -->
-<script src="assets/js/ui/component.todo.js"></script>
-<script src="assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+<script src="{{ asset('assets/js/ui/component.todo.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/jquery-jvectormap-world-mill-en.js') }}"></script>
 
         <!-- demo app -->
-<script src="assets/js/pages/demo.dashboard-crm.js"></script>
+<script src="{{ asset('assets/js/pages/demo.dashboard-crm.js') }}"></script>
 <!-- demo app -->
-<script src="assets/js/pages/demo.datatable-init.js"></script>
+<script src="{{ asset('assets/js/pages/demo.datatable-init.js') }}"></script>
 <script>
      $(document).ready(function(){
             $('.input-daterange').datepicker({

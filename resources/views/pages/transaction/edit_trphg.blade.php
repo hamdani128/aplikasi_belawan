@@ -98,7 +98,7 @@
                             <div class="form-group">
                                 <label for="">Jenis Surat</label>
                                 <div class="input-group">
-                                    <select name="surat_id" class="form-control" id="">
+                                    <select name="surat_id"class="form-control" id="select">
                                         <option value="{{ $trphg->typemail->id }}">{{ $trphg->typemail->nama }}</option>
                                         @foreach ($typemail as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -148,6 +148,23 @@
                     }
                 })
             })
+            $("#select").change(function(){
+            var bil;
+            if($("#select option:selected").text() == "CPO"){
+                bil = 87000
+            }else if ($("#select option:selected").text() == "ACIT"){
+                bil = 67000
+            }else if ($("#select option:selected").text() == "PKO"){
+                bil = 62000
+            }else if ($("#select option:selected").text() == "BULKING"){
+                bil = 67000
+            }else if ($("#select option:selected").text() == "OLIN"){
+                bil = 62000
+            }else if ($("#select option:selected").text() == "PHG"){
+                bil = 67000
+            }
+            $("#pendapatan").val(bil);
+             });
     </script>
 @endsection
 

@@ -110,7 +110,7 @@
                             <div class="form-group">
                                 <label for="">Jenis Surat</label>
                                 <div class="input-group">
-                                    <select name="surat_id" class="form-control" id="">
+                                    <select name="surat_id" id="select" class="form-control" id="">
                                         <option value="{{ $trsmart->typemail->id }}">{{ $trsmart->typemail->nama }}</option>
                                         @foreach ($typemail as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -118,21 +118,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="">langsung</label>
-                                <div class="input-group">                                    
-                                    <input type="number" class="form-control" name="p_langsung" id="langsung" value="{{ $trsmart->p_langsung }}">
-                                  </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">bulking</label>
-                                <div class="input-group">                                    
-                                    <input type="number" class="form-control" name="p_bulking" id="bulking"  onkeyup="sum();" value="{{ $trsmart->p_bulking }}">
-                                  </div>
-                            </div>
-
                             <div class="form-group">
                                 <label for="">Total Didapatkan</label>
                                 <div class="input-group">                                    
@@ -184,6 +169,20 @@
                     }
                 })
             })
+            
+            $("#select").change(function(){
+            var bil;
+            if($("#select option:selected").text() == "CPO"){
+                bil = 17000
+            }else if ($("#select option:selected").text() == "INTI"){
+                bil = 20000
+            }else if ($("#select option:selected").text() == "BULKING CPO"){
+                bil = 27000
+            }else if ($("#select option:selected").text() == "BULKING INTI"){
+                bil = 30000
+            }
+            $("#pendapatan").val(bil);
+             });
     </script>
 @endsection
 

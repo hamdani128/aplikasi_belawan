@@ -19,8 +19,9 @@
         </div>
     </div>
     <!-- end page title -->
+    
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <h5>Setoran</h5>
@@ -30,19 +31,25 @@
                         <div class="form-input">
                             <label for="">PHG (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="phg_setoran" value="{{ $jlh_phg }}">
+                                <input type="text" class="form-control" id="phg_setoran" value="{{ $ken2 }}">
                             </div>
                         </div>
                         <div class="form-input">
-                            <label for="">CPO (15000)</label>
+                            <label for="">CPO SMART (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="cpo_setoran" value="{{ $CPO_total2 }}">
+                                <input type="text" class="form-control" id="cpo_setoran" value="{{ $CPO_total1 + $Bulking_SMART1 }}">
                             </div>
                         </div>
                         <div class="form-input">
-                            <label for="">INTI (15000)</label>
+                            <label for="">INTI SMART (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inti_setoran" value="{{ $INTI_total }}">
+                                <input type="text" class="form-control" id="inti_setoran" value="{{  $INTI_total }}">
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <label for="">ACIT (15000)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="acit_setoran" value="{{ $acit_total }}">
                             </div>
                         </div>
                         <div class="form-input">
@@ -68,6 +75,12 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="bulking_keluar">
                             </div>
+                        </div>
+                        <div class="form-input">
+                            <label for="">Pengeluaran </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="pengeluaran_setoran" value="{{ $keluar }}">
+                            </div>
                         </div> 
                         <div class="form-input mt-1">
                             <div class="input-group">
@@ -78,7 +91,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+
+        <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <h5>Forum</h5>
@@ -94,13 +108,19 @@
                         <div class="form-input">
                             <label for="">MANDOR (8000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="mandor_forum">
+                                <input type="text" class="form-control" id="mandor_forum" value="{{ $total_kendaraan }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">CPO (5000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="cpo_forum" value="{{ $sub_cpo }}">
+                                <input type="text" class="form-control" id="cpo_forum" value="{{ $CPO_total1 }}">
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <label for="">ACIT (10000)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="acit_forum" value="{{ $acit_total }}">
                             </div>
                         </div>
                         <div class="form-input">
@@ -109,6 +129,7 @@
                                 <input type="text" class="form-control" id="olin_forum" value="{{ $olin_total }}">
                             </div>
                         </div>
+
                         <div class="form-input">
                             <label for="">PKO (10000)</label>
                             <div class="input-group">
@@ -136,7 +157,105 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Pembagian PHG</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-input">
+                                <label for="">Total Kendaraan PHG</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="pembagian_total_kendaraan_phg" value="{{ $ken2 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang PP (5000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_pp" value="{{ $ken2 * 5000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang PS (4000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_ps" value="{{ $ken2 * 4000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">DISHUB (4000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="dishub" value="{{ $ken2 * 4000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang SPTI (4000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_spti" value="{{ $ken2 * 4000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang CPO / Bulking (25000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_cpo_bulking" value="{{ ($CPO_total2 + $bulking_total) * 25000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang PKO (30000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_pko" value="{{ $pko_total * 30000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang OLIN (30000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_olin" value="{{ $olin_total * 30000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang ACIT (30000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  id="uang_acit" value="{{ $acit_total * 30000 }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang Kartu PHG/CPO (2000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" id="uang_kartu_phg" value="{{ ($CPO_total2 + $jlh_phg) * 2000 }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Pembagian Smart</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-input">
+                                <label for="">Uang kartu INTI (5000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="inti_kartu_smart" value="{{ $Bulking_SMART2 * 5000  }}">
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="">Uang Kartu CPO (2000)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="cpo_kartu_smart" value="{{ $Bulking_SMART1 * 2000 }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <h5>Pendapatan dan Pengeluran</h5>
@@ -155,6 +274,18 @@
                             <label for="">Pengeluaran</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="pengeluaran" id="pengeluaran" value="{{ $keluar }}">
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <label for="">Pengeluaran PHG</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="pengeluaran_phg" id="keluar_phg">
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <label for="">Pengeluaran SMART</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="pengeluaran_smart" id="keluar_smart">
                             </div>
                         </div>
                         <div class="form-input">
@@ -177,16 +308,25 @@
                         </div> 
                         <div class="form-input mt-1">
                             <div class="input-group">
-                                <a href="#" class="btn btn-md btn-primary" id="dapat"><i class="mdi mdi-refresh"></i> Process</a>
-                                <button class="btn btn-md btn-info ml-1" type="submit"><i class="dripicons-plus"></i> Simpan</button>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="#" class="btn btn-sm btn-primary" id="dapat"><i class="mdi mdi-refresh"></i> Process</a>  
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-12">
+                                        <button class="btn btn-sm btn-info" type="submit"><i class="dripicons-plus"></i> Simpan</button>       
+                                    </div>
+                                </div>
                             </div>
-                        </div> 
+                        </div>
                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -210,12 +350,13 @@
                                         <tr>
                                             <th>Tanggal</th>
                                             <th>PHG (15000)</th>
-                                            <th>CPO (15000)</th>
-                                            <th>INTI (15000)</th>
+                                            <th>CPO SMART (15000)</th>
+                                            <th>INTI SMART (15000)</th>
                                             <th>OLIN (15000)</th>
                                             <th>PKO (15000)</th>
                                             <th>BULKING (15000)</th>
                                             <th>Bulking Keluar (Jlh Motor)</th>
+                                            <th>Pengeluaran</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -228,6 +369,7 @@
                                                 <td><h5 class="pko_setoran" id="setoran_pko"></h5></td>
                                                 <td><h5 class="bulking_setoran" id="setoran_bulking"></h5></td>
                                                 <td><h5 class="bulking_keluar" id="keluar_bulking"></h5></td>
+                                                <td><h5 class="setoran_pengeluaran" id="keluar_setoran"></h5></td>
                                             </tr>
                                     </tbody>
                                 </table>  
@@ -272,8 +414,17 @@
 </div>
 
 @section('kasir1')
-<script src="/assets/js/jquery.PrintArea.js" type="text/JavaScript"></script>
+<script src="{{ asset('assets/js/jquery.PrintArea.js') }}" type="text/JavaScript"></script>
     <script>
+        
+        $(document).ready(function(){
+            $('.input-daterange').datepicker({
+            todayBtn:'linked',
+            format:'yyyy-mm-dd',
+            autoclose:true
+            });
+        });
+
         $(document).ready(function() {
             $("#print").click(function() {
                 var mode = 'iframe'; //popup
@@ -294,6 +445,8 @@
             var a5 = $('#pko_setoran').val();        
             var a6 = $('#bulking_setoran').val();        
             var a7 = $('#bulking_keluar').val();
+            var a8 = $('#pengeluaran_setoran').val();
+
             var b1 = a1 * 15000;
             var b2 = a2 * 15000;
             var b3 = a3 * 15000;
@@ -308,9 +461,7 @@
             document.getElementById('setoran_pko').innerHTML = b5;
             document.getElementById('setoran_bulking').innerHTML = b6;
             document.getElementById('keluar_bulking').innerHTML = a7;
-
-            document.getElementById('setoran_hasil').innerHTML = has1;
-
+            document.getElementById('keluar_setoran').innerHTML = a8;
 
         });
 
@@ -330,15 +481,14 @@
             var d6 = c6 * 15000;
             var d7 = c7 * 10000;
             var has2 = d1+d2+d3+d4+d5+d6+d7
+            
             document.getElementById('forum_kwitansi').innerHTML = d1;
             document.getElementById('forum_mandor').innerHTML = d2;
             document.getElementById('forum_cpo').innerHTML = d3;
             document.getElementById('forum_olin').innerHTML = d4;
             document.getElementById('forum_pko').innerHTML = d5;
             document.getElementById('forum_bulking').innerHTML = d6;
-            document.getElementById('forum_bpjs').innerHTML = d7;
-
-            document.getElementById('has_forum').innerHTML = has2;
+            document.getElementById('forum_bpjs').innerHTML = d7;            
         });
 
         $("#dapat").click(function(){
@@ -376,13 +526,30 @@
             var d6 = c6 * 15000;
             var d7 = c7 * 10000;
             var has2 = d1+d2+d3+d4+d5+d6+d7
-            var sisa = didapat - (has1 + has2 + keluar)
             $('#hasil2').val(has2); 
+            
+            var n1 = parseInt($('#pembagian_total_kendaraan_phg').val());
+            var n2 = parseInt($('#uang_pp').val());            
+            var n3 = parseInt($('#uang_spti').val());            
+            var n4 = parseInt($('#dishub').val());            
+            var n5 = parseInt($('#uang_ps').val());            
+            var n6 = parseInt($('#uang_cpo_bulking').val());            
+            var n7 = parseInt($('#uang_olin').val());            
+            var n8 = parseInt($('#uang_pko').val());            
+            var n9 = parseInt($('#uang_acit').val());            
+            var n10 = parseInt($('#uang_kartu_phg').val());            
+            var keluar_phg =  n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9 + n10
+            $('#keluar_phg').val(keluar_phg);
+
+            var n11 = parseInt($('#inti_kartu_smart').val());            
+            var n12 = parseInt($('#cpo_kartu_smart').val());
+            var keluar_smart = n11 + n12            
+            $('#keluar_smart').val(keluar_smart);
+            var sisa = didapat - (keluar + keluar_phg + keluar_smart + has1 + has2);
             $('#sisa').val(sisa);
-
-
-
         });
+
+       
     </script>
 @endsection
 

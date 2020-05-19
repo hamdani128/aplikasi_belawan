@@ -248,7 +248,7 @@ class RevenueController extends Controller
         {
             $acit = TypeMail::where('nama', 'ACIT')->first()->id;
             $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
-            $hasil = $trphg * 15000;
+            $hasil = $trphg;
         }
         else    
         {
@@ -263,7 +263,7 @@ class RevenueController extends Controller
         {
             $acit = TypeMail::where('nama', 'BULKING')->first()->id;
             $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
-            $hasil = $trphg * 15000;
+            $hasil = $trphg;
         }
         else    
         {
@@ -278,7 +278,7 @@ class RevenueController extends Controller
         {
             $acit = TypeMail::where('nama', 'PKO')->first()->id;
             $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
-            $hasil = $trphg * 15000;
+            $hasil = $trphg;
         }
         else    
         {
@@ -293,7 +293,7 @@ class RevenueController extends Controller
         {
             $acit = TypeMail::where('nama', 'OLIN')->first()->id;
             $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $acit)->count();
-            $hasil = $trphg * 15000;
+            $hasil = $trphg;
         }
         else    
         {
@@ -302,15 +302,15 @@ class RevenueController extends Controller
         return  $hasil;
     }
 
-    public function setoran_api_shift2_cpo(Request $request)
+    public function setoran_api_shift2_cpo_smart(Request $request)
     {
         if(!empty($request->from_date))
         {
-            $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+            // $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
             $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.smart')->first()->id;
-            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo1)->count();
+            // $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo1)->count();
             $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
-            $hasil = $smart+$trphg;
+            $hasil = $smart;
         }
         else    
         {
@@ -325,7 +325,7 @@ class RevenueController extends Controller
         {
             $cpo2 = TypeMail::where('nama', 'INTI')->first()->id;
             $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
-            $hasil = $smart * 15000;
+            $hasil = $smart;
         }
         else    
         {
@@ -336,7 +336,7 @@ class RevenueController extends Controller
 
     public function setoran_api_shift2_pendapatan(Request $request)
     {
-        if(!empty($request->from_date))
+        if(!empty($request->from_date) && !empty($request->to_date))
         {
             $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->sum('pendapatan');
             $phg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->sum('pendapatan');
@@ -355,6 +355,23 @@ class RevenueController extends Controller
         {
             $keluar = TransactionOut::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->sum('jumlah');
             $hasil = $keluar;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
+    public function setoran_api_shift2_cpo_bulking(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+             $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+             $jlh1 = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo1)->count();
+             $bulking = TypeMail::where('nama', 'BULKING')->first()->id;
+             $jlh2 = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $bulking)->count();
+             $hasil = $jlh1 + $jlh2;
         }
         else    
         {
