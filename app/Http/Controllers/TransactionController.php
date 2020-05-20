@@ -91,6 +91,7 @@ class TransactionController extends Controller
             'surat_id' => request('surat_id'),
             'barcode_id' => $barcode->id,
         ]);
+        Alert::success('Success', 'Berhasil Disimpan');
         return redirect('/transaction_incoming');
     }
 
@@ -170,6 +171,7 @@ class TransactionController extends Controller
             'bermalam' => request('bermalam'),
             'surat_id' => request('surat_id'),
         ]);
+        Alert::success('Success', 'Berhasil Diupdate');
         return redirect('/transaction_incoming');
     }
 
@@ -182,6 +184,7 @@ class TransactionController extends Controller
             'note' => "Hapus Transaksi Pt.Smart Dengan Jumlah Pendapatan $trsmart->pendapatan",
         ]);
          $trsmart->delete($trsmart);
+         Alert::success('Success', 'Berhasil Dihapus');
         return redirect('/transaction_incoming');
     }
 
@@ -222,6 +225,7 @@ class TransactionController extends Controller
             'surat_id' => request('surat_id'),
             'barcode_id' => $barcode->id,
         ]);
+        Alert::success('Success', 'Berhasil Disimpan');
         return redirect('/transaction_incoming');
     }
 
@@ -258,6 +262,7 @@ class TransactionController extends Controller
             'bermalam' => request('bermalam'),
             'surat_id' => request('surat_id'),
         ]);
+        Alert::success('Success', 'Berhasil Diupdate');
         return redirect('/transaction_incoming');
     }
 
@@ -284,6 +289,7 @@ class TransactionController extends Controller
             'activity' => "/delete/transaction_phg/$trphg->id",
             'note' => "Hapus Transaksi Pt.Phg Dengan Nilai $trphg->pendapatan",
         ]);
+        Alert::success('Success', 'Berhasil DiHapus');
         $trphg->delete($trphg);
         return redirect('/transaction_incoming');
     }
