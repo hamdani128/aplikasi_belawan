@@ -15,6 +15,7 @@ use Carbon\Traits\Timestamp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables as DataTablesDataTables;

@@ -370,18 +370,20 @@
                         <div class="row">
                             <h5>Setoran</h5>
                             <div class="table-responsive">
-                                <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
+                                <table id="deposit" class="table table-bordered dt-responsive nowrap w-100 table-responsive">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Tanggal</th>
                                             <th>PHG (15000)</th>
                                             <th>CPO SMART (15000)</th>
                                             <th>INTI SMART (15000)</th>
+                                            <th>ACIT (15000)</th>
                                             <th>OLIN (15000)</th>
                                             <th>PKO (15000)</th>
                                             <th>BULKING (15000)</th>
                                             <th>Bulking Keluar (Jlh Motor)</th>
                                             <th>Pengeluaran</th>
+                                            <th>Total Kesuluruhan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -390,11 +392,13 @@
                                                 <td><h5 class="setoran_phg" id="setoran_phg"></h5></td>
                                                 <td><h5 class="cpo_setoran" id="setoran_cpo"></h5></td>
                                                 <td><h5 class="inti_setoran" id="setoran_inti"></h5></td>
+                                                <td><h5 class="acit_setoran" id="setoran_acit"></h5></td>
                                                 <td><h5 class="olin_setoran" id="setoran_olin"></h5></td>
                                                 <td><h5 class="pko_setoran" id="setoran_pko"></h5></td>
                                                 <td><h5 class="bulking_setoran" id="setoran_bulking"></h5></td>
                                                 <td><h5 class="bulking_keluar" id="keluar_bulking"></h5></td>
                                                 <td><h5 class="setoran_pengeluaran" id="keluar_setoran"></h5></td>
+                                                <td><h5 class="total_setoran" id="total_setoran"></h5></td>
                                             </tr>
                                     </tbody>
                                 </table>  
@@ -410,6 +414,7 @@
                                             <th>Kwitansi (5000)</th>
                                             <th>Mandor (8000)</th>
                                             <th>CPO (5000)</th>
+                                            <th>ACIT (5000)</th>
                                             <th>OLIN (10000)</th>
                                             <th>PKO (10000)</th>
                                             <th>Bulking (15000)</th>
@@ -422,6 +427,7 @@
                                                 <td><h5 id="forum_kwitansi"></h5></td>
                                                 <td><h5 id="forum_mandor"></h5></td>
                                                 <td><h5 id="forum_cpo"></h5></td>
+                                                <td><h5 id="forum_acit"></h5></td>
                                                 <td><h5 id="forum_olin"></h5></td>
                                                 <td><h5 id="forum_pko"></h5></td>
                                                 <td><h5 id="forum_bulking"></h5></td>
@@ -539,15 +545,15 @@
         });
         
         $("#setoran").click(function(){
-            var a1 = $('#phg_setoran').val();        
-            var a2 = $('#cpo_setoran').val();        
-            var a3 = $('#inti_setoran').val();        
-            var a4 = $('#olin_setoran').val();        
-            var a5 = $('#pko_setoran').val();        
-            var a6 = $('#bulking_setoran').val();        
-            var a7 = $('#bulking_keluar').val();
-            var a8 = $('#pengeluaran_setoran').val();
-            var a9 = $('#acit_setoran').val();
+            var a1 = parseInt($('#phg_setoran').val());        
+            var a2 = parseInt($('#cpo_setoran').val());        
+            var a3 = parseInt($('#inti_setoran').val());        
+            var a4 = parseInt($('#olin_setoran').val());        
+            var a5 = parseInt($('#pko_setoran').val());        
+            var a6 = parseInt($('#bulking_setoran').val());        
+            var a7 = parseInt($('#bulking_keluar').val());
+            var a8 = parseInt($('#pengeluaran_setoran').val());
+            var a9 = parseInt($('#acit_setoran').val());
 
             var b1 = a1 * 15000;
             var b2 = a2 * 15000;
@@ -558,7 +564,7 @@
             var b7 = a9 * 15000;
 
             var has1 = b1+b2+b3+b4+b5+b6+a7+b7;
-            
+            var total_kendaraan = a1+a2+a3+a4+a5+a6+a9
             document.getElementById('setoran_phg').innerHTML = b1;
             document.getElementById('setoran_cpo').innerHTML = b2;
             document.getElementById('setoran_inti').innerHTML = b3;
@@ -567,18 +573,19 @@
             document.getElementById('setoran_bulking').innerHTML = b6;
             document.getElementById('keluar_bulking').innerHTML = a7;
             document.getElementById('keluar_setoran').innerHTML = a8;
-
+            document.getElementById('setoran_acit').innerHTML = b7;
+            document.getElementById('total_setoran').innerHTML = total_kendaraan;
         });
 
         $("#forum").click(function(){
-            var c1 = $('#kwitansi_forum').val();        
-            var c2 = $('#mandor_forum').val();        
-            var c3 = $('#cpo_forum').val();        
-            var c4 = $('#olin_forum').val();        
-            var c5 = $('#pko_forum').val();        
-            var c6 = $('#bulking_forum').val();        
-            var c7 = $('#bpjs_forum').val();
-            var c8 = $('#acit_forum').val();
+            var c1 = parseInt($('#kwitansi_forum').val());        
+            var c2 = parseInt($('#mandor_forum').val());        
+            var c3 = parseInt($('#cpo_forum').val());        
+            var c4 = parseInt($('#olin_forum').val());        
+            var c5 = parseInt($('#pko_forum').val());        
+            var c6 = parseInt($('#bulking_forum').val());        
+            var c7 = parseInt($('#bpjs_forum').val());
+            var c8 = parseInt($('#acit_forum').val());
             
             var d1 = c1 * 5000;
             var d2 = c2 * 8000;
@@ -587,6 +594,7 @@
             var d5 = c5 * 10000;
             var d6 = c6 * 15000;
             var d7 = c7 * 10000;
+            var d8 = c8 * 10000;
             var has2 = d1+d2+d3+d4+d5+d6+d7
             
             document.getElementById('forum_kwitansi').innerHTML = d1;
@@ -596,6 +604,7 @@
             document.getElementById('forum_pko').innerHTML = d5;
             document.getElementById('forum_bulking').innerHTML = d6;
             document.getElementById('forum_bpjs').innerHTML = d7;            
+            document.getElementById('forum_acit').innerHTML = d8;            
         });
 
         $("#dapat").click(function(){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NetincomeController extends Controller
 {
@@ -35,6 +36,7 @@ class NetincomeController extends Controller
      */
     public function store(Request $request)
     {
+        Alert::success('Success', 'Berhasil Disimpan');
         Auth::user()->netincome()->create($request->all());
         return back();
     }
@@ -50,7 +52,7 @@ class NetincomeController extends Controller
         //
     }
 
-    /**
+    /**ap
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

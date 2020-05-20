@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/tutup-transaksi/shift1', 'TransactionController@tutup_kasir1')->name('tutup-kasir1');
     Route::get('/tutup-transaksi/shift2', 'TransactionController@tutup_kasir2')->name('tutup-kasir2');
+    
     Route::post('/tutup-transaksi/create', 'NetincomeController@store')->name('create-kasir1');
 
 });

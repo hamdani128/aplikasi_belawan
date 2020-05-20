@@ -17,8 +17,9 @@
         <link href="{{ asset('assets/css/vendor/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/vendor/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
         <!-- third party css end -->
-       
-
+        {{-- @include('sweetalert::alert')
+        @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"]) --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
         <!-- App css -->
         <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/app.min.css') }}   " rel="stylesheet" type="text/css" id="light-style" />
@@ -58,6 +59,8 @@
         <!-- bundle -->
         <script src="/assets/js/vendor.min.js"></script>
         <script src="/assets/js/app.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+        @include('sweetalert::alert')
         @yield('datatable-truck')
         @yield('dashboard')
         @yield('datatable')
