@@ -384,6 +384,7 @@
                                             <th>Bulking Keluar (Jlh Motor)</th>
                                             <th>Pengeluaran</th>
                                             <th>Total Kesuluruhan</th>
+                                            <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -399,6 +400,7 @@
                                                 <td><h5 class="bulking_keluar" id="keluar_bulking"></h5></td>
                                                 <td><h5 class="setoran_pengeluaran" id="keluar_setoran"></h5></td>
                                                 <td><h5 class="total_setoran" id="total_setoran"></h5></td>
+                                                <td><h5 class="subtotal_setoran" id="subtotal_setoran"></h5></td>
                                             </tr>
                                     </tbody>
                                 </table>  
@@ -419,6 +421,7 @@
                                             <th>PKO (10000)</th>
                                             <th>Bulking (15000)</th>
                                             <th>BPJS (10000) /14 Orang</th>
+                                            <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -432,6 +435,7 @@
                                                 <td><h5 id="forum_pko"></h5></td>
                                                 <td><h5 id="forum_bulking"></h5></td>
                                                 <td><h5 id="forum_bpjs"></h5></td>
+                                                <td><h5 id="forum_subtotal"></h5></td>
                                             </tr>
                                     </tbody>
                                 </table>  
@@ -565,16 +569,18 @@
 
             var has1 = b1+b2+b3+b4+b5+b6+a7+b7;
             var total_kendaraan = a1+a2+a3+a4+a5+a6+a9
-            document.getElementById('setoran_phg').innerHTML = b1;
-            document.getElementById('setoran_cpo').innerHTML = b2;
-            document.getElementById('setoran_inti').innerHTML = b3;
-            document.getElementById('setoran_olin').innerHTML = b4;
-            document.getElementById('setoran_pko').innerHTML = b5;
-            document.getElementById('setoran_bulking').innerHTML = b6;
+            var sub =total_kendaraan * 15000;
+            document.getElementById('setoran_phg').innerHTML = a1;
+            document.getElementById('setoran_cpo').innerHTML = a2;
+            document.getElementById('setoran_inti').innerHTML = a3;
+            document.getElementById('setoran_olin').innerHTML = a4;
+            document.getElementById('setoran_pko').innerHTML = a5;
+            document.getElementById('setoran_bulking').innerHTML = a6;
             document.getElementById('keluar_bulking').innerHTML = a7;
             document.getElementById('keluar_setoran').innerHTML = a8;
             document.getElementById('setoran_acit').innerHTML = b7;
             document.getElementById('total_setoran').innerHTML = total_kendaraan;
+            document.getElementById('subtotal_setoran').innerHTML = sub;
         });
 
         $("#forum").click(function(){
@@ -595,16 +601,17 @@
             var d6 = c6 * 15000;
             var d7 = c7 * 10000;
             var d8 = c8 * 10000;
-            var has2 = d1+d2+d3+d4+d5+d6+d7
+            var has2 = d1+d2+d3+d4+d5+d6+d7+d8
             
-            document.getElementById('forum_kwitansi').innerHTML = d1;
-            document.getElementById('forum_mandor').innerHTML = d2;
-            document.getElementById('forum_cpo').innerHTML = d3;
-            document.getElementById('forum_olin').innerHTML = d4;
-            document.getElementById('forum_pko').innerHTML = d5;
-            document.getElementById('forum_bulking').innerHTML = d6;
-            document.getElementById('forum_bpjs').innerHTML = d7;            
-            document.getElementById('forum_acit').innerHTML = d8;            
+            document.getElementById('forum_kwitansi').innerHTML = c1;
+            document.getElementById('forum_mandor').innerHTML = c2;
+            document.getElementById('forum_cpo').innerHTML = c3;
+            document.getElementById('forum_olin').innerHTML = c4;
+            document.getElementById('forum_pko').innerHTML = c5;
+            document.getElementById('forum_bulking').innerHTML = c6;
+            document.getElementById('forum_bpjs').innerHTML = c7;            
+            document.getElementById('forum_acit').innerHTML = c8;            
+            document.getElementById('forum_subtotal').innerHTML = has2;            
         });
 
         $("#dapat").click(function(){
