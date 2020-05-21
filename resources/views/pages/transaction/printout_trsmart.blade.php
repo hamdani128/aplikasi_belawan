@@ -233,12 +233,12 @@
                                     <td style="width: 100px;"><b>Rp.{{ number_format($trsmart->p_bulking) }}</td>
                                 </tr>
                                 <tr class="">
-                                    <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Pendapatan</td>
+                                    <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Biaya Pembayaran</td>
                                     <td style="width: 20px">:</td>
                                     <td style="width: 100px;"><b>Rp.{{ number_format($trsmart->pendapatan) }}</td>
                                 </tr>
                                 <tr class="mt-2">
-                                    <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Pendatan Bermalam</td>
+                                    <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Biaya Bermalam</td>
                                     <td style="width: 20px">:</td>
                                     <td style="width: 100px;"><b>Rp.{{ number_format($trsmart->bermalam) }}</td>
                                 </tr>

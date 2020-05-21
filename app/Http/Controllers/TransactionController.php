@@ -289,7 +289,7 @@ class TransactionController extends Controller
             'activity' => "/delete/transaction_phg/$trphg->id",
             'note' => "Hapus Transaksi Pt.Phg Dengan Nilai $trphg->pendapatan",
         ]);
-        Alert::success('Success', 'Berhasil DiHapus');
+        Alert::success('Success', 'Berhasil Dihapus');
         $trphg->delete($trphg);
         return redirect('/transaction_incoming');
     }

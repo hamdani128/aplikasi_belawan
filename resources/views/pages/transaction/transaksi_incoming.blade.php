@@ -148,7 +148,7 @@
                                                             <a href="/edit/transaction_smart/{{$item->id}}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="right" title="Edit"><i class="uil-edit"></i></a>
                                                         </div>
                                                         <div class="mr-1 mb-1">
-                                                            <a href="/delete/transaction_smart/{{$item->id}}" class="btn-md btn btn-danger"  onclick="return confirm('Yakin Data Akan Dihapus ?')"  data-toggle="tooltip" data-placement="right" title="Hapus"><i class="uil-prescription-bottle"></i></a>               
+                                                            <a href="/delete/transaction_smart/{{$item->id}}" class="btn-md btn btn-danger" onclick="return confirm('Yakin Data Akan Dihapus ?')" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="uil-prescription-bottle"></i></a>               
                                                         </div>
                                                         @can('add night income')
                                                         <div class="mr-1 mb-1">
@@ -156,7 +156,7 @@
                                                         </div>
                                                         @endcan
                                                         <div class="mr-1 mb-1">
-                                                            <a href="/print_out/transaction_smart/{{$item->id}}" class="btn-md btn btn-info"  data-toggle="tooltip" data-placement="right" title="Cetak Data Peritem"><i class=" uil-print"></i></a>               
+                                                            <a href=" /print_out/transaction_smart/{{$item->id}}" class="btn-md btn btn-info" data-id="{{$item->id}}"  data-toggle="tooltip" data-placement="right" title="Cetak Data Peritem"><i class=" uil-print"></i></a>               
                                                         </div>
                                                     </td>
                                                     @endcan
@@ -271,13 +271,20 @@
 <!-- demo app -->
 <script src="{{ asset('assets/js/pages/demo.datatable-init.js') }}"></script>
 <script>
-     $(document).ready(function(){
-            $('.input-daterange').datepicker({
-            todayBtn:'linked',
-            format:'yyyy-mm-dd',
-            autoclose:true
-            });
-        });
+    $('.delete-confirm').on('click', function (event) {
+    event.preventDefault();
+    const url = $(this).attr('href');
+    swal({
+        title: 'Are you sure?',
+        text: 'This record and it`s details will be permanantly deleted!',
+        icon: 'warning',
+        buttons: ["Cancel", "Yes!"],
+    }).then(function(value) {
+        if (value) {
+            window.location.href = url;
+        }
+    });
+});
 
     $(function() {
             $('#trsmart').DataTable({
@@ -297,6 +304,7 @@
                 ]
             });
         });
+        
 </script>
 
 @endsection

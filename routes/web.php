@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/create/overnight/trsmart/{transactionsmart}', 'TransactionController@store_overnight_trsmart')->name('create-overnightsmart');
     Route::get('/edit/transaction_smart/{id}', 'TransactionController@edit_trsmart');
     Route::post('/transaction_incoming/smart/{id}/update', 'TransactionController@update_smart')->name('update-transaction-smart');
-    Route::get('/delete/transaction_smart/{id}', 'TransactionController@delete_smart');
+    Route::get('/delete/transaction_smart/{id}', 'TransactionController@delete_smart')->name('delete-smart');
 
     Route::get('/transaction_incoming/phg', 'TransactionController@add_phg_transaction')->name('create-phg');
     Route::post('/transaction_incoming/phg/add', 'TransactionController@store_phg')->name('create-transaction-phg');

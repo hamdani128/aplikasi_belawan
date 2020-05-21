@@ -219,12 +219,12 @@
                                      <td style="width: 100px;"><b>{{ $trphg->typemail->nama }}</td>
                                  </tr>
                                  <tr class="">
-                                     <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Pendapatan</td>
+                                     <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Biaya Pembayaran</td>
                                      <td style="width: 20px">:</td>
                                      <td style="width: 100px;"><b>Rp.{{ number_format($trphg->pendapatan) }}</td>
                                  </tr>
                                  <tr class="mt-2">
-                                     <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Pendapatan Bermalam</td>
+                                     <td style="font-size: 12pt;width: 100px;padding-left: 1cm">Biaya Bermalam</td>
                                      <td style="width: 20px">:</td>
                                      <td style="width: 100px;"><b>Rp.{{ number_format($trphg->bermalam) }}</td>
                                  </tr>
