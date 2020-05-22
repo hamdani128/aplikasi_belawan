@@ -34,23 +34,37 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mail = TypeMail::count();
+        // $mail = TypeMail::count();
+        // $truk = Truck::get()->count();
+        // $user = User::count();  
+        // $smart = TransactionSmart::get()->sum('pendapatan');
+        // $phg = TransactionPhgt::get()->sum('pendapatan');
+        // $out = TransactionOut::get()->sum('jumlah');
+        // $malam_smart =  TransactionSmart::get()->sum('bermalam');
+        // $malam_phg =TransactionPhgt::get()->sum('bermalam');
+        // $malam = $malam_smart + $malam_phg;
+        // $total_pendapatan = $smart + $phg;
         if(Auth::user()->hasRole('super admin')){
+            $mail = TypeMail::get()->count();
+            $truk = Truck::get()->count();
+            $user = User::count();  
             $smart = TransactionSmart::get()->sum('pendapatan');
             $phg = TransactionPhgt::get()->sum('pendapatan');
-            $total_pendapatan = $smart + $phg;
             $out = TransactionOut::get()->sum('jumlah');
             $malam_smart =  TransactionSmart::get()->sum('bermalam');
             $malam_phg =TransactionPhgt::get()->sum('bermalam');
             $malam = $malam_smart + $malam_phg;
-            $truk = Truck::count();
+            $total_pendapatan = $smart + $phg;
         }else if(Auth::user()->hasRole('admin satu')){
+            $mail = TypeMail::get()->count();
+            $truk = Truck::get()->count();
+            $user = User::count(); 
             $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
             $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
             $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
             $malam_smart =  TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('bermalam');
             $malam_phg =TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('bermalam');
-            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
+            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get()->count();
             $out = TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('jumlah');
             
             $malam = $malam_smart + $malam_phg;
@@ -58,18 +72,25 @@ class HomeController extends Controller
             $truk = $truksmart + $trukphg;
 
         }else if(Auth::user()->hasRole('admin dua')){
-            $out = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('jumlah');
-            $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
-            $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
-            $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->where('created_at','<',date('Y-m-d ').'07:00:00')->count();
-            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->where('created_at','<',date('Y-m-d ').'07:00:00')->count();
-            $malam_smart =  TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('bermalam');
-            $malam_phg =TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('bermalam');
+            $mail = TypeMail::get()->count();
+            $truk = Truck::get()->count();
+            $user = User::count();  
+            
+            $out = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('jumlah');
+            $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+            $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+            
+            $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->get()->count();
+            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->get()->count();
+            
+            $malam_smart =  TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('bermalam');
+            $malam_phg =TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('bermalam');
+            
             $malam = $malam_smart + $malam_phg;
             $total_pendapatan = $trsmart + $trphg;
             $truk = $truksmart + $trukphg;
         }        
-        $user = User::count();        
+               
         return view('layouts.dashboard', compact('truk', 'mail', 'total_pendapatan', 'out', 'malam', 'user'));
     }
 }

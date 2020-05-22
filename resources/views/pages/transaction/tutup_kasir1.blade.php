@@ -43,7 +43,7 @@
                         <div class="form-input">
                             <label for="">INTI SMART (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inti_setoran" value="{{  $INTI_total }}">
+                                <input type="text" class="form-control" id="inti_setoran" value="{{  $INTI }}">
                             </div>
                         </div>
                         <div class="form-input">

@@ -306,11 +306,12 @@ class RevenueController extends Controller
     {
         if(!empty($request->from_date))
         {
-            // $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+           
             $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.smart')->first()->id;
-            // $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo1)->count();
-            $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
-            $hasil = $smart;
+            $cpo3 = TypeMail::where('nama', 'BULKING CPO')->first()->id;
+            $smart1 = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
+            $smart2 = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo3)->count();
+            $hasil = $smart1 + $smart2;
         }
         else    
         {
@@ -324,8 +325,10 @@ class RevenueController extends Controller
         if(!empty($request->from_date))
         {
             $cpo2 = TypeMail::where('nama', 'INTI')->first()->id;
-            $smart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
-            $hasil = $smart;
+            $bulking3 = TypeMail::where('nama', 'BULKING INTI')->first()->id;
+            $smart1 = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo2)->count();
+            $smart2 = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $bulking3)->count();
+            $hasil = $smart1 + $smart2;
         }
         else    
         {
