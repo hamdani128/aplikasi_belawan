@@ -33,19 +33,19 @@ class TransactionController extends Controller
         if(Auth::user()->hasRole('super admin')){
             $trsmart = TransactionSmart::orderBy('no', 'DESC')->get();
             $trphg = TransactionPhgt::orderBy('no', 'DESC')->get();
-            $truksmart = TransactionSmart::where('created_at','LIKE','%'.date('Y-m-d').'%')->count();
-            $trukphg = TransactionPhgt::where('created_at','LIKE','%'.date('Y-m-d').'%')->count();
+            $truksmart = TransactionSmart::get()->count();
+            $trukphg = TransactionPhgt::get()->count();
         }else if(Auth::user()->hasRole('admin satu')){
             $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->orderBy('no','DESC')->get();
             $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->orderBy('no','DESC')->get();
             $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
             $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
         }else if(Auth::user()->hasRole('admin dua')){
-            $troutgoing = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orderBy('no','DESC')->get();
-            $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orderBy('no','DESC')->get();
-            $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orderBy('no','DESC')->get();
-            $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->count();
-            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->count();
+            $troutgoing = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
+            $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
+            $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
+            $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->count();
+            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->count();
         }
         return view('pages.transaction.transaksi_incoming', compact('trsmart', 'trphg', 'truksmart', 'trukphg'));
     }
