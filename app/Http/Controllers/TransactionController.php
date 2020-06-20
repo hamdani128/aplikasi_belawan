@@ -106,7 +106,7 @@ class TransactionController extends Controller
                     <a href="/edit/transaction_smart/{{$q->id}}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="left" title="Edit"><i class="uil-edit"></i></a>
                 </div>
                 <div class="d-flex mr-1 mb-1">
-                    <a href="/delete/transaction_smart/{{$q->id}}" class="btn-md btn btn-danger"  onclick="return confirm("Yakin Data Akan Dihapus ?")"  data-toggle="tooltip" data-placement="left" title="Hapus"><i class="uil-prescription-bottle"></i></a>               
+                    <a href="/delete/transaction_smart/{{$q->id}}" class="btn-md btn btn-danger"  onclick="return confirm("Yakin Data Akan Dihapus ?")"  data-toggle="tooltip" data-placement="left" title="Hapus"><i class="uil-prescription-bottle"></i></a>
                 </div>
                 <div class="d-flex ml-2 mr-1 mb-1">
                     <a href="/add_overnight/transaction_smart/{{$q->id}}" class="btn-md btn btn-success"  data-toggle="tooltip" data-placement="left" title="Tambah data bermalam"><i class="uil-money-withdraw"></i></a>
@@ -130,7 +130,7 @@ class TransactionController extends Controller
     }
 
     public function store_overnight_trsmart(Request $request, TransactionSmart $transactionsmart)
-    { 
+    {
         $data = request()->all();
         $data['transaksi_id'] = $transactionsmart->id;
         auth()->user()->overnight_smart()->create($data);
@@ -139,7 +139,7 @@ class TransactionController extends Controller
     }
 
     public function edit_trsmart($id)
-    {   
+    {
         $trsmart = TransactionSmart::find($id);
         $typemail = TypeMail::where('perusahaan','PT.Smart')->get();
          return view('pages.transaction.edit_trsmart', compact('trsmart', 'typemail'));
@@ -213,7 +213,7 @@ class TransactionController extends Controller
         $barcode=auth()->user()->barcode()->create([
             'barcode' => strtotime(\Carbon\Carbon::now()),
         ]);
-        
+
         auth()->user()->trphg()->create([
             'kendaraan_id' => $truck->id,
             'ticket' => request('tiket'),
@@ -230,7 +230,7 @@ class TransactionController extends Controller
     }
 
     public function edit_trphg($id)
-    {   
+    {
         $trphg = TransactionPhgt::find($id);
         $typemail = TypeMail::where('perusahaan','PT.PHG')->get();
          return view('pages.transaction.edit_trphg', compact('trphg', 'typemail'));
@@ -273,7 +273,7 @@ class TransactionController extends Controller
     }
 
     public function store_overnight_trphg(Request $request, TransactionPhgt $transactionphg)
-    { 
+    {
         $data = request()->all();
         $data['transaksi_id'] = $transactionphg->id;
         auth()->user()->overnight_phg()->create($data);
@@ -317,7 +317,7 @@ class TransactionController extends Controller
     public function create_troutgoing()
     {
         auth()->user()->transaction_out()->create([
-            'no' => request('no'), 
+            'no' => request('no'),
             'jumlah' => request('jumlah'),
             'keterangan' => request('keterangan'),
         ]);
@@ -356,7 +356,7 @@ class TransactionController extends Controller
         $barcode = \DNS1D::getBarcodeSVG($trsmart->barcode->barcode, 'c39',2,80);
         return view('pages.transaction.printout_trsmart', compact('trsmart', 'barcode'));
     }
-    
+
     public function printout_peritem_phg($id)
     {
         $trphg = TransactionPhgt::find($id);
@@ -366,7 +366,7 @@ class TransactionController extends Controller
     }
 
     public function index_activity()
-    {   
+    {
         $activity = ActivityLog::all();
         return view('pages.activity.activity', compact('activity'));
     }
@@ -421,13 +421,13 @@ class TransactionController extends Controller
                     'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1, 
+                            'smart' => $pen1,
                             'phg' => $pen2,
                             'pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->sum('jumlah'),
                             'pendapatan_bersih' => Netincome::where('created_at', 'LIKE' ,'%'.date('Y-m-d').'%')->sum('pendapatan_bersih'),
-                        ]), 
+                        ]),
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(), 
+                    'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(),
                 ],
             ];
             return response()->json($result);
@@ -442,16 +442,16 @@ class TransactionController extends Controller
             $result = [
                 'data' => [
                     'transaction_smart' => TransactionSmart::whereMonth('created_at', $month)->get(),
-                    'transaction_phg' =>  TransactionPhgt::whereMonth('created_at', $month)->get(),    
+                    'transaction_phg' =>  TransactionPhgt::whereMonth('created_at', $month)->get(),
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1, 
+                            'smart' => $pen1,
                             'phg' => $pen2,
                             'pengeluran' => TransactionOut::whereMonth('created_at', $month)->sum('jumlah'),
                             'pendapatan_bersih' => Netincome::whereMonth('created_at', $month)->sum('pendapatan_bersih'),
-                        ]),    
+                        ]),
                     ],
-                    'list_pengeluaran' => TransactionOut::whereMonth('created_at', $month)->get(),   
+                    'list_pengeluaran' => TransactionOut::whereMonth('created_at', $month)->get(),
                 ],
             ];
             return response()->json($result);
@@ -480,16 +480,16 @@ class TransactionController extends Controller
         $trphg = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 19:00:00')->where('created_at', '<=' ,date('Y-m-d').' 07:00:00')->get();
         return view('pages.transaction.print_phg_rekapan2', compact('trphg'));
     }
-    
+
 
     public function tutup_kasir1()
     {
-        $acit = TypeMail::where('nama', 'ACIT')->first()->id; 
-        $bulking = TypeMail::where('nama', 'BULKING')->first()->id; 
+        $acit = TypeMail::where('nama', 'ACIT')->first()->id;
+        $bulking = TypeMail::where('nama', 'BULKING')->first()->id;
         $pko = TypeMail::where('nama', 'PKO')->first()->id;
-        $olin = TypeMail::where('nama', 'OLIN')->first()->id; 
-        $inti = TypeMail::where('nama', 'INTI')->first()->id; 
-        $phg = TypeMail::where('nama', 'PHG')->first()->id; 
+        $olin = TypeMail::where('nama', 'OLIN')->first()->id;
+        $inti = TypeMail::where('nama', 'INTI')->first()->id;
+        $phg = TypeMail::where('nama', 'PHG')->first()->id;
         $bulking_CPO = TypeMail::where('nama', 'BULKING CPO')->first()->id;
         $bulking_INTI = TypeMail::where('nama', 'BULKING INTI')->first()->id;
 
@@ -499,28 +499,28 @@ class TransactionController extends Controller
 
         $ken1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->count();
         $ken2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->count();
-       
+
         $pen1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('pendapatan');
         $pen2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('pendapatan');
         $keluar = TransactionOut::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->sum('jumlah');
 
-        $Bulking_SMART1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking_CPO)->count();      
-        $Bulking_SMART2 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking_INTI)->count();      
-        
+        $Bulking_SMART1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking_CPO)->count();
+        $Bulking_SMART2 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking_INTI)->count();
+
         $kartu_smart_bulking = $Bulking_SMART1 + $Bulking_SMART2;
-    
-        $CPO_total1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo1)->count();      
-        $CPO_total2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo2)->count();      
-        
-        $bulking_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking)->count();      
-        $acit_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $acit)->count();      
-        $olin_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $olin)->count();      
-        $pko_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $pko)->count();      
-       
+
+        $CPO_total1 = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo1)->count();
+        $CPO_total2 = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $cpo2)->count();
+
+        $bulking_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $bulking)->count();
+        $acit_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $acit)->count();
+        $olin_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $olin)->count();
+        $pko_total = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $pko)->count();
+        // wanda
         $INTI_total = TransactionSmart::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $inti)->count();
-       
+
         $jlh_phg = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->where('surat_id', $phg)->count();
-        
+
         $INTI = $Bulking_SMART2 + $INTI_total;
         $CPO_SMART = $CPO_total1 + $Bulking_SMART1;
         $sub_cpo = ($CPO_total1 + $CPO_total2);
