@@ -524,7 +524,7 @@ class TransactionController extends Controller
         $INTI = $Bulking_SMART2 + $INTI_total;
         $CPO_SMART = $CPO_total1 + $Bulking_SMART1;
         $sub_cpo = ($CPO_total1 + $CPO_total2);
-        $total_kendaraan = $ken1 + $ken2;
+        $total_kendaraan = $Bulking_SMART1 + $Bulking_SMART2 + $CPO_total1 + $CPO_total2  + $bulking_total;
         $total_pendapatan = $pen1 + $pen2;
         return view('pages.transaction.tutup_kasir1', compact('CPO_SMART','INTI','kartu_smart_bulking','Bulking_SMART1','Bulking_SMART2','jlh_phg','CPO_total2','ken2','total_kendaraan', 'total_pendapatan','keluar', 'sub_cpo', 'jlh_phg', 'acit_total', 'olin_total', 'pko_total', 'INTI_total', 'CPO_total2', 'CPO_total1', 'bulking_total'));
     }

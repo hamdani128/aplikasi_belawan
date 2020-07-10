@@ -181,19 +181,19 @@
                             <div class="form-input">
                                 <label for="">Uang PS (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_ps" value="{{ $ken2 * 4000 }}">
+                                    <input type="text" class="form-control"  id="uang_ps" value="{{ ($CPO_total2 + $bulking_total) * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">DISHUB (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="dishub" value="{{ $ken2 * 4000 }}">
+                                    <input type="text" class="form-control"  id="dishub" value="{{ ($CPO_total2 + $bulking_total) * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang SPTI (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_spti" value="{{ $ken2 * 4000 }}">
+                                    <input type="text" class="form-control"  id="uang_spti" value="{{ ($CPO_total2 + $bulking_total) * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
@@ -221,9 +221,9 @@
                                 </div>
                             </div>
                             <div class="form-input">
-                                <label for="">Uang Kartu PHG/CPO (2000)</label>
+                                <label for="">Uang Kartu  (2000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="" id="uang_kartu_phg" value="{{ ($CPO_total2 + $jlh_phg) * 2000 }}">
+                                    <input type="text" class="form-control" name="" id="uang_kartu_phg" value="{{ $ken2 * 2000 }}">
                                 </div>
                             </div>
                         </div>
@@ -240,13 +240,13 @@
                             <div class="form-input">
                                 <label for="">Uang kartu INTI (5000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="inti_kartu_smart" value="{{ $Bulking_SMART2 * 5000  }}">
+                                    <input type="text" class="form-control" id="inti_kartu_smart" value="{{ ($Bulking_SMART2 + $CPO_total2) * 5000  }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang Kartu CPO (2000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="cpo_kartu_smart" value="{{ $Bulking_SMART1 * 2000 }}">
+                                    <input type="text" class="form-control" id="cpo_kartu_smart" value="{{ ($Bulking_SMART1 + $CPO_total1) * 2000 }}">
                                 </div>
                             </div>
                         </div>
