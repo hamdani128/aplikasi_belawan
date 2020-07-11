@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="form-input">
-                                <label for="">Uang Kartu PHG/CPO (2000)</label>
+                                <label for="">Uang Kartu (2000)</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="" id="uang_kartu_phg">
                                 </div>
@@ -496,12 +496,15 @@
                         var ps = data * 4000;
                         var dishub = data * 4000;
                         var spti = data * 4000;
-                        var kartu = data * 2000;
                         $('#uang_pp').val(pp);
                         $('#uang_ps').val(ps);
                         $('#dishub').val(dishub);
                         $('#uang_spti').val(spti);
-                        $('#uang_kartu_phg').val(kartu);
+                    });
+
+                    $.get('/uangkartu_phg/shift2/phg', {from_date:from_date, to_date:to_date}, function(data){
+                        var uang = data * 2000;
+                        $('#uang_kartu_phg').val(uang);
                     });
 
                     $.get('/setoran/shift2/cpo_smart', {from_date:from_date, to_date:to_date}, function(data){

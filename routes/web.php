@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/setoran/shift2/uang/cpo-bulking', 'RevenueController@setoran_api_shift2_cpo_bulking');
     Route::get('/setoran/shift2/pendapatan', 'RevenueController@setoran_api_shift2_pendapatan');
     Route::get('/setoran/shift2/pengeluaran', 'RevenueController@setoran_api_shift2_pengeluaran');
+    Route::get('/uangkartu_phg/shift2/phg', 'RevenueController@setoran_api_shift2_uang_kartu_phg');
 
     Route::get('/print/forum/shift1', 'RevenueController@print_forum_shift1')->name('print-forum-shift1');
     Route::get('/print/forum/shift2', 'RevenueController@print_forum_shift2')->name('print-forum-shift2');

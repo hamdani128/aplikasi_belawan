@@ -216,9 +216,20 @@ class RevenueController extends Controller
     {
         if(!empty($request->from_date))
         {
+            $acit = TypeMail::where('nama', 'ACIT')->first()->id; 
+            $bulking = TypeMail::where('nama', 'BULKING')->first()->id; 
+            $pko = TypeMail::where('nama', 'PKO')->first()->id;
+            $olin = TypeMail::where('nama', 'OLIN')->first()->id; 
+            $inti = TypeMail::where('nama', 'INTI')->first()->id; 
+            $cpo_phg = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+            $cpo_smart = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.Smart')->first()->id;
+            $bulking_cpo = TypeMail::where('nama', 'BULKING CPO')->first()->id;
+            $bulking_inti = TypeMail::where('nama', 'BULKING INTI')->first()->id;
+
             $trsmart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();           
-            $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();
-            $hasil = $trphg+$trsmart;
+            $trphg_bulking = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $bulking)->count();
+            $trphg_CPO = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo_phg)->count();
+            $hasil = $trphg_bulking+$trphg_CPO+$trsmart;
         }
         else    
         {
@@ -231,7 +242,22 @@ class RevenueController extends Controller
     {
         if(!empty($request->from_date))
         {
-            // $trsmart = TransactionSmart::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();           
+            $bulking = TypeMail::where('nama', 'BULKING')->first()->id; 
+            $cpo_phg = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
+            $trphg_bulking = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $bulking)->count();
+            $trphg_CPO = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo_phg)->count();
+            $hasil = $trphg_bulking + $trphg_CPO;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+    public function setoran_api_shift2_uang_kartu_phg(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
             $trphg = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();
             $hasil = $trphg;
         }
