@@ -89,6 +89,6 @@ class TypeMailController extends Controller
     {
         $typemail = TypeMail::find($id);
         $typemail->delete($typemail);
-        return back();
+        return redirect("/type_mails");
     }
 }
