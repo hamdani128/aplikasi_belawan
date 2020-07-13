@@ -33,7 +33,7 @@
                     <h4 class="m-b-0 text-white">Update Data</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/update/type_mails/{{ $typemail->id }}" method="POST">
+                    <form action="/edit/type_mails/{$item->id}}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
                         <div class="col-md-12">
