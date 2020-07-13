@@ -29,11 +29,8 @@ class TruckController extends Controller
         ->addColumn('aksi', function ($q) {
             $button = '
             <div class="row">
-                <div class="d-flex ml-2 mr-1 mb-1">
-                    <a href="/edit/trucks/'.$q->id.'" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="uil-edit"></i></a>
-                </div>
                 <div class="d-flex mr-1 mb-1">
-                    <a href="/delete/trucks/'.$q->id.'" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="uil-prescription-bottle"></i></a>
+                    <a href="/delete/trucks/'.$q->id.'" class="btn btn-sm btn-danger" onclick="return confirm("Yakin Data Akan Dihapus ?")"  data-toggle="tooltip" data-placement="top" title="Hapus"><i class="uil-prescription-bottle"></i></a>
                 </div>
             </div>';
             return $button;
@@ -117,4 +114,12 @@ class TruckController extends Controller
     {
         //
     }
+
+    public function delete($id)
+    {
+        $truck = Truck::find($id);
+        $truck->delete($truck);
+        return redirect("/truck");
+    }
+
 }

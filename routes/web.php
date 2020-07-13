@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/truck', 'TruckController@index')->name('Truck');
     Route::post('/truck/create', 'TruckController@store')->name('create-kendaraan');
     Route::get('/truck/table', 'TruckController@table')->name('table-kendaraan');
+    Route::get('/delete/trucks/{id}', 'TruckController@delete');
+
     Route::get('/transaction_incoming', 'TransactionController@index')->name('incoming_transaction');
     Route::get('/transaction_incoming/smart', 'TransactionController@add_smart_transaction')->name('create-smart');
     
