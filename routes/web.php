@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/setoran/shift2', 'RevenueController@setoran_api_shift2');
     Route::get('/setoran/shift2/phg', 'RevenueController@setoran_api_shift2_phg');
+    Route::get('/setoran/shift2/phg/total', 'RevenueController@setoran_api_shift2_total');
     Route::get('/setoran/shift2/acit', 'RevenueController@setoran_api_shift2_acit');
     Route::get('/setoran/shift2/bulking', 'RevenueController@setoran_api_shift2_bulking');
     Route::get('/setoran/shift2/pko', 'RevenueController@setoran_api_shift2_pko');
@@ -101,6 +102,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/setoran/shift2/cpo_smart', 'RevenueController@setoran_api_shift2_cpo_smart');
     Route::get('/setoran/shift2/inti', 'RevenueController@setoran_api_shift2_inti');
     Route::get('/setoran/shift2/uang/cpo-bulking', 'RevenueController@setoran_api_shift2_cpo_bulking');
+    Route::get('/setoran/shift2/uang_kartu_inti', 'RevenueController@setoran_api_shift2_kartu_inti');
+    Route::get('/setoran/shift2/details_mail', 'RevenueController@setoran_api_shift2_details_mail');
+    Route::get('/setoran/shift2/uang_kartu_cpo', 'RevenueController@setoran_api_shift2_kartu_cpo');
     Route::get('/setoran/shift2/pendapatan', 'RevenueController@setoran_api_shift2_pendapatan');
     Route::get('/setoran/shift2/pengeluaran', 'RevenueController@setoran_api_shift2_pengeluaran');
     Route::get('/uangkartu_phg/shift2/phg', 'RevenueController@setoran_api_shift2_uang_kartu_phg');

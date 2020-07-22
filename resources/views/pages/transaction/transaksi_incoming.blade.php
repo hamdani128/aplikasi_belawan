@@ -33,8 +33,18 @@
                     <a href="{{ route('print-setoran-shift2') }}" class="btn btn-primary btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Setoran (Shift 2)</a>
                     <a href="{{ route('print-forum-shift1') }}" class="btn btn-info btn-rounded mb-3"><i class="mdi mdi-printer-check"></i> Tutup Kasir Forum (Shift 1)</a>
                     <a href="{{ route('print-forum-shift2') }}" class="btn btn-info btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir forum (Shift 2)</a> --}}
-                    <a href="{{ route('tutup-kasir1') }}" class="btn btn-success btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift1</a>
+                   @role('admin satu')
+                   <a href="{{ route('tutup-kasir1') }}" class="btn btn-success btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift1</a>
+                   @elserole('super admin')
+                   <a href="{{ route('tutup-kasir1') }}" class="btn btn-success btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift1</a>
+                   @endrole
+
+                   @role('admin dua')
                     <a href="{{ route('tutup-kasir2') }}" class="btn btn-warning btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift2</a>
+                    @elserole('super admin')
+                    <a href="{{ route('tutup-kasir2') }}" class="btn btn-warning btn-rounded mb-3 ml-1"><i class="mdi mdi-printer-check"></i> Tutup Kasir Shift2</a>
+                    @endrole
+                
                 </div>
             </div>
         </div>
@@ -107,8 +117,19 @@
                                 @can('add transaction')
                                 <div class="col-lg-12">
                                     <a href="{{ route('create-smart') }}" class="btn btn-md btn-primary"><i class="uil-plus-square"></i> Tambah</a>
+                                    
+                                    @role('admin satu')
                                     <a href="{{ route('smart-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    @elserole('super admin')
+                                    <a href="{{ route('smart-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    @endrole
+
+
+                                    @role('admin dua')
+                                     <a href="{{ route('smart-rekapan-shift2') }}" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
+                                    @elserole('super admin')
                                     <a href="{{ route('smart-rekapan-shift2') }}" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
+                                     @endrole
                                 </div>
                                 @endcan
                             </div>
@@ -125,7 +146,13 @@
                                                 <th>Jam</th>
                                                 <th>Jenis Surat</th>
                                                 <th>Line Pendapatan</th>
+
+                                                @role('admin dua')
                                                 <th>Pendapatan Bermalam</th>
+                                                @elserole('super admin')
+                                                <th>Pendapatan Bermalam</th>
+                                                @endrole
+
                                                 @can('add transaction')
                                                 <th>Tindakan</th>
                                                 @endcan
@@ -141,7 +168,11 @@
                                                     <td>{{ $item->jam }}</td>
                                                     <td>{{ $item->typemail->nama }}</td>
                                                     <td>{{ $item->pendapatan }}</td>
+                                                    @role('admin dua')
                                                     <td>{{ $item->bermalam }}</td>
+                                                    @elserole('super admin')
+                                                    <td>{{ $item->bermalam }}</td>
+                                                    @endrole
                                                     @can('add transaction')
                                                     <td class="row">
                                                         <div class="mr-1 mb-1">
@@ -176,8 +207,18 @@
                                 @can('add transaction')
                                 <div class="col-md-12">
                                     <a href="{{ route('create-phg') }}" class="btn btn-md btn-primary"><i class="uil-plus-square"></i> Tambah</a>
+
+                                    @role('admin satu')
                                     <a href="{{ route('phg-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    @elserole('super admin')
+                                    <a href="{{ route('phg-rekapan-shift1') }}" class="btn btn-md btn-success"><i class="uil-files-landscapes-alt"></i> Rekapan Shift1</a>
+                                    @endrole
+                                    
+                                    @role('admin dua')
                                     <a href="{{ route('phg-rekapan-shift2') }}" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
+                                    @elserole('super admin')
+                                    <a href="{{ route('phg-rekapan-shift2') }}" class="btn btn-md btn-warning text-white"><i class="uil-files-landscapes-alt"></i> Rekapan Shift2</a>
+                                    @endrole
                                 </div>
                                 @endcan
                             </div>
@@ -194,7 +235,11 @@
                                                     <th>No.Kendaraan</th>
                                                     <th>Jenis Surat</th>
                                                     <th>Pendapatan</th>
+                                                    @role('admin dua')
                                                     <th>Bermalam</th>
+                                                    @elserole('super admin')
+                                                    <th>Bermalam</th>
+                                                    @endrole
                                                     @can('add transaction')
                                                     <th>Tindakan</th>
                                                     @endcan
@@ -210,7 +255,11 @@
                                                        <td>{{ $item->trucks->no_kendaraan }}</td>
                                                        <td>{{ $item->typemail->nama }}</td>
                                                        <td>{{ $item->pendapatan }}</td>
+                                                       @role('admin dua')
                                                        <td>{{ $item->bermalam }}</td>
+                                                       @elserole('super admin')
+                                                       <td>{{ $item->bermalam }}</td>
+                                                       @endrole
                                                        @can('add transaction')
                                                        <td class="row">
                                                         <div class="mr-1 mb-1">
@@ -274,7 +323,7 @@
     $('.delete-confirm').on('click', function (event) {
     event.preventDefault();
     const url = $(this).attr('href');
-    swal({
+    swal({  
         title: 'Are you sure?',
         text: 'This record and it`s details will be permanantly deleted!',
         icon: 'warning',

@@ -42,8 +42,6 @@
                                                 <th>Tanggal</th>
                                                 <th>Jam</th>
                                                 <th>Jenis Surat</th>
-                                                <th>Langsung</th>
-                                                <th>Bulking</th>
                                                 <th>Line Pendapatan</th>
                                                 <th>Pendapatan Bermalam</th>
                                             </tr>
@@ -57,9 +55,7 @@
                                                     <td>{{ $item->tanggal }}</td>
                                                     <td>{{ $item->jam }}</td>
                                                     <td>{{ $item->typemail->nama }}</td>
-                                                    <td>{{ $item->p_langsung }}</td>
-                                                    <td>{{ $item->p_bulking }}</td>
-                                                    <td>{{ $item->pendapatan }}</td>
+                                                    <td>{{  number_format($item->pendapatan, 0, ',', '.') }}</td>
                                                     <td>{{ $item->bermalam }}</td>
                                                 </tr>
                                             @empty

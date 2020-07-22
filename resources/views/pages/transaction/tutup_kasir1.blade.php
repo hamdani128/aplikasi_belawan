@@ -31,7 +31,7 @@
                         <div class="form-input">
                             <label for="">PHG (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="phg_setoran" value="{{ $ken2 }}">
+                                <input type="text" class="form-control" id="phg_setoran" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
@@ -102,19 +102,19 @@
                         <div class="form-input">
                             <label for="">KWITANSI (5000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="kwitansi_forum" value="{{ $total_kendaraan }}">
+                                <input type="text" class="form-control" id="kwitansi_forum" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">MANDOR (8000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="mandor_forum" value="{{ $total_kendaraan }}">
+                                <input type="text" class="form-control" id="mandor_forum" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">CPO (5000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="cpo_forum" value="{{ $CPO_total1 }}">
+                                <input type="text" class="form-control" id="cpo_forum" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
@@ -175,7 +175,7 @@
                             <div class="form-input">
                                 <label for="">Uang PP (5000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_pp" value="{{ $ken2 * 5000 }}">
+                                    <input type="text" class="form-control"  id="uang_pp" value="{{ ($CPO_total2 + $bulking_total) * 5000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
@@ -225,6 +225,9 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="" id="uang_kartu_phg" value="{{ $ken2 * 2000 }}">
                                 </div>
+                            </div>
+                            <div class="form-input pt-2">
+                                <button class="btn btn-md btn-primary" id="phg_pembagian"><i class="mdi mdi-refresh"></i> Process</button>
                             </div>
                         </div>
                     </div>
@@ -306,19 +309,9 @@
                                 <input type="text" class="form-control" name="pendapatan_bersih" id="sisa">
                             </div>
                         </div> 
-                        <div class="form-input mt-1">
-                            <div class="input-group">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <a href="#" class="btn btn-sm btn-primary" id="dapat"><i class="mdi mdi-refresh"></i> Process</a>  
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-12">
-                                        <button class="btn btn-sm btn-info" type="submit"><i class="dripicons-plus"></i> Simpan</button>       
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-input mt-2">
+                            <a href="#" class="btn btn-md btn-primary" id="dapat"><i class="mdi mdi-refresh"></i> Process</a>  
+                            <button class="btn btn-md btn-info" type="submit"><i class="dripicons-plus"></i> Simpan</button>       
                         </div>
                        </form>
                     </div>
@@ -340,8 +333,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body printableArea">
-                    <div class="col-md-12">
+                <div class="card-body responsive printableArea">
+                    <div class="col-md-12"> 
                         <div class="row">
                             <h5>Setoran</h5>
                             <div class="table-responsive">
@@ -356,10 +349,11 @@
                                             <th>OLIN (15000)</th>
                                             <th>PKO (15000)</th>
                                             <th>BULKING (15000)</th>
-                                            <th>Bulking Keluar (Jlh Motor)</th>
+                                            <th>Bulking klr (Jlh Motor)</th>
                                             <th>Pengeluaran</th>
                                             <th>Total Kesuluruhan</th>
                                             <th>Subtotal</th>
+                                            <th>Bersih</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -376,6 +370,7 @@
                                                 <td><h5 class="setoran_pengeluaran" id="keluar_setoran"></h5></td>
                                                 <td><h5 class="total_setoran" id="total_setoran"></h5></td>
                                                 <td><h5 class="subtotal_setoran" id="subtotal_setoran"></h5></td>
+                                                <td><h5 class="bersih_setoran" id="bersih_setoran"></h5></td>
                                             </tr>
                                     </tbody>
                                 </table>  
@@ -397,6 +392,7 @@
                                             <th>Bulking (15000)</th>
                                             <th>BPJS (10000) /14 Orang</th>
                                             <th>Subtotal</th>
+                                            <th>Bersih</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -411,9 +407,97 @@
                                                 <td><h5 id="forum_bulking"></h5></td>
                                                 <td><h5 id="forum_bpjs"></h5></td>
                                                 <td><h5 id="forum_subtotal"></h5></td>
+                                                <td><h5 id="forum_bersih"></h5></td>
                                             </tr>
                                     </tbody>
                                 </table>  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Pembagaian PHG dengan Dengan Jenis Surat  : </h4>
+                            @foreach ($data as $item)
+                                <h5> .{{ $item->typemail->nama }}, </h5>
+                            @endforeach
+                            <div class="table-responsive">
+                                <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>TANGGAL</th>
+                                            <th>UANG PP (5000)</th>
+                                            <th>UANG PS (4000)</th>
+                                            <th>DISHUB (4000)</th>
+                                            <th>UANG SPTI (4000)</th>
+                                            <th>UANG CPO / BULKING (25000)</th>
+                                            <th>UANG PKO (30000)</th>
+                                            <th>UANG OLIN (30000)</th>
+                                            <th>UANG ACIT (30000)</th>
+                                            <th>UANG KARTU</th>
+                                            <th>SUBTOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>{{ date('Y-m-d') }}</td>
+                                                <td><h5 id="bagi_uang_pp"></h5></td>
+                                                <td><h5 id="bagi_uang_ps"></h5></td>
+                                                <td><h5 id="bagi_dishub"></h5></td>
+                                                <td><h5 id="bagi_spti"></h5></td>
+                                                <td><h5 id="bagi_cpo_bulking"></h5></td>
+                                                <td><h5 id="bagi_pko"></h5></td>
+                                                <td><h5 id="bagi_olin"></h5></td>
+                                                <td><h5 id="bagi_acit"></h5></td>
+                                                <td><h5 id="bagi_uang_kartu"></h5></td>
+                                                <td><h5 id="bagi_bersih"></h5></td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Pembagian Smart </h4>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>TANGGAL</th>
+                                                        <th>JUMLAH</th>
+                                                        <th>SUBTOTAL KARTU INTI (5000)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr>
+                                                            <td>{{ date('Y-m-d') }}</td>
+                                                            <td><h5 id="bagi_smart_inti_jumlah">{{ $Bulking_SMART2 + $CPO_total2 }}</h5></td>
+                                                            <td><h5 id="bagi_uang_ps"></h5>{{ ($Bulking_SMART2 + $CPO_total2) * 5000 }}</td>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table id="deposit" class="table table-bordered dt-responsive nowrap w-100">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>TANGGAL</th>
+                                                        <th>JUMLAH</th>
+                                                        <th>SUBTOTAL KARTU CPO (2000)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr>
+                                                            <td>{{ date('Y-m-d') }}</td>
+                                                            <td><h5 id="bagi_smart_inti_jumlah">{{ $Bulking_SMART1 + $CPO_total1 }}</h5></td>
+                                                            <td><h5 id="bagi_uang_ps"></h5>{{ ($Bulking_SMART1 + $CPO_total1) * 2000 }}</td>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -439,9 +523,10 @@
             $("#print").click(function() {
                 var mode = 'iframe'; //popup
                 var close = mode == "popup";
+                var style = '@page { size: Letter landscape; }';
                 var options = {
                     mode: mode,
-                    popClose: close
+                    popClose: close,
                 };
                 $("div.printableArea").printArea(options);
             });
@@ -469,6 +554,7 @@
             var has1 = b1+b2+b3+b4+b5+b6+a7+b7;
             var total_kendaraan = a1+a2+a3+a4+a5+a6+a9
             var sub =total_kendaraan * 15000;
+            var bersih = sub - a8
             document.getElementById('setoran_phg').innerHTML = a1;
             document.getElementById('setoran_cpo').innerHTML = a2;
             document.getElementById('setoran_inti').innerHTML = a3;
@@ -480,6 +566,7 @@
             document.getElementById('setoran_acit').innerHTML = b7;
             document.getElementById('total_setoran').innerHTML = total_kendaraan;
             document.getElementById('subtotal_setoran').innerHTML = sub;
+            document.getElementById('bersih_setoran').innerHTML = bersih;
         });
 
         $("#forum").click(function(){
@@ -500,7 +587,8 @@
             var d6 = c6 * 15000;
             var d7 = c7 * 10000;
             var d8 = c8 * 10000;
-            var has2 = d1+d2+d3+d4+d5+d6+d7+d8
+            var has2 = d1+d2+d3+d4+d5+d6+d8
+            var bersih = has2 - d7
             
             document.getElementById('forum_kwitansi').innerHTML = c1;
             document.getElementById('forum_mandor').innerHTML = c2;
@@ -511,6 +599,31 @@
             document.getElementById('forum_bpjs').innerHTML = c7;            
             document.getElementById('forum_acit').innerHTML = c8;            
             document.getElementById('forum_subtotal').innerHTML = has2;            
+            document.getElementById('forum_bersih').innerHTML = bersih;            
+        });
+
+        $("#phg_pembagian").click(function(){
+            var c1 = parseInt($('#uang_pp').val());        
+            var c2 = parseInt($('#uang_ps').val());        
+            var c3 = parseInt($('#dishub').val());        
+            var c4 = parseInt($('#uang_spti').val());        
+            var c5 = parseInt($('#uang_cpo_bulking').val());        
+            var c6 = parseInt($('#uang_pko').val());        
+            var c7 = parseInt($('#uang_olin').val());
+            var c8 = parseInt($('#uang_acit').val());
+            var c9 = parseInt($('#uang_kartu_phg').val());
+
+            var hasil = c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9
+            document.getElementById('bagi_uang_pp').innerHTML = c1;
+            document.getElementById('bagi_uang_ps').innerHTML = c2;
+            document.getElementById('bagi_dishub').innerHTML = c3;
+            document.getElementById('bagi_spti').innerHTML = c4;
+            document.getElementById('bagi_cpo_bulking').innerHTML = c5;
+            document.getElementById('bagi_pko').innerHTML = c6;
+            document.getElementById('bagi_olin').innerHTML = c7;            
+            document.getElementById('bagi_acit').innerHTML = c8;            
+            document.getElementById('bagi_uang_kartu').innerHTML = c9;            
+            document.getElementById('bagi_bersih').innerHTML = hasil;            
         });
 
         $("#dapat").click(function(){

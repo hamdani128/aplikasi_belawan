@@ -66,7 +66,7 @@ class HomeController extends Controller
             $malam_phg =TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('bermalam');
             $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get()->count();
             $out = TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('jumlah');
-            
+
             $malam = $malam_smart + $malam_phg;
             $total_pendapatan = $trsmart + $trphg;
             $truk = $truksmart + $trukphg;
@@ -75,7 +75,7 @@ class HomeController extends Controller
             $mail = TypeMail::get()->count();
             $truk = Truck::get()->count();
             $user = User::count();  
-            
+                        
             $out = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('jumlah');
             $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('pendapatan');
             $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('pendapatan');

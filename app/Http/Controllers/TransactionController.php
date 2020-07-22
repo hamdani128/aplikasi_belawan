@@ -470,7 +470,7 @@ class TransactionController extends Controller
     }
 
     public function phg_rekapan_shift1()
-    {
+    {   
         $trphg = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00')->get();
         return view('pages.transaction.print_phg_rekapan1', compact('trphg'));
     }
@@ -493,6 +493,7 @@ class TransactionController extends Controller
         $bulking_CPO = TypeMail::where('nama', 'BULKING CPO')->first()->id;
         $bulking_INTI = TypeMail::where('nama', 'BULKING INTI')->first()->id;
 
+        $data = TransactionPhgt::where('created_at', '>=' ,date('Y-m-d').' 07:00:00')->where('created_at', '<=' ,date('Y-m-d').' 19:00:00');
 
         $cpo2 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.PHG')->first()->id;
         $cpo1 = TypeMail::where('nama', 'CPO')->where('perusahaan', 'PT.Smart')->first()->id;
@@ -526,7 +527,7 @@ class TransactionController extends Controller
         $sub_cpo = ($CPO_total1 + $CPO_total2);
         $total_kendaraan = $Bulking_SMART1 + $Bulking_SMART2 + $CPO_total1 + $CPO_total2  + $bulking_total;
         $total_pendapatan = $pen1 + $pen2;
-        return view('pages.transaction.tutup_kasir1', compact('CPO_SMART','INTI','kartu_smart_bulking','Bulking_SMART1','Bulking_SMART2','jlh_phg','CPO_total2','ken2','total_kendaraan', 'total_pendapatan','keluar', 'sub_cpo', 'jlh_phg', 'acit_total', 'olin_total', 'pko_total', 'INTI_total', 'CPO_total2', 'CPO_total1', 'bulking_total'));
+        return view('pages.transaction.tutup_kasir1', compact('data','CPO_SMART','INTI','kartu_smart_bulking','Bulking_SMART1','Bulking_SMART2','jlh_phg','CPO_total2','ken2','total_kendaraan', 'total_pendapatan','keluar', 'sub_cpo', 'jlh_phg', 'acit_total', 'olin_total', 'pko_total', 'INTI_total', 'CPO_total2', 'CPO_total1', 'bulking_total'));
     }
 
     public function tutup_kasir2()
