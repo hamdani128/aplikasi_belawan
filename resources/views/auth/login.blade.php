@@ -29,7 +29,7 @@
 
                         <!-- Logo -->
                         <div class="auth-brand text-center text-lg-left d-flex">
-                            <a href="#">
+                            <a href="{{ route('home') }}">
                                 <span><img src="img/polado.png" alt="" height="50"></h5></span>
                             </a>
                             <h3 class="ml-2">PT Folado Karya Abadi</h3>
@@ -71,6 +71,10 @@
                             </div>
                             <!-- social-->
                         </form>
+                        <div class="form-group pt-2 text-center">
+                            <a href="{{ route('home') }}" class="btn btn-success btn-block"><i class="mdi mdi-tablet-dashboard
+                                "></i> Back to Portal</a>
+                        </div>
                         <!-- end form-->
 
                         <!-- Footer-->

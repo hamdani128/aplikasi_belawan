@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 // Route::get('/home', 'HomeController@landing');
 Auth::routes();
-Route::get('/', 'HomeController@landing');
+Route::get('/', 'HomeController@landing')->name('home');
 Route::middleware('auth')->group(function(){
     Route::get('/dashboard', 'HomeController@index');
     Route::get('/type_mails', "TypeMailController@index")->name('TypeMail');
@@ -121,7 +121,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/tutup-transaksi/shift2', 'TransactionController@tutup_kasir2')->name('tutup-kasir2');
     
     Route::post('/tutup-transaksi/create', 'NetincomeController@store')->name('create-kasir1');
-
+    Route::get('/logout', 'Auth/LoginController@logout');
 });
 
 Route::middleware('role:super admin')->group(function () {
