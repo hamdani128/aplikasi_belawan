@@ -175,25 +175,25 @@
                             <div class="form-input">
                                 <label for="">Uang PP (5000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_pp" value="{{ ($CPO_total2 + $bulking_total) * 5000 }}">
+                                    <input type="text" class="form-control"  id="uang_pp" value="{{ $CPO_total2  * 5000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang PS (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_ps" value="{{ ($CPO_total2 + $bulking_total) * 4000 }}">
+                                    <input type="text" class="form-control"  id="uang_ps" value="{{ $CPO_total2 * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">DISHUB (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="dishub" value="{{ ($CPO_total2 + $bulking_total) * 4000 }}">
+                                    <input type="text" class="form-control"  id="dishub" value="{{ $CPO_total2  * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang SPTI (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_spti" value="{{ ($CPO_total2 + $bulking_total) * 4000 }}">
+                                    <input type="text" class="form-control"  id="uang_spti" value="{{ $CPO_total2  * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">

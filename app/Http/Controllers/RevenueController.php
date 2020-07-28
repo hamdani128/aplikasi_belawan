@@ -247,7 +247,7 @@ class RevenueController extends Controller
             $trphg_bulking = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $bulking)->count();
             $trphg_CPO = TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->where('surat_id', $cpo_phg)->count();
             $phg =TransactionPhgt::where('created_at', '>=' ,date($request->from_date).' 19:00:00')->where('created_at', '<=' ,date($request->to_date).' 07:00:00')->count();
-            $hasil = $trphg_bulking + $trphg_CPO;
+            $hasil =  $trphg_CPO;
         }
         else    
         {
