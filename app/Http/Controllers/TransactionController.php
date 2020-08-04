@@ -410,24 +410,49 @@ class TransactionController extends Controller
         //
     }
 
-    public function days()
+    public function kasir1_days()
     {
-            sleep(1);
-            $pen1 = TransactionSmart::where('tanggal', date('Y-m-d'))->sum('pendapatan');
-            $pen2 = TransactionPhgt::where('tanggal', date('Y-m-d'))->sum('pendapatan');
+        $pen1 = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+        $pen2 = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+        $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('jumlah');
+        sleep(1);
             $result = [
                 'data' => [
-                    'transaction_smart' => TransactionSmart::where('tanggal', date('Y-m-d'))->get(),
-                    'transaction_phg' =>  TransactionPhgt::where('tanggal', date('Y-m-d'))->get(),
+                    'transaction_smart' => $pen1,
+                    'transaction_phg' =>  $pen2,
                     'subtotal' => [
                         collect([
                             'smart' => $pen1, 
                             'phg' => $pen2,
-                            'pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->sum('jumlah'),
+                            'pengeluaran' => $keluar,
                             'pendapatan_bersih' => Netincome::where('created_at', 'LIKE' ,'%'.date('Y-m-d').'%')->sum('pendapatan_bersih'),
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at', 'LIKE', '%'.date('Y-m-d').'%')->get(), 
+                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get(), 
+                ],
+            ];
+            return response()->json($result);
+    }
+
+    public function kasir2_days()
+    {
+        $pen1 = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('pendapatan');
+        $pen2 = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('pendapatan');
+        $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('jumlah');
+        sleep(1);
+            $result = [
+                'data' => [
+                    'tr_smart' => $pen1,
+                    'tr_phg' =>  $pen2,
+                    'subtotal' => [
+                        collect([
+                            'smart' => $pen1, 
+                            'phg' => $pen2,
+                            'pengeluaran' => $keluar,
+                            'pendapatan_bersih' => Netincome::where('created_at', 'LIKE' ,'%'.date('Y-m-d').'%')->sum('pendapatan_bersih'),
+                        ]), 
+                    ],
+                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get(), 
                 ],
             ];
             return response()->json($result);

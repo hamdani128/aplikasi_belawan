@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('days', 'TransactionController@days');
+Route::get('kasir1_days', 'TransactionController@kasir1_days');
+
 Route::get('all', 'TransactionController@all_transaction');
 
