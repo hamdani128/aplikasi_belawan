@@ -22,6 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('kasir1_days', 'TransactionController@kasir1_days');
-
+Route::get('kasir2_days', 'TransactionController@kasir2_days');
 Route::get('all', 'TransactionController@all_transaction');
 

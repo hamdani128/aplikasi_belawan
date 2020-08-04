@@ -449,10 +449,10 @@ class TransactionController extends Controller
                             'smart' => $pen1, 
                             'phg' => $pen2,
                             'pengeluaran' => $keluar,
-                            'pendapatan_bersih' => Netincome::where('created_at', 'LIKE' ,'%'.date('Y-m-d').'%')->sum('pendapatan_bersih'),
+                            'pendapatan_bersih' => Netincome::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('pendapatan_bersih'),
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get(), 
+                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get(), 
                 ],
             ];
             return response()->json($result);
