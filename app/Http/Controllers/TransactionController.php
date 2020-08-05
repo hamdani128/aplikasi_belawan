@@ -435,6 +435,11 @@ class TransactionController extends Controller
         $pen1 = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get();
         $pen2 = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get();
         $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('jumlah');
+        
+        $sub_smart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+        $sub_phg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+        
+        
         sleep(1);
             $result = [
                 'data' => [
@@ -442,8 +447,8 @@ class TransactionController extends Controller
                     'transaction_phg' =>  $pen2,
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1->sum('pendapatan'), 
-                            'phg' => $pen2->sum('pendapatan'),
+                            'smart' => $sub_smart, 
+                            'phg' => $sub_phg,
                             'pengeluaran' => $keluar,
                             'pendapatan_bersih' => Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih'),
                         ]), 
@@ -478,6 +483,19 @@ class TransactionController extends Controller
                 ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
                 ->sum('jumlah');
 
+         $sub_smart = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->sum('pendapatan');
+        $sub_phg = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->sum('pendapatan');
+
         sleep(1);
             $result = [
                 'data' => [
@@ -485,8 +503,8 @@ class TransactionController extends Controller
                     'transaction_phg' => $pen2,
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1->sum('pendapatan'), 
-                            'phg' => $pen2->sum('pendapatan'),
+                            'smart' => $sub_smart, 
+                            'phg' => $sub_phg,
                             'pengeluaran' => $keluar,
                             'pendapatan_bersih' => Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
                                                     ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
