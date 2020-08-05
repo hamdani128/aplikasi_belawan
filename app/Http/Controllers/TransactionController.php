@@ -545,7 +545,7 @@ class TransactionController extends Controller
                             'pendapatan_bersih' => Netincome::whereMonth('created_at', $month)->sum('pendapatan_bersih'),
                         ]),    
                     ],
-                    'list_pengeluaran' => TransactionOut::whereMonth('created_at', $month)->get(),   
+                    'list_pengeluaran' => ''.TransactionOut::whereMonth('created_at', $month)->get().'',   
                 ],
             ];
             return response()->json($result);
