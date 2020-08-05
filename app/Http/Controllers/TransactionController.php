@@ -439,6 +439,8 @@ class TransactionController extends Controller
         $sub_smart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
         $sub_phg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
         
+        $netincome = Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih');
+        $detail_trout = TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get();
         
         sleep(1);
             $result = [
@@ -450,10 +452,10 @@ class TransactionController extends Controller
                             'smart' => ''.$sub_smart.'', 
                             'phg' => ''.$sub_phg.'',
                             'pengeluaran' => ''.$keluar.'',
-                            'pendapatan_bersih' => ''.Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih').'',
+                            'pendapatan_bersih' => ''.$netincome.'',
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get(), 
+                    'list_pengeluaran' => $detail_trout, 
                 ],
             ];
             return response()->json($result);
@@ -521,7 +523,7 @@ class TransactionController extends Controller
                             'pendapatan_bersih' => ''.$netincome.'' ,
                         ]), 
                     ],
-                    'list_pengeluaran' => ''.$detail_trout.'', 
+                    'list_pengeluaran' => $detail_trout, 
                 ],
             ];
             return response()->json($result);
@@ -545,7 +547,7 @@ class TransactionController extends Controller
                             'pendapatan_bersih' => Netincome::whereMonth('created_at', $month)->sum('pendapatan_bersih'),
                         ]),    
                     ],
-                    'list_pengeluaran' => ''.TransactionOut::whereMonth('created_at', $month)->get().'',   
+                    'list_pengeluaran' => TransactionOut::whereMonth('created_at', $month)->get(),   
                 ],
             ];
             return response()->json($result);
