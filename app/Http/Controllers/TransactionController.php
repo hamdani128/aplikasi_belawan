@@ -442,8 +442,8 @@ class TransactionController extends Controller
                     'transaction_phg' =>  $pen2,
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1, 
-                            'phg' => $pen2,
+                            'smart' => $pen1->sum('pendapatan'), 
+                            'phg' => $pen2->sum('pendapatan'),
                             'pengeluaran' => $keluar,
                             'pendapatan_bersih' => Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih'),
                         ]), 
@@ -485,8 +485,8 @@ class TransactionController extends Controller
                     'transaction_phg' => $pen2,
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1, 
-                            'phg' => $pen2,
+                            'smart' => $pen1->sum('pendapatan'), 
+                            'phg' => $pen2->sum('pendapatan'),
                             'pengeluaran' => $keluar,
                             'pendapatan_bersih' => Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
                                                     ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
