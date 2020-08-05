@@ -447,13 +447,13 @@ class TransactionController extends Controller
                     'transaction_phg' =>  $pen2,
                     'subtotal' => [
                         collect([
-                            'smart' => $sub_smart, 
-                            'phg' => $sub_phg,
-                            'pengeluaran' => $keluar,
-                            'pendapatan_bersih' => Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih'),
+                            'smart' => ''.$sub_smart.'', 
+                            'phg' => ''.$sub_phg.'',
+                            'pengeluaran' => ''.$keluar.'',
+                            'pendapatan_bersih' => ''.Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih').'',
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get(), 
+                    'list_pengeluaran' => ''.TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get().'', 
                 ],
             ];
             return response()->json($result);
@@ -496,6 +496,18 @@ class TransactionController extends Controller
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
                     ->sum('pendapatan');
 
+        $netincome = Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
+                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
+                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->sum('pendapatan_bersih');  
+
+        $detail_trout = TransactionOut::where('created_at','>',Carbon::createFromdate('19:00:00'))
+                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                        ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
+                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                        ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->get();
+
         sleep(1);
             $result = [
                 'data' => [
@@ -505,19 +517,11 @@ class TransactionController extends Controller
                         collect([
                             'smart' => $sub_smart, 
                             'phg' => $sub_phg,
-                            'pengeluaran' => $keluar,
-                            'pendapatan_bersih' => Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
-                                                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                                                    ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
-                                                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                                                    ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->sum('pendapatan_bersih'),
+                            'pengeluaran' => ''.$keluar.'',
+                            'pendapatan_bersih' => ''.$netincome.'' ,
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at','>',Carbon::createFromdate('19:00:00'))
-                                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                                        ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
-                                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                                        ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->get(), 
+                    'list_pengeluaran' => ''.$detail_trout.'', 
                 ],
             ];
             return response()->json($result);
