@@ -41,29 +41,30 @@ class TransactionController extends Controller
             $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
             $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
         }else if(Auth::user()->hasRole('admin dua')){
-            $trphg = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
+            $kemarin =date('Y-m-d');
+            $trphg = TransactionPhgt::where('jam','>','19:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->orWhere('jam', '<', '07:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->Where('jam', '>', $kemarin.'07:00:00','-','INTERVAL 1 DAY')
                     ->get();
-            $trsmart = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
+            $trsmart = TransactionSmart::where('jam','>','19:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->orWhere('jam', '<', '07:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->Where('jam', '>', $kemarin.'07:00:00','-','INTERVAL 1 DAY')
                     ->get();
-            $trukphg = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
+            $trukphg = TransactionPhgt::where('jam','>','19:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->orWhere('jam', '<', '07:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->Where('jam', '>', $kemarin.'07:00:00','-','INTERVAL 1 DAY')
                     ->count();
-            $truksmart = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
+            $truksmart = TransactionSmart::where('jam','>','19:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->orWhere('jam', '<', '07:00:00')
                     ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->Where('jam', '>', $kemarin.'07:00:00','-','INTERVAL 1 DAY')
                     ->count();
         }
         return view('pages.transaction.transaksi_incoming', compact('trsmart', 'trphg', 'truksmart', 'trukphg'));
@@ -484,8 +485,8 @@ class TransactionController extends Controller
                     'tr_phg' =>  $pen2,
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1, 
-                            'phg' => $pen2,
+                            'transaction_smart' => $pen1, 
+                            'transaction_phg' => $pen2,
                             'pengeluaran' => $keluar,
                             'pendapatan_bersih' => Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
                                                     ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
