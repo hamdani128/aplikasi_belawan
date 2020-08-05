@@ -41,11 +41,30 @@ class TransactionController extends Controller
             $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
             $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->count();
         }else if(Auth::user()->hasRole('admin dua')){
-            $troutgoing = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
-            $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
-            $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get();
-            $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->count();
-            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->count();
+            $trphg = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->get();
+            $trsmart = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->get();
+            $trukphg = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->count();
+            $truksmart = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                    ->count();
         }
         return view('pages.transaction.transaksi_incoming', compact('trsmart', 'trphg', 'truksmart', 'trukphg'));
     }
@@ -436,9 +455,28 @@ class TransactionController extends Controller
 
     public function kasir2_days()
     {
-        $pen1 = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('pendapatan');
-        $pen2 = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('pendapatan');
-        $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('jumlah');
+    //    $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('jumlah');
+        
+        $pen1 = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
+                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                ->sum('pendapatan');
+        $pen2 = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
+                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
+                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
+                ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                ->sum('pendapatan');
+        
+        $keluar = TransactionOut::where('created_at','>',Carbon::createFromdate('19:00:00'))
+                ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
+                ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+                ->sum('jumlah');
+
         sleep(1);
             $result = [
                 'data' => [
@@ -449,10 +487,18 @@ class TransactionController extends Controller
                             'smart' => $pen1, 
                             'phg' => $pen2,
                             'pengeluaran' => $keluar,
-                            'pendapatan_bersih' => Netincome::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('pendapatan_bersih'),
+                            'pendapatan_bersih' => Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
+                                                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                                                    ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
+                                                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                                                    ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->sum('pendapatan_bersih'),
                         ]), 
                     ],
-                    'list_pengeluaran' => TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->get(), 
+                    'list_pengeluaran' => TransactionOut::where('created_at','>',Carbon::createFromdate('19:00:00'))
+                                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                                        ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
+                                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
+                                        ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->get(), 
                 ],
             ];
             return response()->json($result);

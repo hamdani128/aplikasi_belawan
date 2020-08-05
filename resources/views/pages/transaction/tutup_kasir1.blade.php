@@ -221,7 +221,7 @@
                                 </div>
                             </div>
                             <div class="form-input">
-                                <label for="">Uang Kartu  (2000)</label>
+                                <label for="">Uang Kartu (2000)</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="" id="uang_kartu_phg" value="{{ $ken2 * 2000 }}">
                                 </div>
