@@ -45,25 +45,25 @@ class TransactionController extends Controller
             // $kemarin =date('Y-m-d', strtotime("-1 day", strtotime(date('Y-m-d'))));
             // $hari = date('Y-m-d').' 19:00:00';
                 $trphg = transactionPhgt::where('user_id','3')
-                        ->whereTime('created_at', '>' ,' 19:00:00')
+                        ->whereTime('created_at', '>' ,date('Y-m-d').' 19:00:00')
                         ->orWhere('user_id','3')
-                        ->whereTime('created_at', '<' ,' 07:00:00')
+                        ->whereTime('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->get();
          
             $trsmart = TransactionSmart::where('user_id','3')
-                        ->whereTime('created_at', '>' ,' 19:00:00')
+                        ->whereTime('created_at', '>' ,date('Y-m-d').' 19:00:00')
                         ->orWhere('user_id','3')
-                        ->whereTime('created_at', '<' ,' 07:00:00')
+                        ->whereTime('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->get();
             $trukphg = TransactionPhgt::where('user_id','3')
-                        ->whereTime('created_at', '>' ,' 19:00:00')
+                        ->whereTime('created_at', '>' ,date('Y-m-d').' 19:00:00')
                         ->orWhere('user_id','3')
-                        ->whereTime('created_at', '<' ,' 07:00:00')
+                        ->whereTime('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->count();
             $truksmart = TransactionSmart::where('user_id','3')
-                        ->whereTime('created_at', '>' ,' 19:00:00')
+                        ->whereTime('created_at', '>' ,date('Y-m-d').' 19:00:00')
                         ->orWhere('user_id','3')
-                        ->whereTime('created_at', '<' ,' 07:00:00')
+                        ->whereTime('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->count();
         }
         // return dd($trphg);
