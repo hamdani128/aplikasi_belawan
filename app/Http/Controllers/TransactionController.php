@@ -46,24 +46,32 @@ class TransactionController extends Controller
             // $hari = date('Y-m-d').' 19:00:00';
                 $trphg = transactionPhgt::where('user_id','3')
                         ->where('created_at', '>' ,date('Y-m-d').' 19:00:00')
+                        ->where('created_at', '<' ,date('Y-m-d').' 00:00:00')
                         ->orWhere('user_id','3')
+                        ->where('created_at', '>' ,date('Y-m-d').' 00:00:00')
                         ->where('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->get();
          
             $trsmart = TransactionSmart::where('user_id','3')
                         ->where('created_at', '>' ,date('Y-m-d').' 19:00:00')
+                        ->where('created_at', '<' ,date('Y-m-d').' 00:00:00')
                         ->orWhere('user_id','3')
+                        ->where('created_at', '>' ,date('Y-m-d').' 00:00:00')
                         ->where('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->get();
 
             $trukphg = TransactionPhgt::where('user_id','3')
                         ->where('created_at', '>' ,date('Y-m-d').' 19:00:00')
+                        ->where('created_at', '<' ,date('Y-m-d').' 00:00:00')
                         ->orWhere('user_id','3')
+                        ->where('created_at', '>' ,date('Y-m-d').' 00:00:00')
                         ->where('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->count();
             $truksmart = TransactionSmart::where('user_id','3')
                         ->where('created_at', '>' ,date('Y-m-d').' 19:00:00')
+                        ->where('created_at', '<' ,date('Y-m-d').' 00:00:00')
                         ->orWhere('user_id','3')
+                        ->where('created_at', '>' ,date('Y-m-d').' 00:00:00')
                         ->where('created_at', '<' ,date('Y-m-d').' 07:00:00')
                         ->count();
         }
