@@ -76,15 +76,54 @@ class HomeController extends Controller
             $truk = Truck::get()->count();
             $user = User::count();  
                         
-            $out = TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('jumlah');
-            $trsmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('pendapatan');
-            $trphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+            $out = TransactionOut::where('user_id', '3')
+                    ->where('created_at','>',date('Y-m-d ').'19:00:00')
+                    ->where('created_at','<',date('Y-m-d ').'07:00:00')
+                    ->sum('jumlah');
+            $trsmart = TransactionSmart::where('user_id', '3')
+                    ->where('tanggal', date('Y-m-d'))
+                    ->whereTime('jam', '>', '19:00:00')
+                    ->orWhere('user_id','3')
+                    ->where('tanggal', date('Y-m-d'))
+                    ->whereTime('jam', '<', '07:00:00')
+                     ->sum('pendapatan');
+            $trphg = TransactionPhgt::where('user_id', '3')
+                     ->where('tanggal', date('Y-m-d'))
+                    ->whereTime('jam', '>', '19:00:00')
+                    ->orWhere('user_id','3')
+                    ->where('tanggal', date('Y-m-d'))
+                    ->whereTime('jam', '<', '07:00:00')
+                    ->sum('pendapatan');
             
-            $truksmart = TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->get()->count();
-            $trukphg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->get()->count();
+            $truksmart = TransactionSmart::where('user_id', '3')
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '>', '19:00:00')
+                        ->orWhere('user_id','3')
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '<', '07:00:00')
+                        ->get()->count();
+            $trukphg = TransactionPhgt::where('user_id','3')
+                    ->where('tanggal', date('Y-m-d'))
+                    ->whereTime('jam', '>', '19:00:00')
+                    ->orWhere('user_id','3')
+                    ->where('tanggal', date('Y-m-d'))
+                    ->whereTime('jam', '<', '07:00:00')
+                    ->get()->count();
             
-            $malam_smart =  TransactionSmart::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('bermalam');
-            $malam_phg =TransactionPhgt::where('created_at','>',date('Y-m-d ').'19:00:00')->sum('bermalam');
+            $malam_smart =  TransactionSmart::Where('user_id','3')
+                            ->where('tanggal', date('Y-m-d'))
+                            ->whereTime('jam', '>', '19:00:00')
+                            ->orWhere('user_id','3')
+                            ->where('tanggal', date('Y-m-d'))
+                            ->whereTime('jam', '<', '07:00:00')                
+                            ->sum('bermalam');
+            $malam_phg =TransactionPhgt::Where('user_id','3')
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '>', '19:00:00')
+                        ->orWhere('user_id','3')
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '<', '07:00:00')
+                        ->sum('bermalam');
             
             $malam = $malam_smart + $malam_phg;
             $total_pendapatan = $trsmart + $trphg;
