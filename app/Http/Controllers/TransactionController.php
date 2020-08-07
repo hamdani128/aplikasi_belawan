@@ -61,18 +61,18 @@ class TransactionController extends Controller
                         ->get();
 
             $trukphg = TransactionPhgt::where('user_id','3')
-                        ->where('created_at', '>' ,date('Y-m-d'.' 19:00:00'))
-                        ->where('created_at', '<' ,date('Y-m-d'.' 00:00:00'))
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '>', '19:00:00')
                         ->orWhere('user_id','3')
-                        ->where('created_at', '>' ,date('Y-m-d'.' 00:00:00'))
-                        ->where('created_at', '<' ,date('Y-m-d'.' 07:00:00'))
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '<', '07:00:00')
                         ->count();
             $truksmart = TransactionSmart::where('user_id','3')
-                        ->where('created_at', '>' ,date('Y-m-d'.' 19:00:00'))
-                        ->where('created_at', '<' ,date('Y-m-d'.' 00:00:00'))
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '>', '19:00:00')
                         ->orWhere('user_id','3')
-                        ->where('created_at', '>' ,date('Y-m-d'.' 00:00:00'))
-                        ->where('created_at', '<' ,date('Y-m-d'.' 07:00:00'))
+                        ->where('tanggal', date('Y-m-d'))
+                        ->whereTime('jam', '<', '07:00:00')
                         ->count();
         }
         // return dd($trphg);
