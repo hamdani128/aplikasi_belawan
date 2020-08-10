@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- end page title -->
-    <div class="row mb-2">
+    {{-- <div class="row mb-2">
         <div class="col-md-3 pt-1">
             <div class="input-group input-daterange">
                 <input type="text" class="form-control form-control-light" name="from_date" id="from_date">
@@ -43,7 +43,7 @@
         <div class="col-md-2 pt-1">
             <button  class="btn btn-md btn-primary" id="filter"><i class="mdi mdi-update"></i><b> refresh</b></button>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <div class="col-lg-3">
@@ -56,43 +56,43 @@
                         <div class="form-input">
                             <label for="">PHG (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="phg_setoran">
+                                <input type="text" class="form-control" id="phg_setoran" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">CPO SMART (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="cpo_setoran">
+                                <input type="text" class="form-control" id="cpo_setoran" value="{{ $CPO_total1 + $Bulking_SMART1 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">INTI SMART (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inti_setoran">
+                                <input type="text" class="form-control" id="inti_setoran" value="{{  $INTI }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">ACIT (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="acit_setoran">
+                                <input type="text" class="form-control" id="acit_setoran" value="{{ $acit_total }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">OLIN (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="olin_setoran">
+                                <input type="text" class="form-control" id="olin_setoran" value="{{ $olin_total }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">PKO (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="pko_setoran">
+                                <input type="text" class="form-control" id="pko_setoran" value="{{ $pko_total }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">BULKING (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="bulking_setoran">
+                                <input type="text" class="form-control" id="bulking_setoran" value="{{ $bulking_total }}">
                             </div>
                         </div> 
                         <div class="form-input">
@@ -104,7 +104,7 @@
                         <div class="form-input">
                             <label for="">Pengeluaran </label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="pengeluaran_setoran">
+                                <input type="text" class="form-control" id="pengeluaran_setoran" value="{{ $keluar }}">
                             </div>
                         </div> 
                         <div class="form-input mt-1">
@@ -127,44 +127,44 @@
                         <div class="form-input">
                             <label for="">KWITANSI (5000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="kwitansi_forum">
+                                <input type="text" class="form-control" id="kwitansi_forum" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">MANDOR (8000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="mandor_forum">
+                                <input type="text" class="form-control" id="mandor_forum" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">CPO (5000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="cpo_forum">
+                                <input type="text" class="form-control" id="cpo_forum" value="{{ $CPO_total2 }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">ACIT (10000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="acit_forum">
+                                <input type="text" class="form-control" id="acit_forum" value="{{ $acit_total }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">OLIN (10000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="olin_forum">
+                                <input type="text" class="form-control" id="olin_forum" value="{{ $olin_total }}">
                             </div>
                         </div>
 
                         <div class="form-input">
                             <label for="">PKO (10000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="pko_forum" >
+                                <input type="text" class="form-control" id="pko_forum" value="{{ $pko_total }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">BULKING (15000)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="bulking_forum">
+                                <input type="text" class="form-control" id="bulking_forum" value="{{ $bulking_total }}">
                             </div>
                         </div> 
                         <div class="form-input">
@@ -194,61 +194,61 @@
                             <div class="form-input">
                                 <label for="">Total Kendaraan PHG</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="pembagian_total_kendaraan_phg">
+                                    <input type="text" class="form-control"  id="pembagian_total_kendaraan_phg" value="{{ $ken2 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang PP (5000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_pp">
+                                    <input type="text" class="form-control"  id="uang_pp" value="{{ $CPO_total2  * 5000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang PS (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_ps">
+                                    <input type="text" class="form-control"  id="uang_ps" value="{{ $CPO_total2 * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">DISHUB (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="dishub">
+                                    <input type="text" class="form-control"  id="dishub" value="{{ $CPO_total2  * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang SPTI (4000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_spti">
+                                    <input type="text" class="form-control"  id="uang_spti" value="{{ $CPO_total2  * 4000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang CPO / Bulking (25000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_cpo_bulking">
+                                    <input type="text" class="form-control"  id="uang_cpo_bulking" value="{{ ($CPO_total2 + $bulking_total) * 25000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang PKO (30000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_pko">
+                                    <input type="text" class="form-control"  id="uang_pko" value="{{ $pko_total * 30000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang OLIN (30000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_olin">
+                                    <input type="text" class="form-control"  id="uang_olin" value="{{ $olin_total * 30000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang ACIT (30000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control"  id="uang_acit">
+                                    <input type="text" class="form-control"  id="uang_acit" value="{{ $acit_total * 30000 }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang Kartu (2000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="" id="uang_kartu_phg">
+                                    <input type="text" class="form-control" name="" id="uang_kartu_phg" value="{{ $ken2 * 2000 }}">
                                 </div>
                             </div>
                             <div class="form-input pt-2">
@@ -268,13 +268,13 @@
                             <div class="form-input">
                                 <label for="">Uang kartu INTI (5000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="inti_kartu_smart">
+                                    <input type="text" class="form-control" id="inti_kartu_smart" value="{{ ($Bulking_SMART2 + $CPO_total2) * 5000  }}">
                                 </div>
                             </div>
                             <div class="form-input">
                                 <label for="">Uang Kartu CPO (2000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="cpo_kartu_smart">
+                                    <input type="text" class="form-control" id="cpo_kartu_smart" value="{{ ($Bulking_SMART1 + $CPO_total1) * 2000 }}">
                                 </div>
                             </div>
                         </div>
@@ -295,25 +295,25 @@
                         <div class="form-input">
                             <label for="">Pendapatan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="pemasukkan" id="pendapatan" >
+                                <input type="text" class="form-control" name="pemasukkan" id="pendapatan" value="{{ $total_pendapatan }}">
                             </div>
                         </div> 
                         <div class="form-input">
                             <label for="">Pengeluaran</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="pengeluaran" id="pengeluaran">
+                                <input type="text" class="form-control" name="pengeluaran" id="pengeluaran" value="{{ $keluar }}">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">Pengeluaran PHG</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="pengeluaran_phg" id="keluar_phg">
+                                <input type="text" class="form-control" id="keluar_phg">
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="">Pengeluaran SMART</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="pengeluaran_smart" id="keluar_smart">
+                                <input type="text" class="form-control"  id="keluar_smart">
                             </div>
                         </div>
                         <div class="form-input">
@@ -334,7 +334,7 @@
                                 <input type="text" class="form-control" name="pendapatan_bersih" id="sisa">
                             </div>
                         </div> 
-                        <div class="form-input mt-1">
+                        <div class="form-input mt-2">
                             <a href="#" class="btn btn-md btn-primary" id="dapat"><i class="mdi mdi-refresh"></i> Process</a>  
                             <button class="btn btn-md btn-info" type="submit"><i class="dripicons-plus"></i> Simpan</button>       
                         </div>
