@@ -42,25 +42,25 @@ class TransactionController extends Controller
             $trsmart = TransactionSmart::where('user_id','2')
             ->whereDate('created_at', '=', date('Y-m-d'))
             ->whereTime('created_at', '>', '07:00:00')
-            ->whereTime('created_at', '<', '00:00:00')
+            ->whereTime('created_at', '<', '24:00:00')
             ->orderBy('no','DESC')->get();
 
 
             $trphg = TransactionPhgt::where('user_id','2')
             ->whereDate('created_at', '=', date('Y-m-d'))
             ->whereTime('created_at', '>', '07:00:00')
-            ->whereTime('created_at', '<', '00:00:00')
+            ->whereTime('created_at', '<', '24:00:00')
             ->orderBy('no','DESC')->get();
             $truksmart = TransactionSmart::where('user_id','2')
             ->whereDate('created_at', '=', date('Y-m-d'))
             ->whereTime('created_at', '>', '07:00:00')
-            ->whereTime('created_at', '<', '00:00:00')
+            ->whereTime('created_at', '<', '24:00:00')
             ->count();
 
             $trukphg = TransactionPhgt::where('user_id','2')
             ->whereDate('created_at', '=', date('Y-m-d'))
             ->whereTime('created_at', '>', '07:00:00')
-            ->whereTime('created_at', '<', '00:00:00')
+            ->whereTime('created_at', '<', '24:00:00')
             ->count();
         
         }else if(Auth::user()->hasRole('admin dua')){
