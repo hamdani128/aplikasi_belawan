@@ -467,8 +467,8 @@ class TransactionController extends Controller
         sleep(1);
             $result = [
                 'data' => [
-                    'transaction_smart' => number_format($pen1),
-                    'transaction_phg' =>  number_format($pen2),
+                    'transaction_smart' => $pen1,
+                    'transaction_phg' =>  $pen2,
                     'subtotal' => [
                         collect([
                             'smart' => ''.number_format($sub_smart).'', 
@@ -523,8 +523,8 @@ class TransactionController extends Controller
         sleep(1);
             $result = [
                 'data' => [
-                    'transaction_smart' => number_format($pen1),
-                    'transaction_phg' => number_format($pen2),
+                    'transaction_smart' => $pen1,
+                    'transaction_phg' => $pen2,
                     'subtotal' => [
                         collect([
                             'smart' => number_format($sub_smart), 
