@@ -454,15 +454,15 @@ class TransactionController extends Controller
 
     public function kasir1_days()
     {
-        $pen1 = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get();
-        $pen2 = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get();
-        $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('jumlah');
+        $pen1 = TransactionSmart::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->get();
+        $pen2 = TransactionPhgt::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->get();
+        $keluar =TransactionOut::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->sum('jumlah');
         
-        $sub_smart = TransactionSmart::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
-        $sub_phg = TransactionPhgt::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan');
+        $sub_smart = TransactionSmart::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->sum('pendapatan');
+        $sub_phg = TransactionPhgt::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->sum('pendapatan');
         
-        $netincome = Netincome::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->sum('pendapatan_bersih');
-        $detail_trout = TransactionOut::where('created_at','>',date('Y-m-d ').'07:00:00')->where('created_at','<',date('Y-m-d ').'19:00:00')->get();
+        $netincome = Netincome::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->sum('pendapatan_bersih');
+        $detail_trout = TransactionOut::whereDate('created_at','=',date('Y-m-d '))->whereTime('created_at','>','07:00:00')->whereTime('created_at','<','24:00:00')->get();
         
         sleep(1);
             $result = [
@@ -487,50 +487,38 @@ class TransactionController extends Controller
     {
     //    $keluar =TransactionOut::where('created_at','>',date('Y-m-d ').'19:00:00')->orWhere('created_at','>',date('Y-m-d ').'19:00:00','-', 'INTERVAL 1 DAY')->where('created_at','<',date('Y-m-d ').'07:00:00')->sum('jumlah');
         
-        $pen1 = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
-                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
-                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+        $pen1 = TransactionSmart::whereDate('created_at','=',date('Y-m-d'))
+                ->whereTime('created_at','>','00:00:00')
+                ->whereTime('created_at','<','07:00:00')
                 ->get();
-        $pen2 = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
-                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
-                ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+        $pen2 = TransactionPhgt::whereDate('created_at','=',date('Y-m-d'))
+                ->whereTime('created_at','>','00:00:00')
+                ->whereTime('created_at','<','07:00:00')
                 ->get();
         
-        $keluar = TransactionOut::where('created_at','>',Carbon::createFromdate('19:00:00'))
-                ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
-                ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+        $keluar = TransactionOut::whereDate('created_at','=',date('Y-m-d'))
+                ->whereTime('created_at','>','00:00:00')
+                ->whereTime('created_at','<','07:00:00')
                 ->sum('jumlah');
 
-         $sub_smart = TransactionSmart::where('jam','>',Carbon::createFromdate('19:00:00'))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+         $sub_smart = TransactionSmart::whereDate('created_at','=',date('Y-m-d'))
+                    ->whereTime('created_at','>','00:00:00')
+                    ->whereTime('created_at','<','07:00:00')
                     ->sum('pendapatan');
-        $sub_phg = TransactionPhgt::where('jam','>',Carbon::createFromdate('19:00:00'))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('jam','<',Carbon::createFromdate('07:00:00'))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('tanggal', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))
+        $sub_phg = TransactionPhgt::whereDate('created_at','=',date('Y-m-d'))
+                    ->whereTime('created_at','>','00:00:00')
+                    ->whereTime('created_at','<','07:00:00')
                     ->sum('pendapatan');
 
-        $netincome = Netincome::where('created_at','>',Carbon::createFromdate('19:00:00'))
-                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                    ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
-                    ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                    ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->sum('pendapatan_bersih');  
+        $netincome = Netincome::whereDate('created_at','=',date('Y-m-d'))
+                    ->whereTime('created_at','>','00:00:00')
+                    ->whereTime('created_at','<','07:00:00')
+                    ->sum('pendapatan_bersih');  
 
-        $detail_trout = TransactionOut::where('created_at','>',Carbon::createFromdate('19:00:00'))
-                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                        ->orWhere('created_at','<',Carbon::createFromdate('07:00:00'))
-                        ->where('created_at', Carbon::createFromdate(date('Y-m-d')))
-                        ->where('created_at', Carbon::createFromdate(date('Y-m-d'),'-','INTERVAL 1 DAY'))->get();
+        $detail_trout = TransactionOut::whereDate('created_at','=',date('Y-m-d'))
+                        ->whereTime('created_at','>','00:00:00')
+                        ->whereTime('created_at','<','07:00:00')
+                        ->get();
 
         sleep(1);
             $result = [
