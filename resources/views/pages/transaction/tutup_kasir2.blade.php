@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- end page title -->
-    {{-- <div class="row mb-2">
+    <div class="row mb-2">
         <div class="col-md-3 pt-1">
             <div class="input-group input-daterange">
                 <input type="text" class="form-control form-control-light" name="from_date" id="from_date">
@@ -43,7 +43,9 @@
         <div class="col-md-2 pt-1">
             <button  class="btn btn-md btn-primary" id="filter"><i class="mdi mdi-update"></i><b> refresh</b></button>
         </div>
-    </div> --}}
+    </div>
+
+
 
     <div class="row">
         <div class="col-lg-3">
@@ -344,6 +346,140 @@
             </div>
         </div>
     </div>
+
+    {{-- <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Checkout Steps -->
+                    <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
+                        <li class="nav-item">
+                            <a href="#setoran" data-toggle="tab" aria-expanded="false"
+                                class="nav-link rounded-0 active">
+                                <i class="mdi mdi-cash-multiple font-18"></i>
+                                <span class="d-none d-lg-block">Setoran</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#forum" data-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
+                                <i class="mdi mdi-cash-multiple font-18"></i>
+                                <span class="d-none d-lg-block">Forum</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#pembagian-phg" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                                <i class="mdi mdi-cash-multiple font-18"></i>
+                                <span class="d-none d-lg-block">Pembagian PHG</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#pembagian-smart" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                                <i class="mdi mdi-cash-multiple font-18"></i>
+                                <span class="d-none d-lg-block">Pembagian Smart</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#pendapatan-pengeluaran" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                                <i class="mdi mdi-cash-multiple font-18"></i>
+                                <span class="d-none d-lg-block">Pendapatan Pengeluaran</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Steps Information -->
+                    <div class="tab-content">
+
+                        <!-- Billing Content-->
+                        <div class="tab-pane show active" id="setoran">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-input">
+                                        <label for="">PHG (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="phg_setoran" value="{{ $CPO_total2 }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">CPO SMART (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cpo_setoran" value="{{ $CPO_total1 + $Bulking_SMART1 }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">INTI SMART (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="inti_setoran" value="{{  $INTI }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">ACIT (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="acit_setoran" value="{{ $acit_total }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">OLIN (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="olin_setoran" value="{{ $olin_total }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">PKO (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="pko_setoran" value="{{ $pko_total }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">BULKING (15000)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="bulking_setoran" value="{{ $bulking_total }}">
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-input">
+                                        <label for="">BULKING KELUAR (JUMLAH MOTOR)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="bulking_keluar">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="">Pengeluaran </label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="pengeluaran_setoran" value="{{ $keluar }}">
+                                        </div>
+                                    </div> 
+                                   
+                                </div>
+                                 <!-- end col -->   
+
+                            </div> <!-- end row-->
+                        </div>
+                        <!-- End Billing Information Content-->
+
+                        <!-- Shipping Content-->
+                        <div class="tab-pane" id="forum">
+                            <div class="row">
+                                 <!-- end col -->            
+                            </div> <!-- end row-->
+                        </div>
+                        <!-- End Shipping Information Content-->
+
+                        <!-- Payment Content-->
+                        <div class="tab-pane" id="payment-information">
+                            <div class="row">
+                                     <!-- end col -->            
+                            </div> <!-- end row-->
+                        </div>
+                        <!-- End Payment Information Content-->
+
+                    </div> <!-- end tab content-->
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div> --}}
 
     <div class="row">
         <div class="col-lg-12">
@@ -802,7 +938,7 @@
             var n12 = parseInt($('#cpo_kartu_smart').val());
             var keluar_smart = n11 + n12            
             $('#keluar_smart').val(keluar_smart);
-            var sisa = didapat - (keluar + keluar_phg + keluar_smart + has1 + has2);
+            var sisa = didapat - (keluar + keluar_phg + keluar_smart);
             $('#sisa').val(sisa);
         });
 

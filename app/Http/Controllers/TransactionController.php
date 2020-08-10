@@ -467,14 +467,14 @@ class TransactionController extends Controller
         sleep(1);
             $result = [
                 'data' => [
-                    'transaction_smart' => $pen1,
-                    'transaction_phg' =>  $pen2,
+                    'transaction_smart' => number_format($pen1),
+                    'transaction_phg' =>  number_format($pen2),
                     'subtotal' => [
                         collect([
-                            'smart' => ''.$sub_smart.'', 
-                            'phg' => ''.$sub_phg.'',
-                            'pengeluaran' => ''.$keluar.'',
-                            'pendapatan_bersih' => ''.$netincome.'',
+                            'smart' => ''.number_format($sub_smart).'', 
+                            'phg' => ''.number_format($sub_phg).'',
+                            'pengeluaran' => ''.number_format($keluar).'',
+                            'pendapatan_bersih' => ''.number_format($netincome).'',
                         ]), 
                     ],
                     'list_pengeluaran' => $detail_trout, 
@@ -523,14 +523,14 @@ class TransactionController extends Controller
         sleep(1);
             $result = [
                 'data' => [
-                    'transaction_smart' => $pen1,
-                    'transaction_phg' => $pen2,
+                    'transaction_smart' => number_format($pen1),
+                    'transaction_phg' => number_format($pen2),
                     'subtotal' => [
                         collect([
-                            'smart' => $sub_smart, 
-                            'phg' => $sub_phg,
-                            'pengeluaran' => ''.$keluar.'',
-                            'pendapatan_bersih' => ''.$netincome.'' ,
+                            'smart' => number_format($sub_smart), 
+                            'phg' => number_format($sub_phg),
+                            'pengeluaran' => ''.number_format($keluar).'',
+                            'pendapatan_bersih' => ''.number_format($netincome).'' ,
                         ]), 
                     ],
                     'list_pengeluaran' => $detail_trout, 
@@ -545,16 +545,18 @@ class TransactionController extends Controller
             $pen1 = TransactionSmart::sum('pendapatan');
             $pen2 = TransactionPhgt::sum('pendapatan');
             $month = Carbon::now()->format('m');
+            $out = TransactionOut::whereMonth('created_at', $month)->sum('jumlah');
+            $income =Netincome::whereMonth('created_at', $month)->sum('pendapatan_bersih');
             $result = [
                 'data' => [
                     'transaction_smart' => TransactionSmart::whereMonth('created_at', $month)->get(),
                     'transaction_phg' =>  TransactionPhgt::whereMonth('created_at', $month)->get(),    
                     'subtotal' => [
                         collect([
-                            'smart' => $pen1, 
-                            'phg' => $pen2,
-                            'pengeluran' => TransactionOut::whereMonth('created_at', $month)->sum('jumlah'),
-                            'pendapatan_bersih' => Netincome::whereMonth('created_at', $month)->sum('pendapatan_bersih'),
+                            'smart' => number_format($pen1), 
+                            'phg' => number_format($pen2),
+                            'pengeluran' =>  number_format($out),
+                            'pendapatan_bersih' =>  number_format($income),
                         ]),    
                     ],
                     'list_pengeluaran' => TransactionOut::whereMonth('created_at', $month)->get(),   

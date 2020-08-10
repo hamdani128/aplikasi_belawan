@@ -680,7 +680,7 @@
             var n12 = parseInt($('#cpo_kartu_smart').val());
             var keluar_smart = n11 + n12            
             $('#keluar_smart').val(keluar_smart);
-            var sisa = didapat - (keluar + keluar_phg + keluar_smart + has1 + has2);
+            var sisa = didapat - (keluar + keluar_phg + keluar_smart);
             $('#sisa').val(sisa);
         });
 
