@@ -269,7 +269,7 @@
                             <div class="form-input">
                                 <label for="">Uang kartu INTI (5000)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="inti_kartu_smart" value="{{ ($Bulking_SMART2 + $CPO_total2) * 5000  }}">
+                                    <input type="text" class="form-control" id="inti_kartu_smart" value="{{ ($Bulking_SMART2 + $INTI_total) * 5000  }}">
                                 </div>
                             </div>
                             <div class="form-input">
