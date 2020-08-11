@@ -19,7 +19,33 @@
         </div>
     </div>
     <!-- end page title -->
-    
+    <div class="row mb-2">
+        <div class="col-md-3 pt-1">
+            <div class="input-group input-daterange">
+                <input type="text" class="form-control form-control-light" name="from_date" id="from_date">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-primary border-primary text-white">
+                        <i class="mdi mdi-calendar-range font-13"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        {{-- <div class="col-md-3 pt-1">
+            <div class="input-group input-daterange">
+                <input type="text" class="form-control form-control-light" name="to_date" id="to_date">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-primary border-primary text-white">
+                        <i class="mdi mdi-calendar-range font-13"></i>
+                    </span>
+                </div>
+            </div>
+        </div> --}}
+        <div class="col-md-2 pt-1">
+            <button  class="btn btn-md btn-primary" id="today"><i class="mdi mdi-update"></i><b> refresh</b></button>
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col-lg-3">
             <div class="card">
@@ -682,6 +708,85 @@
             $('#keluar_smart').val(keluar_smart);
             var sisa = didapat - (keluar + keluar_phg + keluar_smart);
             $('#sisa').val(sisa);
+        });
+
+        $("#today").click(function(){
+            var from_date = $('#from_date').val();
+            $.get('/kasir1/cpo_phg', {from_date:from_date}, function(data){
+                        $('#kwitansi_forum').val(data);
+                        $('#mandor_forum').val(data);
+                        $('#cpo_forum').val(data);
+                        $('#phg_setoran').val(data);
+
+                        var pp = data * 5000;
+                        var ps = data * 4000;
+                        var dishub = data * 4000;
+                        var spti = data * 4000
+                        var cpo = data * 25000
+                        $('#uang_pp').val(pp);        
+                        $('#uang_ps').val(ps);        
+                        $('#dishub').val(dishub);        
+                        $('#uang_spti').val(spti);  
+                        $('#uang_cpo_bulking').val(cpo);                      
+            });
+
+            $.get('/kasir1/acit', {from_date:from_date}, function(data){
+                        $('#acit_forum').val(data);
+                        $('#acit_setoran').val(data);
+
+                        var acit = data * 30000;
+                        $('#uang_acit').val(acit);                          
+            });
+
+            $.get('/kasir1/olin', {from_date:from_date}, function(data){
+                        $('#olin_forum').val(data);
+                        $('#olin_setoran').val(data);
+
+                        var olin = data * 30000;
+                        $('#uang_olin').val(olin);                          
+            });
+
+            $.get('/kasir1/pko', {from_date:from_date}, function(data){
+                        $('#pko_forum').val(data);
+                        $('#pko_setoran').val(data);
+
+                        var pko = data * 30000;
+                        $('#uang_pko').val(pko);                          
+            });
+
+            $.get('/kasir1/bulking', {from_date:from_date}, function(data){
+                        $('#bulking_forum').val(data);
+                        $('#bulking_setoran').val(data);
+
+                        var bulking = data * 25000;
+                        var c5 = parseInt($('#uang_cpo_bulking').val()); 
+                        var has = bulking + c5
+                        $('#uang_cpo_bulking').val(has);                          
+            });
+
+            $.get('/kasir1/smart_cpo', {from_date:from_date}, function(data){
+                        $('#cpo_setoran').val(data);
+                        var kartu = data * 2000;
+                        $('#cpo_kartu_smart').val(kartu);                          
+            });
+
+            $.get('/kasir1/smart_inti', {from_date:from_date}, function(data){
+                        $('#inti_setoran').val(data);
+                        var kartu = data * 5000;
+                        $('#inti_kartu_smart').val(kartu);                          
+            });
+
+            $.get('/kasir1/phg', {from_date:from_date}, function(data){
+                        $('#pembagian_total_kendaraan_phg').val(data);
+                        var kartu = data * 2000;
+                        $('#uang_kartu_phg').val(kartu);                          
+            });
+
+            $.get('/kasir1/out', {from_date:from_date}, function(data){
+                        $('#pengeluaran_setoran').val(data);                   
+            });
+
+
         });
 
        

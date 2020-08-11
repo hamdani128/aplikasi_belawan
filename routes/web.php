@@ -120,6 +120,26 @@ Route::middleware('auth')->group(function(){
     Route::get('/tutup-transaksi/shift1', 'TransactionController@tutup_kasir1')->name('tutup-kasir1');
     Route::get('/tutup-transaksi/shift2', 'TransactionController@tutup_kasir2')->name('tutup-kasir2');
     
+    Route::get('/kasir2/phg', 'Api\KasirController@kasir2_phg');
+    Route::get('/kasir2/cpo_phg', 'Api\KasirController@kasir2_cpo');
+    Route::get('/kasir2/acit', 'Api\KasirController@kasir2_acit');
+    Route::get('/kasir2/olin', 'Api\KasirController@kasir2_olin');
+    Route::get('/kasir2/pko', 'Api\KasirController@kasir2_pko');
+    Route::get('/kasir2/bulking', 'Api\KasirController@kasir2_bulking');
+    Route::get('/kasir2/smart_cpo', 'Api\KasirController@kasir2_smart_cpo');
+    Route::get('/kasir2/smart_inti', 'Api\KasirController@kasir2_smart_inti');
+    Route::get('/kasir2/out', 'Api\KasirController@kasir2_keluar');
+
+    Route::get('/kasir1/phg', 'Api\KasirController@kasir1_phg');
+    Route::get('/kasir1/cpo_phg', 'Api\KasirController@kasir1_cpo');
+    Route::get('/kasir1/acit', 'Api\KasirController@kasir1_acit');
+    Route::get('/kasir1/olin', 'Api\KasirController@kasir1_olin');
+    Route::get('/kasir1/pko', 'Api\KasirController@kasir1_pko');
+    Route::get('/kasir1/bulking', 'Api\KasirController@kasir1_bulking');
+    Route::get('/kasir1/smart_cpo', 'Api\KasirController@kasir1_smart_cpo');
+    Route::get('/kasir1/smart_inti', 'Api\KasirController@kasir1_smart_inti');
+    Route::get('/kasir1/out', 'Api\KasirController@kasir1_keluar');
+
     Route::post('/tutup-transaksi/create', 'NetincomeController@store')->name('create-kasir1');
     Route::get('/logout', 'Auth/LoginController@logout');
 });
