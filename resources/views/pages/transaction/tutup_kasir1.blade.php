@@ -614,7 +614,7 @@
             var d7 = c7 * 10000;
             var d8 = c8 * 10000;
             var has2 = d1+d2+d3+d4+d5+d6+d8
-            var bersih = has2 - d7
+            var bersih = has2 + d7
             
             document.getElementById('forum_kwitansi').innerHTML = c1;
             document.getElementById('forum_mandor').innerHTML = c2;
@@ -669,7 +669,7 @@
             var b4 = a4 * 15000;
             var b5 = a5 * 15000;
             var b6 = a6 * 15000;
-            var has1 = b1+b2+b3+b4+b5+b6+a7;
+            var has1 = b1+b2+b3+b4+b5+b6;
             $('#hasil1').val(has1);
 
             var c1 = parseInt($('#kwitansi_forum').val());        
@@ -686,8 +686,9 @@
             var d5 = c5 * 10000;
             var d6 = c6 * 15000;
             var d7 = c7 * 10000;
-            var has2 = d1+d2+d3+d4+d5+d6+d7
-            $('#hasil2').val(has2); 
+            var has2 = d1+d2+d3+d4+d5+d6
+            var has3 = has2 - d7
+            $('#hasil2').val(has3); 
             
             var n1 = parseInt($('#pembagian_total_kendaraan_phg').val());
             var n2 = parseInt($('#uang_pp').val());            
@@ -706,8 +707,10 @@
             var n12 = parseInt($('#cpo_kartu_smart').val());
             var keluar_smart = n11 + n12            
             $('#keluar_smart').val(keluar_smart);
+
             var sisa = didapat - (keluar + keluar_phg + keluar_smart);
-            $('#sisa').val(sisa);
+            var ber = sisa + has1 + has3;
+            $('#sisa').val(ber);
         });
 
         $("#today").click(function(){
@@ -783,7 +786,12 @@
             });
 
             $.get('/kasir1/out', {from_date:from_date}, function(data){
-                        $('#pengeluaran_setoran').val(data);                   
+                        $('#pengeluaran_setoran').val(data);  
+                        $('#pengeluaran').val(data);                     
+            });
+
+            $.get('/kasir1/income', {from_date:from_date}, function(data){
+                        $('#pendapatan').val(data);                   
             });
 
 

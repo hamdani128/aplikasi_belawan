@@ -129,6 +129,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/kasir2/smart_cpo', 'Api\KasirController@kasir2_smart_cpo');
     Route::get('/kasir2/smart_inti', 'Api\KasirController@kasir2_smart_inti');
     Route::get('/kasir2/out', 'Api\KasirController@kasir2_keluar');
+    Route::get('/kasir2/income', 'Api\KasirController@kasir2_pendapatan');
 
     Route::get('/kasir1/phg', 'Api\KasirController@kasir1_phg');
     Route::get('/kasir1/cpo_phg', 'Api\KasirController@kasir1_cpo');
@@ -139,6 +140,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/kasir1/smart_cpo', 'Api\KasirController@kasir1_smart_cpo');
     Route::get('/kasir1/smart_inti', 'Api\KasirController@kasir1_smart_inti');
     Route::get('/kasir1/out', 'Api\KasirController@kasir1_keluar');
+    Route::get('/kasir1/income', 'Api\KasirController@kasir1_pendapatan');
 
     Route::post('/tutup-transaksi/create', 'NetincomeController@store')->name('create-kasir1');
     Route::get('/logout', 'Auth/LoginController@logout');

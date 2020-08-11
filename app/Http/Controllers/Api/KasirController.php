@@ -271,6 +271,27 @@ class KasirController extends Controller
         return  $hasil;
     }
 
+    public function kasir2_pendapatan(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $phg = TransactionPhgt::whereDate('created_at', '=' ,date($request->from_date))
+                    ->whereTime('created_at', '>' ,'00:00:00')
+                    ->whereTime('created_at', '<' ,'07:00:00')
+                    ->sum('pendapatan');
+            $smart = TransactionSmart::whereDate('created_at', '=' ,date($request->from_date))
+                    ->whereTime('created_at', '>' ,'00:00:00')
+                    ->whereTime('created_at', '<' ,'07:00:00')
+                    ->sum('pendapatan');
+            $hasil = $phg + $smart;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
+
 
     // Api Kasir 1
 
@@ -457,6 +478,26 @@ class KasirController extends Controller
         return  $hasil;
     }
 
+    public function kasir1_pendapatan(Request $request)
+    {
+        if(!empty($request->from_date))
+        {
+            $phg = TransactionPhgt::whereDate('created_at', '=' ,date($request->from_date))
+                    ->whereTime('created_at', '>' ,'07:00:00')
+                    ->whereTime('created_at', '<' ,'24:00:00')
+                    ->sum('pendapatan');
+            $smart = TransactionSmart::whereDate('created_at', '=' ,date($request->from_date))
+                    ->whereTime('created_at', '>' ,'07:00:00')
+                    ->whereTime('created_at', '<' ,'24:00:00')
+                    ->sum('pendapatan');
+            $hasil = $phg + $smart;
+        }
+        else    
+        {
+            $hasil = 0;
+        }
+        return  $hasil;
+    }
 
 
 }
