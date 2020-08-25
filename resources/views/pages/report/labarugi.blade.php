@@ -301,7 +301,7 @@
                     load_pengeluaran(from_date, to_date);
 
                     $.get('/report/sum-pendapatan/trsmart', {from_date:from_date, to_date:to_date}, function(data){
-                        $(".pensmart").html(data );
+                        $(".pensmart").html(data);
                     });
                     $.get('/report/sum-pendapatan/trphg', {from_date:from_date, to_date:to_date}, function(data){
                         $(".penphg").html(data);
@@ -331,7 +331,21 @@
                 "responsive": true,
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    ['copy', 'csv', 'excel', 'pdf'],
+                        {
+                            extend: 'print',
+                            customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    );
+            
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            }
+                        }
                 ],
                 ajax: {
                     url  : '/report/table/smart',
@@ -349,7 +363,9 @@
                     { data: 'pendapatan', name: 'pendapatan' },
                     { data: 'bermalam', name: 'bermalam' },
                   
-                ]
+                ],
+                dom: '<"html5buttons">Blfrtip',
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
         }
 
@@ -361,7 +377,21 @@
                 "responsive": true,
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    ['copy', 'csv', 'excel', 'pdf'],
+                        {
+                            extend: 'print',
+                            customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    );
+            
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            }
+                        }
                 ],
                 ajax: {
                     url  : '/report/table/phg',
@@ -376,7 +406,9 @@
                     { data: 'typemail.nama', name: 'typemail.nama' },
                     { data: 'pendapatan', name: 'pendapatan' },
                     { data: 'bermalam', name: 'bermalam' },
-                ]
+                ],
+                dom: '<"html5buttons">Blfrtip',
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
         }
         
@@ -388,7 +420,21 @@
                 "responsive": true,
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    ['copy', 'csv', 'excel', 'pdf'],
+                        {
+                            extend: 'print',
+                            customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    );
+            
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            }
+                        }
                 ],
                 ajax: {
                     url  : '/report/table/outgoing',
@@ -398,7 +444,9 @@
                     { data: 'no', name: 'no' },
                     { data: 'jumlah', name: 'jumlah' },
                     { data: 'keterangan', name: 'keterangan' },
-                ]
+                ],
+                dom: '<"html5buttons">Blfrtip',
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
         }
 

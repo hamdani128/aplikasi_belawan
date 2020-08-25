@@ -222,8 +222,26 @@
                 "responsive": true,
                 dom: '<"html5buttons">Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    ['copy', 'csv', 'excel', 'pdf'],
+
+                         {
+                            extend: 'print',
+                            customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    );
+            
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            }
+                        }
+
                 ],
+                        
+
                 ajax: {
                     url  : '/report/table/smart',
                     data :{from_date:from_date, to_date:to_date}
@@ -240,7 +258,8 @@
                     { data: 'pendapatan', name: 'pendapatan' },
                     { data: 'bermalam', name: 'bermalam' },
                   
-                ]
+                ],
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
         }
 </script>
@@ -270,12 +289,29 @@
             $('#phg').DataTable({
                 processing: true,
                 serverSide: true,
+                
                 "bSort": false,
                 "responsive": true,
                 dom: '<"html5buttons">Blfrtip',
+                
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    ['copy', 'csv', 'excel', 'pdf'],
+                        {
+                            extend: 'print',
+                            customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    );
+            
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            }
+                        }
                 ],
+                
                 ajax: {
                     url  : '/report/table/phg',
                     data :{from_date:from_date, to_date:to_date}
@@ -289,7 +325,8 @@
                     { data: 'typemail.nama', name: 'typemail.nama' },
                     { data: 'pendapatan', name: 'pendapatan' },
                     { data: 'bermalam', name: 'bermalam' },
-                ]
+                ],
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
         }
 </script>

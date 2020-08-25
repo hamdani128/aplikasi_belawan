@@ -118,7 +118,7 @@ class ReportController extends Controller
         {
             $trsmart = 0;
         }
-        return $trsmart;
+        return number_format($trsmart);
     }
 
     public function info_trphg(Request $request)
@@ -132,7 +132,7 @@ class ReportController extends Controller
         {
             $trphg = 0;
         }
-        return $trphg;
+        return number_format($trphg);
     }
 
     public function info_trkeluar(Request $request)
@@ -147,7 +147,7 @@ class ReportController extends Controller
             $trout = TransactionOut::whereDate('created_at', '>=' ,array(date('Y-m-d')))->whereDate('created_at', '<=' ,array(date('Y-m-d')))->sum('jumlah');           
             // $trout = TransactionOut::whereBetween('tanggal', array(date('Y-m-d'), date('Y-m-d')))->sum('pendapatan');;
         }
-        return  $trout;
+        return number_format($trout);
     }
 
     public function info_hasil(Request $request)
@@ -164,7 +164,7 @@ class ReportController extends Controller
             $hasil = 0;
             // $trout = TransactionOut::whereBetween('tanggal', array(date('Y-m-d'), date('Y-m-d')))->sum('pendapatan');;
         }
-        return  $hasil;
+        return number_format($hasil);
     }
     /**
      * Show the form for creating a new resource.

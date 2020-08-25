@@ -142,7 +142,9 @@
                     { data: 'jumlah', name: 'jumlah' },
                     { data: 'keterangan', name: 'keterangan' },
                     { data: 'created_at', name: 'created_at' },
-                ]
+                ],
+                dom: '<"html5buttons">Blfrtip',
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
         }
     </script>
